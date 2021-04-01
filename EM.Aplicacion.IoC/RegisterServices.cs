@@ -1,9 +1,4 @@
-﻿using EM.Dominio.Repositorio.Direccion;
-using EM.Infrestructura.Repositorio.Direccion;
-using EM.IServicio.Direccion;
-using EM.Servicio.Direccion;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -21,7 +16,10 @@ namespace EM.Aplicacion.IoC
     using EM.IServicio.Provincia;
     using EM.Servicio.Localidad;
     using EM.Servicio.Provincia;
-
+    using EM.Dominio.Repositorio.Direccion;
+    using EM.Infrestructura.Repositorio.Direccion;
+    using EM.IServicio.Direccion;
+    using EM.Servicio.Direccion;
 
     public class RegisterServices
     {

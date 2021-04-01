@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EM.Dominio.Entidades;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace EM.Dominio.Metadata
+﻿namespace EM.Dominio.Metadata
 {
+    using EM.Dominio.Entidades;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
     public class DireccionConfiguracion : IEntityTypeConfiguration<Direccion>
     {
         public void Configure(EntityTypeBuilder<Direccion> builder)

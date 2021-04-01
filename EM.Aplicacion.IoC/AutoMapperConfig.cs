@@ -1,12 +1,11 @@
-﻿using EM.IServicio.Direccion.Dto;
-using EM.IServicio.Localidad.Dto;
-using EM.IServicio.Provincia.Dto;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using AutoMapper;
     using EM.Dominio.Entidades;
     using EM.IServicio.Pais.Dto;
+    using EM.IServicio.Direccion.Dto;
+    using EM.IServicio.Localidad.Dto;
+    using EM.IServicio.Provincia.Dto;
 
     public class AutoMapperConfig : Profile
     {
