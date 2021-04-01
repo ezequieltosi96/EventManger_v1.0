@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using EM.ServicioBase.Dto;
-
-namespace EM.IServicio.Direccion.Dto
+﻿namespace EM.IServicio.Direccion.Dto
 {
+    using EM.ServicioBase.Dto;
+
     public class DireccionDto : DtoBase
     {
         public string Descripcion { get; set; }
