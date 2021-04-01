@@ -1,9 +1,4 @@
-﻿using EM.Dominio.Repositorio.Provincia;
-using EM.Infrestructura.Repositorio.Provincia;
-using EM.IServicio.Provincia;
-using EM.Servicio.Provincia;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -13,6 +8,15 @@ namespace EM.Aplicacion.IoC
     using IServicio.Pais;
     using Servicio.Pais;
     using AutoMapper;
+    using EM.Dominio.Repositorio.Localidad;
+    using EM.Dominio.Repositorio.Provincia;
+    using EM.Infrestructura.Repositorio.Localidad;
+    using EM.Infrestructura.Repositorio.Provincia;
+    using EM.IServicio.Localidad;
+    using EM.IServicio.Provincia;
+    using EM.Servicio.Localidad;
+    using EM.Servicio.Provincia;
+
 
     public class RegisterServices
     {
@@ -36,6 +40,10 @@ namespace EM.Aplicacion.IoC
             // provincia
             services.AddTransient<IProvinciaRepositorio, ProvinciaRepositorio>();
             services.AddTransient<IProvinciaServicio, ProvinciaServicio>();
+
+            // localidad
+            services.AddTransient<ILocalidadRepositorio, LocalidadRepositorio>();
+            services.AddTransient<ILocalidadServicio, LocalidadServicio>();
         }
     }
 }

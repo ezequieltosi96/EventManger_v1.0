@@ -1,4 +1,5 @@
-﻿using EM.IServicio.Provincia.Dto;
+﻿using EM.IServicio.Localidad.Dto;
+using EM.IServicio.Provincia.Dto;
 
 namespace EM.Aplicacion.IoC
 {
@@ -17,6 +18,10 @@ namespace EM.Aplicacion.IoC
             // provincia
             CreateMap<Provincia, ProvinciaDto>();
             CreateMap<ProvinciaDto, Provincia>();
+
+            // localidad
+            CreateMap<Localidad, LocalidadDto>();
+            CreateMap<LocalidadDto, Localidad>();
         }
     }
 }
