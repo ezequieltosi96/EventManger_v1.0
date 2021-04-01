@@ -14,9 +14,45 @@
             SeedPaises(context);
             SeedProvincias(context);
             SeedLocalidades(context);
+            SeedDirecciones(context);
 
             // Guardar cambios
             context.SaveChanges();
+        }
+
+        private static void SeedDirecciones(DataContext context)
+        {
+            if (context.Direcciones.Any()) return;
+
+            var direcciones = new List<Direccion>()
+            {
+                new Direccion()
+                {
+                    //Id = 1,
+                    Descripcion = "Maipu 42",
+                    LocalidadId = 1,
+                },
+                new Direccion()
+                {
+                    //Id = 2,
+                    Descripcion = "Av. 25 de Mayo 654",
+                    LocalidadId = 1,
+                },
+                new Direccion()
+                {
+                    //Id = 3,
+                    Descripcion = "24 de Septiembre 1100",
+                    LocalidadId = 5,
+                },
+                new Direccion()
+                {
+                    //Id = 4,
+                    Descripcion = "Av. Mate dde Luna 3312",
+                    LocalidadId = 5,
+                },
+            };
+
+            context.Direcciones.AddRange(direcciones);
         }
 
         private static void SeedLocalidades(DataContext context)

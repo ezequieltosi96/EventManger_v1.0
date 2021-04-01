@@ -1,4 +1,9 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using EM.Dominio.Repositorio.Direccion;
+using EM.Infrestructura.Repositorio.Direccion;
+using EM.IServicio.Direccion;
+using EM.Servicio.Direccion;
+
+namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -29,7 +34,6 @@
             {
                 mc.AddProfile(new AutoMapperConfig());
             });
-
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
@@ -44,6 +48,10 @@
             // localidad
             services.AddTransient<ILocalidadRepositorio, LocalidadRepositorio>();
             services.AddTransient<ILocalidadServicio, LocalidadServicio>();
+
+            // direccion
+            services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
+            services.AddTransient<IDireccionServicio, DireccionServicio>();
         }
     }
 }

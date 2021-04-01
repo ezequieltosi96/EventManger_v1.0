@@ -20,6 +20,7 @@
             modelBuilder.ApplyConfiguration(new PaisConfiguracion());
             modelBuilder.ApplyConfiguration(new ProvinciaConfiguracion());
             modelBuilder.ApplyConfiguration(new LocalidadConfiguracion());
+            modelBuilder.ApplyConfiguration(new DireccionConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -40,5 +41,7 @@
         public DbSet<Provincia> Provincias { get; set; }
 
         public DbSet<Localidad> Localidades { get; set; }
+
+        public DbSet<Direccion> Direcciones { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using EM.IServicio.Localidad.Dto;
+﻿using EM.IServicio.Direccion.Dto;
+using EM.IServicio.Localidad.Dto;
 using EM.IServicio.Provincia.Dto;
 
 namespace EM.Aplicacion.IoC
@@ -22,6 +23,10 @@ namespace EM.Aplicacion.IoC
             // localidad
             CreateMap<Localidad, LocalidadDto>();
             CreateMap<LocalidadDto, Localidad>();
+
+            // direccion
+            CreateMap<Direccion, DireccionDto>();
+            CreateMap<DireccionDto, Direccion>();
         }
     }
 }

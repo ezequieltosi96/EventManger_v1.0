@@ -7,5 +7,7 @@
         public string Nombre { get; set; }
 
         public long ProvinciaId { get; set; }
+
+        public virtual Provincia Provincia { get; set; }
     }
 }
