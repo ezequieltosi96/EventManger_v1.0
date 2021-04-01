@@ -1,0 +1,41 @@
+﻿namespace EM.Infrestructura
+{
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using Dominio.Entidades;
+    using Dominio.Metadata;
+    using static Aplicacion.CadenaConexion.CadenaConexion;
+    public class DataContext : DbContext
+    {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(ObtenercadenaSql, provider => provider.CommandTimeout(40));
+
+            base.OnConfiguring(optionsBuilder);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configuracion FluentApi
+            modelBuilder.ApplyConfiguration(new PaisConfiguracion());
+            modelBuilder.ApplyConfiguration(new ProvinciaConfiguracion());
+            // fin configuracion FluentApi
+
+            // Desactivar le borrado en cascada
+            var cascadeFKs = modelBuilder.Model.GetEntityTypes()
+                .SelectMany(t => t.GetForeignKeys())
+                .Where(fk => !fk.IsOwnership && fk.DeleteBehavior == DeleteBehavior.Cascade);
+
+            foreach (var fk in cascadeFKs)
+                fk.DeleteBehavior = DeleteBehavior.Restrict;
+            // fin desactivar borrado en cascada
+
+            base.OnModelCreating(modelBuilder);
+        }
+
+        // Declaracion de DbSet
+        public DbSet<Pais> Paises { get; set; }
+
+        public DbSet<Provincia> Provincias { get; set; }
+    }
+}
