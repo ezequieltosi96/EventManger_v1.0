@@ -21,7 +21,10 @@ namespace EM.Aplicacion.IoC
     using EM.IServicio.Provincia;
     using EM.Servicio.Localidad;
     using EM.Servicio.Provincia;
-
+    using EM.Dominio.Repositorio.BeneficioEntrada;
+    using EM.Infrestructura.Repositorio.BeneficioEntrada;
+    using EM.IServicio.BeneficioEntrada;
+    using EM.Servicio.BeneficioEntrada;
 
     public class RegisterServices
     {
@@ -48,6 +51,10 @@ namespace EM.Aplicacion.IoC
             // localidad
             services.AddTransient<ILocalidadRepositorio, LocalidadRepositorio>();
             services.AddTransient<ILocalidadServicio, LocalidadServicio>();
+
+            //BeneficioEntrada
+            services.AddTransient<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
+            services.AddTransient<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
 
             // direccion
             services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
