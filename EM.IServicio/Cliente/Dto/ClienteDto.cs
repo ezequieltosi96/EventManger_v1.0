@@ -4,6 +4,5 @@
 
     public class ClienteDto : PersonaDto
     {
-        public long UsuarioId { get; set; }
     }
 }

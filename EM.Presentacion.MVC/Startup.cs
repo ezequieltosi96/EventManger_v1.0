@@ -31,7 +31,7 @@ namespace EM.Presentacion.MVC
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // llamada al inyector
-            new RegisterServices().Register(services);
+            RegisterServices.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,7 +52,7 @@ namespace EM.Presentacion.MVC
             app.UseCookiePolicy();
 
             // Seed Database
-            SeedDb.Seed(context);
+            // SeedDb.Seed(context);
 
             app.UseMvc(routes =>
             {

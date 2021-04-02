@@ -23,8 +23,6 @@
             modelBuilder.ApplyConfiguration(new DireccionConfiguracion());
             modelBuilder.ApplyConfiguration(new BeneficioEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new PersonaConfiguracion());
-            modelBuilder.ApplyConfiguration(new RolConfiguracion());
-            modelBuilder.ApplyConfiguration(new UsuarioConfiguracion());
             modelBuilder.ApplyConfiguration(new TipoEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new ClienteConfiguracion());
             // fin configuracion FluentApi
@@ -53,10 +51,6 @@
         public DbSet<BeneficioEntrada> BeneficiosEntradas { get; set; }
 
         public DbSet<Persona> Personas { get; set; }
-
-        public DbSet<Rol> Roles { get; set; }
-
-        public DbSet<Usuario> Usuarios { get; set; }
 
         public DbSet<Cliente> Clientes { get; set; }
 

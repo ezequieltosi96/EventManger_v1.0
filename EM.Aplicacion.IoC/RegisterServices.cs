@@ -1,13 +1,4 @@
-﻿using EM.Dominio.Repositorio.Cliente;
-using EM.Dominio.Repositorio.Usuario;
-using EM.Infrestructura.Repositorio.Cliente;
-using EM.Infrestructura.Repositorio.Usuario;
-using EM.IServicio.Cliente;
-using EM.IServicio.Usuario;
-using EM.Servicio.Cliente;
-using EM.Servicio.Usuario;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -40,15 +31,14 @@ namespace EM.Aplicacion.IoC
     using EM.Dominio.Repositorio.Persona;
     using EM.IServicio.Persona;
     using EM.Servicio.Persona;
-    using EM.Dominio.Repositorio.Rol;
-    using EM.Infrestructura.Repositorio.Rol;
-    using EM.IServicio.Rol;
-    using EM.Servicio.Rol;
+    using EM.Dominio.Repositorio.Cliente;
+    using EM.Infrestructura.Repositorio.Cliente;
+    using EM.IServicio.Cliente;
+    using EM.Servicio.Cliente;
 
-
-    public class RegisterServices
+    public static class RegisterServices
     {
-        public void Register(IServiceCollection services)
+        public static void Register(IServiceCollection services)
         {
             // general
             services.AddDbContext<DataContext>();
@@ -87,14 +77,6 @@ namespace EM.Aplicacion.IoC
             // persona
             services.AddTransient<IPersonaRepositorio, PersonaRepositorio>();
             services.AddTransient<IPersonaServicio, PersonaServicio>();
-
-            // rol
-            services.AddTransient<IRolRepositorio, RolRepositorio>();
-            services.AddTransient<IRolServicio, RolServicio>();
-
-            // usuario
-            services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
-            services.AddTransient<IUsuarioServicio, UsuarioServicio>();
 
             // cliente
             services.AddTransient<IClienteRepositorio, ClienteRepositorio>();

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EM.Infrestructura
+﻿namespace EM.Infrestructura
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -19,50 +17,9 @@ namespace EM.Infrestructura
             SeedDirecciones(context);
             SeedBeneficiosEntradas(context);
             SeedTipoEntrada(context);
-            SeedRoles(context);
-            SeedUsuario(context);
 
             // Guardar cambios
             context.SaveChanges();
-        }
-
-        private static void SeedUsuario(DataContext context)
-        {
-            if (context.Usuarios.Any()) return;
-
-            context.Usuarios.Add(new Usuario()
-            {
-                Mail = "admin@admin.com",
-                Password = "123456789",
-                FechaAlta = DateTime.Now,
-                RolId = 1
-            });
-        }
-
-        private static void SeedRoles(DataContext context)
-        {
-            if (context.Roles.Any()) return;
-
-            var roles = new List<Rol>()
-            {
-                new Rol()
-                {
-                    //Id = 1,
-                    Nombre = "admin",
-                },
-                new Rol()
-                {
-                    //Id = 2,
-                    Nombre = "empresa",
-                },
-                new Rol()
-                {
-                    //Id = 3,
-                    Nombre = "cliente",
-                },
-            };
-
-            context.Roles.AddRange(roles);
         }
 
         private static void SeedDirecciones(DataContext context)
@@ -75,25 +32,25 @@ namespace EM.Infrestructura
                 {
                    //Id = 1,
                     Descripcion = "Maipu 42",
-                    LocalidadId = 7,
+                    LocalidadId = 1,
                 },
                 new Direccion()
                 {
                    //Id = 2,
                     Descripcion = "Av. 25 de Mayo 654",
-                    LocalidadId = 7,
+                    LocalidadId = 1,
                 },
                 new Direccion()
                 {
                    //Id = 3,
                     Descripcion = "24 de Septiembre 1100",
-                    LocalidadId = 11,
+                    LocalidadId = 5,
                 },
                 new Direccion()
                 {
                    //Id = 4,
                     Descripcion = "Av. Mate dde Luna 3312",
-                    LocalidadId = 11,
+                    LocalidadId = 5,
                 },
             };
 
@@ -116,73 +73,73 @@ namespace EM.Infrestructura
                 {
                    //Id = 1,
                     Nombre = "CABA",
-                    ProvinciaId = 15,
+                    ProvinciaId = 1,
                 },
                 new Localidad()
                 {
                    //Id = 2,
                     Nombre = "Palermo",
-                    ProvinciaId = 15,
+                    ProvinciaId = 1,
                 },
                 new Localidad()
                 {
                    //Id = 3,
                     Nombre = "Recoleta",
-                    ProvinciaId = 15,
+                    ProvinciaId = 1,
                 },
                 new Localidad()
                 {
                    //Id = 4,
                     Nombre = "Chacarita",
-                    ProvinciaId = 15,
+                    ProvinciaId = 1,
                 },
                 new Localidad()
                 {
                    //Id = 5,
                     Nombre = "San Miguel de Tucuman",
-                    ProvinciaId = 16,
+                    ProvinciaId = 2,
                 },
                 new Localidad()
                 {
                    //Id = 6,
                     Nombre = "Tafi Viejo",
-                    ProvinciaId = 16,
+                    ProvinciaId = 2,
                 },
                 new Localidad()
                 {
                    //Id = 7,
                     Nombre = "Mendoza",
-                    ProvinciaId = 17,
+                    ProvinciaId = 3,
                 },
                 new Localidad()
                 {
                    //Id = 8,
                     Nombre = "Carlos Paz",
-                    ProvinciaId = 18,
+                    ProvinciaId = 4,
                 },
                 new Localidad()
                 {
                    //Id = 9,
                     Nombre = "Las Condes",
-                    ProvinciaId = 19,
+                    ProvinciaId = 5,
                 },
                 new Localidad()
                 {
                    //Id = 10,
                     Nombre = "Iquique",
-                    ProvinciaId = 20,
+                    ProvinciaId = 6,
                 },
                 new Localidad()
                 {
                    //Id = 11,
                     Nombre = "Sao Pablo",
-                    ProvinciaId = 21,
+                    ProvinciaId = 7,
                 },
                 new Localidad()
                 {
                    //Id = 12,
                     Nombre = "Brasilia",
-                    ProvinciaId = 22,
+                    ProvinciaId = 8,
                 },
             };
 
@@ -204,49 +161,49 @@ namespace EM.Infrestructura
                 {
                    //Id = 1,
                     Nombre = "Buenos Aires",
-                    PaisId = 19,
+                    PaisId = 1,
                 },
                 new Provincia()
                 {
                    //Id = 2,
                     Nombre = "Tucuman",
-                    PaisId = 19,
+                    PaisId = 1,
                 },
                 new Provincia()
                 {
                    //Id = 3,
                     Nombre = "Mendoza",
-                    PaisId = 19,
+                    PaisId = 1,
                 },
                 new Provincia()
                 {
                    //Id = 4,
                     Nombre = "Cordoba",
-                    PaisId = 19,
+                    PaisId = 1,
                 },
                 new Provincia()
                 {
                    //Id = 5,
                     Nombre = "Santiago De Chile",
-                    PaisId = 20,
+                    PaisId = 2,
                 },
                 new Provincia()
                 {
                    //Id = 6,
                     Nombre = "Iquique",
-                    PaisId = 20,
+                    PaisId = 2,
                 },
                 new Provincia()
                 {
                    //Id = 7,
                     Nombre = "Sao Paulo",
-                    PaisId = 21,
+                    PaisId = 3,
                 },
                 new Provincia()
                 {
                    //Id = 8,
                     Nombre = "Brasilia",
-                    PaisId = 21,
+                    PaisId = 3,
                 },
             };
 
@@ -283,6 +240,7 @@ namespace EM.Infrestructura
 
             context.Paises.AddRange(paises);
         }
+
         private static void SeedBeneficiosEntradas(DataContext context)
         {
             if (context.BeneficiosEntradas.Any())
@@ -313,6 +271,7 @@ namespace EM.Infrestructura
 
             context.BeneficiosEntradas.AddRange(beneficioEntrada);
         }
+
         private static void SeedTipoEntrada(DataContext context)
         {
             if (context.TiposEntradas.Any())
@@ -328,25 +287,25 @@ namespace EM.Infrestructura
                 {
                    //Id = 1,
                     Nombre = "Gold",
-                    BeneficioEntradaId = 9
+                    BeneficioEntradaId = 1
                 },
                 new TipoEntrada()
                 {
                    //Id = 2,
                     Nombre = "Silver",
-                    BeneficioEntradaId = 10
+                    BeneficioEntradaId = 2
                 },
                 new TipoEntrada()
                 {
                    //Id = 3,
                     Nombre = "Bronze",
-                    BeneficioEntradaId = 11
+                    BeneficioEntradaId = 3
                 },
                 new TipoEntrada()
                 {
                    //Id = 4,
                     Nombre = "Free",
-                    BeneficioEntradaId = 11
+                    BeneficioEntradaId = 3
                 }
             };
 

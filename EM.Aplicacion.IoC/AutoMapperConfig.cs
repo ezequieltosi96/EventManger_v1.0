@@ -10,8 +10,6 @@
     using EM.IServicio.TipoEntrada.Dto;
     using EM.IServicio.Cliente.Dto;
     using EM.IServicio.Persona.Dto;
-    using EM.IServicio.Rol.Dto;
-    using EM.IServicio.Usuario.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -40,14 +38,6 @@
             // persona
             CreateMap<Persona, PersonaDto>();
             CreateMap<PersonaDto, Persona>();
-
-            // rol
-            CreateMap<Rol, RolDto>();
-            CreateMap<RolDto, Rol>();
-
-            // usuario
-            CreateMap<Usuario, UsuarioDto>();
-            CreateMap<UsuarioDto, Usuario>();
 
             // cliente
             CreateMap<Cliente, ClienteDto>();
