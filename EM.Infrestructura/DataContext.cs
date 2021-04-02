@@ -29,6 +29,7 @@
             modelBuilder.ApplyConfiguration(new ClienteConfiguracion());
             modelBuilder.ApplyConfiguration(new EmpresaConfiguracion());
             modelBuilder.ApplyConfiguration(new DisertanteConfiguracion());
+            modelBuilder.ApplyConfiguration(new EstablecimientoConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -63,5 +64,7 @@
         public DbSet<Empresa> Empresas { get; set; }
 
         public DbSet<Disertante> Disertantes { get; set; }
+
+        public DbSet<Establecimiento> Establecimientos { get; set; }
     }
 }

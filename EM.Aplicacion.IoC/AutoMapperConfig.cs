@@ -12,6 +12,7 @@
     using EM.IServicio.Persona.Dto;
     using EM.IServicio.Empresa.Dto;
     using EM.IServicio.Disertante.Dto;
+    using EM.IServicio.Establecimiento.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -56,6 +57,10 @@
             // disertante 
             CreateMap<Disertante, DisertanteDto>();
             CreateMap<DisertanteDto, Disertante>();
+
+            // establecimiento
+            CreateMap<Establecimiento, EstablecimientoDto>();
+            CreateMap<EstablecimientoDto, Establecimiento>();
         }
     }
 }

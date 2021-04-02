@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using EM.Dominio.Repositorio.Disertante;
-using EM.IServicio.Disertante;
-using EM.IServicio.Disertante.Dto;
-using EM.ServicioBase.Dto;
-
-namespace EM.Servicio.Disertante
+﻿namespace EM.Servicio.Disertante
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using EM.Dominio.Repositorio.Disertante;
+    using EM.IServicio.Disertante;
+    using EM.IServicio.Disertante.Dto;
+    using EM.ServicioBase.Dto;
+
     public class DisertanteServicio : IDisertanteServicio
     {
         private readonly IDisertanteRepositorio _disertanteRepositorio;

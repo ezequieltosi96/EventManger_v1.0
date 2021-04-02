@@ -1,4 +1,9 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using EM.Dominio.Repositorio.Establecimiento;
+using EM.Infrestructura.Repositorio.Establecimiento;
+using EM.IServicio.Establecimiento;
+using EM.Servicio.Establecimiento;
+
+namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -70,47 +75,51 @@
             services.AddSingleton(mapper);
 
             // repositorio base
-            services.AddScoped<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
+            services.AddSingleton<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
 
             // pais
-            services.AddTransient<IPaisRepositorio, PaisRepositorio>();
-            services.AddTransient<IPaisServicio, PaisServicio>();
+            services.AddSingleton<IPaisRepositorio, PaisRepositorio>();
+            services.AddSingleton<IPaisServicio, PaisServicio>();
 
             // provincia
-            services.AddTransient<IProvinciaRepositorio, ProvinciaRepositorio>();
-            services.AddTransient<IProvinciaServicio, ProvinciaServicio>();
+            services.AddSingleton<IProvinciaRepositorio, ProvinciaRepositorio>();
+            services.AddSingleton<IProvinciaServicio, ProvinciaServicio>();
 
             // localidad
-            services.AddTransient<ILocalidadRepositorio, LocalidadRepositorio>();
-            services.AddTransient<ILocalidadServicio, LocalidadServicio>();
+            services.AddSingleton<ILocalidadRepositorio, LocalidadRepositorio>();
+            services.AddSingleton<ILocalidadServicio, LocalidadServicio>();
 
             //BeneficioEntrada
-            services.AddTransient<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
-            services.AddTransient<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
+            services.AddSingleton<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
+            services.AddSingleton<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
 
             // direccion
-            services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
-            services.AddTransient<IDireccionServicio, DireccionServicio>();
+            services.AddSingleton<IDireccionRepositorio, DireccionRepositorio>();
+            services.AddSingleton<IDireccionServicio, DireccionServicio>();
 
             // direccion
-            services.AddTransient<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
-            services.AddTransient<ITipoEntradaServicio, TipoEntradaServicio>();
+            services.AddSingleton<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
+            services.AddSingleton<ITipoEntradaServicio, TipoEntradaServicio>();
 
             // persona
-            services.AddTransient<IPersonaRepositorio, PersonaRepositorio>();
-            services.AddTransient<IPersonaServicio, PersonaServicio>();
+            services.AddSingleton<IPersonaRepositorio, PersonaRepositorio>();
+            services.AddSingleton<IPersonaServicio, PersonaServicio>();
 
             // cliente
-            services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
-            services.AddTransient<IClienteServicio, ClienteServicio>();
+            services.AddSingleton<IClienteRepositorio, ClienteRepositorio>();
+            services.AddSingleton<IClienteServicio, ClienteServicio>();
 
             // empresa
-            services.AddTransient<IEmpresaRepositorio, EmpresaRepositorio>();
-            services.AddTransient<IEmpresaServicio, EmpresaServicio>();
+            services.AddSingleton<IEmpresaRepositorio, EmpresaRepositorio>();
+            services.AddSingleton<IEmpresaServicio, EmpresaServicio>();
 
             // disertante
-            services.AddTransient<IDisertanteRepositorio, DisertanteRepositorio>();
-            services.AddIdentity<IDisertanteServicio, DisertanteServicio>();
+            services.AddSingleton<IDisertanteRepositorio, DisertanteRepositorio>();
+            services.AddSingleton<IDisertanteServicio, DisertanteServicio>();
+
+            // establecimiento
+            services.AddSingleton<IEstablecimientoRepositorio, EstablecimientoRepositorio>();
+            services.AddSingleton<IEstablecimientoServicio, EstablecimientoServicio>();
         }
     }
 }
