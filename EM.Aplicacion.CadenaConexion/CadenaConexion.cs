@@ -3,7 +3,7 @@
     public static class CadenaConexion
     {
         // Cadena de conexion Nicolas
-        private const string Servidor = "Notebook\SQL";
+        private const string Servidor = @"Notebook\SQL";
         private const string BaseDeDatos = "EventManagerV1";
         private const string Usuario = "sa";
         private const string Contrasena = "123";
