@@ -28,6 +28,7 @@ namespace EM.Infrestructura
             modelBuilder.ApplyConfiguration(new PersonaConfiguracion());
             modelBuilder.ApplyConfiguration(new TipoEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new ClienteConfiguracion());
+            modelBuilder.ApplyConfiguration(new EmpresaConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -58,5 +59,7 @@ namespace EM.Infrestructura
         public DbSet<Cliente> Clientes { get; set; }
 
         public DbSet<TipoEntrada> TiposEntradas { get; set; }
+
+        public DbSet<Empresa> Empresas { get; set; }
     }
 }

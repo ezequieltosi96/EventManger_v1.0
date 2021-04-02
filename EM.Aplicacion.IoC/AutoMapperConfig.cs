@@ -10,6 +10,7 @@
     using EM.IServicio.TipoEntrada.Dto;
     using EM.IServicio.Cliente.Dto;
     using EM.IServicio.Persona.Dto;
+    using EM.IServicio.Empresa.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -46,6 +47,10 @@
             //TipoEntrada
             CreateMap<TipoEntrada, TipoEntradaDto>();
             CreateMap<TipoEntradaDto, TipoEntrada>();
+
+            // empresa
+            CreateMap<Empresa, EmpresaDto>();
+            CreateMap<EmpresaDto, Empresa>();
         }
     }
 }

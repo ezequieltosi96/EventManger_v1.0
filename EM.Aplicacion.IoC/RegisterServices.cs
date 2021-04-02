@@ -1,6 +1,4 @@
-﻿using EM.Dominio.Identity;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -37,6 +35,12 @@ namespace EM.Aplicacion.IoC
     using EM.Infrestructura.Repositorio.Cliente;
     using EM.IServicio.Cliente;
     using EM.Servicio.Cliente;
+    using EM.Dominio.Identity;
+    using EM.Dominio.Repositorio.Empresa;
+    using EM.Infrestructura.Repositorio.Empresa;
+    using EM.IServicio.Empresa;
+    using EM.Servicio.Empresa;
+
 
     public static class RegisterServices
     {
@@ -96,6 +100,10 @@ namespace EM.Aplicacion.IoC
             // cliente
             services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
             services.AddTransient<IClienteServicio, ClienteServicio>();
+
+            // empresa
+            services.AddTransient<IEmpresaRepositorio, EmpresaRepositorio>();
+            services.AddTransient<IEmpresaServicio, EmpresaServicio>();
         }
     }
 }

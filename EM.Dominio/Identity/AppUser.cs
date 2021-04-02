@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
-
-namespace EM.Dominio.Identity
+﻿namespace EM.Dominio.Identity
 {
+    using Microsoft.AspNetCore.Identity;
+
     public class AppUser : IdentityUser
     {
     }
