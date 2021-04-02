@@ -17,6 +17,8 @@ namespace EM.Infrestructura
             SeedProvincias(context);
             SeedLocalidades(context);
             SeedDirecciones(context);
+            SeedBeneficiosEntradas(context);
+            SeedTipoEntrada(context);
             SeedRoles(context);
             SeedUsuario(context);
 
@@ -71,31 +73,32 @@ namespace EM.Infrestructura
             {
                 new Direccion()
                 {
-                    //Id = 1,
+                   //Id = 1,
                     Descripcion = "Maipu 42",
-                    LocalidadId = 1,
+                    LocalidadId = 7,
                 },
                 new Direccion()
                 {
-                    //Id = 2,
+                   //Id = 2,
                     Descripcion = "Av. 25 de Mayo 654",
-                    LocalidadId = 1,
+                    LocalidadId = 7,
                 },
                 new Direccion()
                 {
-                    //Id = 3,
+                   //Id = 3,
                     Descripcion = "24 de Septiembre 1100",
-                    LocalidadId = 5,
+                    LocalidadId = 11,
                 },
                 new Direccion()
                 {
-                    //Id = 4,
+                   //Id = 4,
                     Descripcion = "Av. Mate dde Luna 3312",
-                    LocalidadId = 5,
+                    LocalidadId = 11,
                 },
             };
 
             context.Direcciones.AddRange(direcciones);
+
         }
 
         private static void SeedLocalidades(DataContext context)
@@ -111,75 +114,75 @@ namespace EM.Infrestructura
             {
                 new Localidad()
                 {
-                    //Id = 1,
+                   //Id = 1,
                     Nombre = "CABA",
-                    ProvinciaId = 1,
+                    ProvinciaId = 15,
                 },
                 new Localidad()
                 {
-                    //Id = 2,
+                   //Id = 2,
                     Nombre = "Palermo",
-                    ProvinciaId = 1,
+                    ProvinciaId = 15,
                 },
                 new Localidad()
                 {
-                    //Id = 3,
+                   //Id = 3,
                     Nombre = "Recoleta",
-                    ProvinciaId = 1,
+                    ProvinciaId = 15,
                 },
                 new Localidad()
                 {
-                    //Id = 4,
+                   //Id = 4,
                     Nombre = "Chacarita",
-                    ProvinciaId = 1,
+                    ProvinciaId = 15,
                 },
                 new Localidad()
                 {
-                    //Id = 5,
+                   //Id = 5,
                     Nombre = "San Miguel de Tucuman",
-                    ProvinciaId = 2,
+                    ProvinciaId = 16,
                 },
                 new Localidad()
                 {
-                    //Id = 6,
+                   //Id = 6,
                     Nombre = "Tafi Viejo",
-                    ProvinciaId = 2,
+                    ProvinciaId = 16,
                 },
                 new Localidad()
                 {
-                    //Id = 7,
+                   //Id = 7,
                     Nombre = "Mendoza",
-                    ProvinciaId = 3,
+                    ProvinciaId = 17,
                 },
                 new Localidad()
                 {
-                    //Id = 8,
+                   //Id = 8,
                     Nombre = "Carlos Paz",
-                    ProvinciaId = 4,
+                    ProvinciaId = 18,
                 },
                 new Localidad()
                 {
-                    //Id = 9,
+                   //Id = 9,
                     Nombre = "Las Condes",
-                    ProvinciaId = 5,
+                    ProvinciaId = 19,
                 },
                 new Localidad()
                 {
-                    //Id = 10,
+                   //Id = 10,
                     Nombre = "Iquique",
-                    ProvinciaId = 6,
+                    ProvinciaId = 20,
                 },
                 new Localidad()
                 {
-                    //Id = 11,
+                   //Id = 11,
                     Nombre = "Sao Pablo",
-                    ProvinciaId = 7,
+                    ProvinciaId = 21,
                 },
                 new Localidad()
                 {
-                    //Id = 12,
+                   //Id = 12,
                     Nombre = "Brasilia",
-                    ProvinciaId = 8,
+                    ProvinciaId = 22,
                 },
             };
 
@@ -199,51 +202,51 @@ namespace EM.Infrestructura
             {
                 new Provincia()
                 {
-                    //Id = 1,
+                   //Id = 1,
                     Nombre = "Buenos Aires",
-                    PaisId = 1,
+                    PaisId = 19,
                 },
                 new Provincia()
                 {
-                    //Id = 2,
+                   //Id = 2,
                     Nombre = "Tucuman",
-                    PaisId = 1,
+                    PaisId = 19,
                 },
                 new Provincia()
                 {
-                    //Id = 3,
+                   //Id = 3,
                     Nombre = "Mendoza",
-                    PaisId = 1,
+                    PaisId = 19,
                 },
                 new Provincia()
                 {
-                    //Id = 4,
+                   //Id = 4,
                     Nombre = "Cordoba",
-                    PaisId = 1,
+                    PaisId = 19,
                 },
                 new Provincia()
                 {
-                    //Id = 5,
+                   //Id = 5,
                     Nombre = "Santiago De Chile",
-                    PaisId = 2,
+                    PaisId = 20,
                 },
                 new Provincia()
                 {
-                    //Id = 6,
+                   //Id = 6,
                     Nombre = "Iquique",
-                    PaisId = 2,
+                    PaisId = 20,
                 },
                 new Provincia()
                 {
-                    //Id = 7,
+                   //Id = 7,
                     Nombre = "Sao Paulo",
-                    PaisId = 3,
+                    PaisId = 21,
                 },
                 new Provincia()
                 {
-                    //Id = 8,
+                   //Id = 8,
                     Nombre = "Brasilia",
-                    PaisId = 3,
+                    PaisId = 21,
                 },
             };
 
@@ -263,22 +266,91 @@ namespace EM.Infrestructura
             {
                 new Pais()
                 {
-                    //Id = 1,
+                   //Id = 1,
                     Nombre = "Argentina",
                 },
                 new Pais()
                 {
-                    //Id = 2,
+                   //Id = 2,
                     Nombre = "Chile",
                 },
                 new Pais()
                 {
-                    //Id = 3,
+                   //Id = 3,
                     Nombre = "Brasil",
                 }
             };
 
             context.Paises.AddRange(paises);
+        }
+        private static void SeedBeneficiosEntradas(DataContext context)
+        {
+            if (context.BeneficiosEntradas.Any())
+            {
+                return;
+            }
+
+            // No especificar el Id ya que la db lo asigna automaticamente.
+            // Solo lo dejo comentado para poder hacer las relaciones entre entidades
+            var beneficioEntrada = new List<BeneficioEntrada>()
+            {
+                new BeneficioEntrada()
+                {
+                   //Id = 1,
+                    Nombre = "Almuerzo",
+                },
+                new BeneficioEntrada()
+                {
+                   //Id = 2,
+                    Nombre = "Cena",
+                },
+                new BeneficioEntrada()
+                {
+                   //Id = 3,
+                    Nombre = "Camiceta",
+                }
+            };
+
+            context.BeneficiosEntradas.AddRange(beneficioEntrada);
+        }
+        private static void SeedTipoEntrada(DataContext context)
+        {
+            if (context.TiposEntradas.Any())
+            {
+                return;
+            }
+
+            // No especificar el Id ya que la db lo asigna automaticamente.
+            // Solo lo dejo comentado para poder hacer las relaciones entre entidades
+            var tipoEntrada = new List<TipoEntrada>()
+            {
+                new TipoEntrada()
+                {
+                   //Id = 1,
+                    Nombre = "Gold",
+                    BeneficioEntradaId = 9
+                },
+                new TipoEntrada()
+                {
+                   //Id = 2,
+                    Nombre = "Silver",
+                    BeneficioEntradaId = 10
+                },
+                new TipoEntrada()
+                {
+                   //Id = 3,
+                    Nombre = "Bronze",
+                    BeneficioEntradaId = 11
+                },
+                new TipoEntrada()
+                {
+                   //Id = 4,
+                    Nombre = "Free",
+                    BeneficioEntradaId = 11
+                }
+            };
+
+            context.TiposEntradas.AddRange(tipoEntrada);
         }
     }
 }
