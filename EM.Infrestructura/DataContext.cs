@@ -25,6 +25,7 @@
             modelBuilder.ApplyConfiguration(new PersonaConfiguracion());
             modelBuilder.ApplyConfiguration(new RolConfiguracion());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguracion());
+            modelBuilder.ApplyConfiguration(new TipoEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new ClienteConfiguracion());
             // fin configuracion FluentApi
 
@@ -58,5 +59,8 @@
         public DbSet<Usuario> Usuarios { get; set; }
 
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<BeneficioEntrada> BeneficiosEntradas { get; set; }
+
+        public DbSet<TipoEntrada> TiposEntradas { get; set; }
     }
 }

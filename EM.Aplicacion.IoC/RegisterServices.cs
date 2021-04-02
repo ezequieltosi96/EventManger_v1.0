@@ -33,6 +33,10 @@ namespace EM.Aplicacion.IoC
     using EM.Infrestructura.Repositorio.Direccion;
     using EM.IServicio.Direccion;
     using EM.Servicio.Direccion;
+    using EM.Dominio.Repositorio.TipoEntrada;
+    using EM.Infrestructura.Repositorio.TipoEntrada;
+    using EM.IServicio.TipoEntrada;
+    using EM.Servicio.TipoEntrada;
     using EM.Dominio.Repositorio.Persona;
     using EM.IServicio.Persona;
     using EM.Servicio.Persona;
@@ -75,6 +79,10 @@ namespace EM.Aplicacion.IoC
             // direccion
             services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
             services.AddTransient<IDireccionServicio, DireccionServicio>();
+
+            // direccion
+            services.AddTransient<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
+            services.AddTransient<ITipoEntradaServicio, TipoEntradaServicio>();
 
             // persona
             services.AddTransient<IPersonaRepositorio, PersonaRepositorio>();
