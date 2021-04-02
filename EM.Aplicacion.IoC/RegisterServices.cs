@@ -20,6 +20,9 @@
     using EM.Infrestructura.Repositorio.Direccion;
     using EM.IServicio.Direccion;
     using EM.Servicio.Direccion;
+    using EM.Dominio.Repositorio.Persona;
+    using EM.IServicio.Persona;
+    using EM.Servicio.Persona;
 
     public class RegisterServices
     {
@@ -50,6 +53,10 @@
             // direccion
             services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
             services.AddTransient<IDireccionServicio, DireccionServicio>();
+
+            // persona
+            services.AddTransient<IPersonaRepositorio, PersonaRepositorio>();
+            services.AddTransient<IPersonaServicio, PersonaServicio>();
         }
     }
 }

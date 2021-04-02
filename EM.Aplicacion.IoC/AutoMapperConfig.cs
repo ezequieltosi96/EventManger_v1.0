@@ -1,4 +1,6 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using EM.IServicio.Persona.Dto;
+
+namespace EM.Aplicacion.IoC
 {
     using AutoMapper;
     using EM.Dominio.Entidades;
@@ -26,6 +28,10 @@
             // direccion
             CreateMap<Direccion, DireccionDto>();
             CreateMap<DireccionDto, Direccion>();
+
+            // persona
+            CreateMap<Persona, PersonaDto>();
+            CreateMap<PersonaDto, Persona>();
         }
     }
 }
