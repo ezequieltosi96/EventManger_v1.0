@@ -4,5 +4,6 @@
 
     public class ClienteDto : PersonaDto
     {
+        public string Email { get; set; }
     }
 }
