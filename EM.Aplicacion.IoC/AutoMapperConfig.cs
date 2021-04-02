@@ -1,4 +1,5 @@
 ﻿using EM.IServicio.Persona.Dto;
+using EM.IServicio.Rol.Dto;
 
 namespace EM.Aplicacion.IoC
 {
@@ -37,6 +38,10 @@ namespace EM.Aplicacion.IoC
             // persona
             CreateMap<Persona, PersonaDto>();
             CreateMap<PersonaDto, Persona>();
+
+            // rol
+            CreateMap<Rol, RolDto>();
+            CreateMap<RolDto, Rol>();
         }
     }
 }

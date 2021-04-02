@@ -15,9 +15,36 @@
             SeedProvincias(context);
             SeedLocalidades(context);
             SeedDirecciones(context);
+            SeedRoles(context);
 
             // Guardar cambios
             context.SaveChanges();
+        }
+
+        private static void SeedRoles(DataContext context)
+        {
+            if (context.Roles.Any()) return;
+
+            var roles = new List<Rol>()
+            {
+                new Rol()
+                {
+                    //Id = 1,
+                    Nombre = "admin",
+                },
+                new Rol()
+                {
+                    //Id = 2,
+                    Nombre = "empresa",
+                },
+                new Rol()
+                {
+                    //Id = 3,
+                    Nombre = "cliente",
+                },
+            };
+
+            context.Roles.AddRange(roles);
         }
 
         private static void SeedDirecciones(DataContext context)

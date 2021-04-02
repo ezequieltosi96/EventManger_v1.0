@@ -27,6 +27,11 @@
     using EM.Dominio.Repositorio.Persona;
     using EM.IServicio.Persona;
     using EM.Servicio.Persona;
+    using EM.Dominio.Repositorio.Rol;
+    using EM.Infrestructura.Repositorio.Rol;
+    using EM.IServicio.Rol;
+    using EM.Servicio.Rol;
+
 
     public class RegisterServices
     {
@@ -65,6 +70,10 @@
             // persona
             services.AddTransient<IPersonaRepositorio, PersonaRepositorio>();
             services.AddTransient<IPersonaServicio, PersonaServicio>();
+
+            // rol
+            services.AddTransient<IRolRepositorio, RolRepositorio>();
+            services.AddTransient<IRolServicio, RolServicio>();
         }
     }
 }

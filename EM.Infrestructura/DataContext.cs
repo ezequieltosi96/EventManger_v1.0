@@ -23,6 +23,7 @@
             modelBuilder.ApplyConfiguration(new DireccionConfiguracion());
             modelBuilder.ApplyConfiguration(new BeneficioEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new PersonaConfiguracion());
+            modelBuilder.ApplyConfiguration(new RolConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -46,8 +47,10 @@
 
         public DbSet<Direccion> Direcciones { get; set; }
 
-        public DbSet<BeneficioEntrada> BeneficiosEntradas { get; set; } 
+        public DbSet<BeneficioEntrada> BeneficiosEntradas { get; set; }
 
         public DbSet<Persona> Personas { get; set; }
+
+        public DbSet<Rol> Roles { get; set; }
     }
 }
