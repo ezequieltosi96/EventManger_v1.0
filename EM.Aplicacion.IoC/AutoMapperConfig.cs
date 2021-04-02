@@ -11,6 +11,7 @@ namespace EM.Aplicacion.IoC
     using EM.IServicio.Direccion.Dto;
     using EM.IServicio.Localidad.Dto;
     using EM.IServicio.Provincia.Dto;
+    using EM.IServicio.TipoEntrada.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -47,6 +48,10 @@ namespace EM.Aplicacion.IoC
             // usuario
             CreateMap<Usuario, UsuarioDto>();
             CreateMap<UsuarioDto, Usuario>();
+
+            //TipoEntrada
+            CreateMap<TipoEntrada, TipoEntradaDto>();
+            CreateMap<TipoEntradaDto, TipoEntrada>();
         }
     }
 }
