@@ -40,7 +40,10 @@
     using EM.Infrestructura.Repositorio.Empresa;
     using EM.IServicio.Empresa;
     using EM.Servicio.Empresa;
-
+    using EM.Dominio.Repositorio.Disertante;
+    using EM.Infrestructura.Repositorio.Disertante;
+    using EM.IServicio.Disertante;
+    using EM.Servicio.Disertante;
 
     public static class RegisterServices
     {
@@ -104,6 +107,10 @@
             // empresa
             services.AddTransient<IEmpresaRepositorio, EmpresaRepositorio>();
             services.AddTransient<IEmpresaServicio, EmpresaServicio>();
+
+            // disertante
+            services.AddTransient<IDisertanteRepositorio, DisertanteRepositorio>();
+            services.AddIdentity<IDisertanteServicio, DisertanteServicio>();
         }
     }
 }

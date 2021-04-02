@@ -1,12 +1,11 @@
-﻿using EM.Dominio.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-
-namespace EM.Infrestructura
+﻿namespace EM.Infrestructura
 {
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using Dominio.Entidades;
     using Dominio.Metadata;
+    using EM.Dominio.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using static Aplicacion.CadenaConexion.CadenaConexion;
     public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     {
@@ -29,6 +28,7 @@ namespace EM.Infrestructura
             modelBuilder.ApplyConfiguration(new TipoEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new ClienteConfiguracion());
             modelBuilder.ApplyConfiguration(new EmpresaConfiguracion());
+            modelBuilder.ApplyConfiguration(new DisertanteConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -61,5 +61,7 @@ namespace EM.Infrestructura
         public DbSet<TipoEntrada> TiposEntradas { get; set; }
 
         public DbSet<Empresa> Empresas { get; set; }
+
+        public DbSet<Disertante> Disertantes { get; set; }
     }
 }
