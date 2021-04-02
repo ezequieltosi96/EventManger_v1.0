@@ -21,6 +21,7 @@
             modelBuilder.ApplyConfiguration(new ProvinciaConfiguracion());
             modelBuilder.ApplyConfiguration(new LocalidadConfiguracion());
             modelBuilder.ApplyConfiguration(new DireccionConfiguracion());
+            modelBuilder.ApplyConfiguration(new BeneficioEntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new PersonaConfiguracion());
             // fin configuracion FluentApi
 
@@ -44,6 +45,8 @@
         public DbSet<Localidad> Localidades { get; set; }
 
         public DbSet<Direccion> Direcciones { get; set; }
+
+        public DbSet<BeneficioEntrada> BeneficiosEntradas { get; set; } 
 
         public DbSet<Persona> Personas { get; set; }
     }

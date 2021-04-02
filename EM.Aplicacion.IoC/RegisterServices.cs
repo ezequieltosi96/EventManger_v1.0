@@ -16,6 +16,10 @@
     using EM.IServicio.Provincia;
     using EM.Servicio.Localidad;
     using EM.Servicio.Provincia;
+    using EM.Dominio.Repositorio.BeneficioEntrada;
+    using EM.Infrestructura.Repositorio.BeneficioEntrada;
+    using EM.IServicio.BeneficioEntrada;
+    using EM.Servicio.BeneficioEntrada;
     using EM.Dominio.Repositorio.Direccion;
     using EM.Infrestructura.Repositorio.Direccion;
     using EM.IServicio.Direccion;
@@ -49,6 +53,10 @@
             // localidad
             services.AddTransient<ILocalidadRepositorio, LocalidadRepositorio>();
             services.AddTransient<ILocalidadServicio, LocalidadServicio>();
+
+            //BeneficioEntrada
+            services.AddTransient<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
+            services.AddTransient<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
 
             // direccion
             services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
