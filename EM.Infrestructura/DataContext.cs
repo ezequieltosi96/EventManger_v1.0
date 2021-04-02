@@ -25,6 +25,7 @@
             modelBuilder.ApplyConfiguration(new PersonaConfiguracion());
             modelBuilder.ApplyConfiguration(new RolConfiguracion());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguracion());
+            modelBuilder.ApplyConfiguration(new ClienteConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -55,5 +56,7 @@
         public DbSet<Rol> Roles { get; set; }
 
         public DbSet<Usuario> Usuarios { get; set; }
+
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }

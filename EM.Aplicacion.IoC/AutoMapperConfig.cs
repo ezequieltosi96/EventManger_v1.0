@@ -1,8 +1,4 @@
-﻿using EM.IServicio.Persona.Dto;
-using EM.IServicio.Rol.Dto;
-using EM.IServicio.Usuario.Dto;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using AutoMapper;
     using EM.Dominio.Entidades;
@@ -11,6 +7,10 @@ namespace EM.Aplicacion.IoC
     using EM.IServicio.Direccion.Dto;
     using EM.IServicio.Localidad.Dto;
     using EM.IServicio.Provincia.Dto;
+    using EM.IServicio.Cliente.Dto;
+    using EM.IServicio.Persona.Dto;
+    using EM.IServicio.Rol.Dto;
+    using EM.IServicio.Usuario.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -47,6 +47,10 @@ namespace EM.Aplicacion.IoC
             // usuario
             CreateMap<Usuario, UsuarioDto>();
             CreateMap<UsuarioDto, Usuario>();
+
+            // cliente
+            CreateMap<Cliente, ClienteDto>();
+            CreateMap<ClienteDto, Cliente>();
         }
     }
 }

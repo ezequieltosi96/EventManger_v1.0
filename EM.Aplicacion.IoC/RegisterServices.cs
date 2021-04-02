@@ -1,6 +1,10 @@
-﻿using EM.Dominio.Repositorio.Usuario;
+﻿using EM.Dominio.Repositorio.Cliente;
+using EM.Dominio.Repositorio.Usuario;
+using EM.Infrestructura.Repositorio.Cliente;
 using EM.Infrestructura.Repositorio.Usuario;
+using EM.IServicio.Cliente;
 using EM.IServicio.Usuario;
+using EM.Servicio.Cliente;
 using EM.Servicio.Usuario;
 
 namespace EM.Aplicacion.IoC
@@ -83,6 +87,10 @@ namespace EM.Aplicacion.IoC
             // usuario
             services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddTransient<IUsuarioServicio, UsuarioServicio>();
+
+            // cliente
+            services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
+            services.AddTransient<IClienteServicio, ClienteServicio>();
         }
     }
 }
