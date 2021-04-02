@@ -44,7 +44,10 @@ namespace EM.Aplicacion.IoC
     using EM.Infrestructura.Repositorio.Rol;
     using EM.IServicio.Rol;
     using EM.Servicio.Rol;
-
+    using EM.Dominio.Repositorio.Usuario;
+    using EM.Infrestructura.Repositorio.Usuario;
+    using EM.IServicio.Usuario;
+    using EM.Servicio.Usuario;
 
     public class RegisterServices
     {
