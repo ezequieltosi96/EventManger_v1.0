@@ -1,7 +1,11 @@
 ﻿using EM.Dominio.Repositorio.Establecimiento;
+using EM.Dominio.Repositorio.Sala;
 using EM.Infrestructura.Repositorio.Establecimiento;
+using EM.Infrestructura.Repositorio.Sala;
 using EM.IServicio.Establecimiento;
+using EM.IServicio.Sala;
 using EM.Servicio.Establecimiento;
+using EM.Servicio.Sala;
 
 namespace EM.Aplicacion.IoC
 {
@@ -120,6 +124,10 @@ namespace EM.Aplicacion.IoC
             // establecimiento
             services.AddSingleton<IEstablecimientoRepositorio, EstablecimientoRepositorio>();
             services.AddSingleton<IEstablecimientoServicio, EstablecimientoServicio>();
+
+            // sala
+            services.AddSingleton<ISalaRespositorio, SalaRepositorio>();
+            services.AddSingleton<ISalaServicio, SalaServicio>();
         }
     }
 }
