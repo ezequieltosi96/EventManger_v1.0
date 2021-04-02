@@ -1,4 +1,6 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using EM.Dominio.Identity;
+
+namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -40,15 +42,28 @@
     {
         public static void Register(IServiceCollection services)
         {
-            // general
+            // dbContext
             services.AddDbContext<DataContext>();
-            services.AddScoped<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
+            // identity
+            services.AddIdentity<AppUser, AppRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<DataContext>();
+            // automapper
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperConfig());
             });
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
+
+            // repositorio base
+            services.AddScoped<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
 
             // pais
             services.AddTransient<IPaisRepositorio, PaisRepositorio>();

@@ -1,11 +1,14 @@
-﻿namespace EM.Infrestructura
+﻿using EM.Dominio.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+namespace EM.Infrestructura
 {
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using Dominio.Entidades;
     using Dominio.Metadata;
     using static Aplicacion.CadenaConexion.CadenaConexion;
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

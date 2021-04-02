@@ -51,6 +51,8 @@ namespace EM.Presentacion.MVC
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            app.UseAuthentication();
+
             // Seed Database
             // SeedDb.Seed(context);
 
