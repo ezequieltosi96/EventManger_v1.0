@@ -59,7 +59,6 @@
         public DbSet<Usuario> Usuarios { get; set; }
 
         public DbSet<Cliente> Clientes { get; set; }
-        public DbSet<BeneficioEntrada> BeneficiosEntradas { get; set; }
 
         public DbSet<TipoEntrada> TiposEntradas { get; set; }
     }
