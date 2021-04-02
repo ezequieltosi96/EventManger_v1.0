@@ -1,4 +1,6 @@
-﻿namespace EM.Infrestructura
+﻿using System;
+
+namespace EM.Infrestructura
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -16,9 +18,23 @@
             SeedLocalidades(context);
             SeedDirecciones(context);
             SeedRoles(context);
+            SeedUsuario(context);
 
             // Guardar cambios
             context.SaveChanges();
+        }
+
+        private static void SeedUsuario(DataContext context)
+        {
+            if (context.Usuarios.Any()) return;
+
+            context.Usuarios.Add(new Usuario()
+            {
+                Mail = "admin@admin.com",
+                Password = "123456789",
+                FechaAlta = DateTime.Now,
+                RolId = 1
+            });
         }
 
         private static void SeedRoles(DataContext context)

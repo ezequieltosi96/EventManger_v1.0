@@ -1,4 +1,9 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using EM.Dominio.Repositorio.Usuario;
+using EM.Infrestructura.Repositorio.Usuario;
+using EM.IServicio.Usuario;
+using EM.Servicio.Usuario;
+
+namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -74,6 +79,10 @@
             // rol
             services.AddTransient<IRolRepositorio, RolRepositorio>();
             services.AddTransient<IRolServicio, RolServicio>();
+
+            // usuario
+            services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
+            services.AddTransient<IUsuarioServicio, UsuarioServicio>();
         }
     }
 }
