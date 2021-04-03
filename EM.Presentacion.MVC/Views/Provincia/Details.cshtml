@@ -1,6 +1,6 @@
-﻿@model EM.Presentacion.MVC.Models.Pais.PaisViewModel
+﻿@model EM.Presentacion.MVC.Models.Provincia.ProvinciaViewModel
 @{
-    ViewData["Title"] = "Detalle Pais";
+    ViewData["Title"] = "Detalle Provincia";
 }
 
 <h1 class="text-center">@ViewData["Title"]</h1>
@@ -10,6 +10,8 @@
         <dl class="dl-horizontal">
             <dt>@Html.DisplayNameFor(model => model.Nombre)</dt>
             <dd>@Model.Nombre</dd>
+            <dt>@Html.DisplayNameFor(model => model.PaisNombre)</dt>
+            <dd>@Model.PaisNombre</dd>
             <dt>@Html.DisplayNameFor(model => model.EstaEliminado)</dt>
             <dd>@Model.EstaEliminado</dd>
         </dl>

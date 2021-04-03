@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EM.Aplicacion.IoC;
 using EM.Infrestructura;
+using EM.Presentacion.MVC.Helpers.RegistrarServicios;
 
 namespace EM.Presentacion.MVC
 {
@@ -32,6 +33,7 @@ namespace EM.Presentacion.MVC
 
             // llamada al inyector
             RegisterServices.Register(services);
+            RegisterHelperServices.Register(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

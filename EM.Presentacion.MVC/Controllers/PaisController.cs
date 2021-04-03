@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using EM.IServicio.Pais;
 using EM.IServicio.Pais.Dto;
 using EM.Presentacion.MVC.Models.Pais;
@@ -13,10 +14,12 @@ namespace EM.Presentacion.MVC.Controllers
     public class PaisController : Controller
     {
         private readonly IPaisServicio _paisServicio;
+        private readonly IMapper _mapper;
 
-        public PaisController(IPaisServicio paisServicio)
+        public PaisController(IPaisServicio paisServicio, IMapper mapper)
         {
             _paisServicio = paisServicio;
+            _mapper = mapper;
         }
 
         // GET: PaisController
