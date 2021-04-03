@@ -84,6 +84,10 @@
     using EM.Dominio.Repositorio.FormaPago;
     using EM.Infrestructura.Repositorio.FormaPago;
     using EM.IServicio.FormaPago;
+    using EM.Infrestructura.Repositorio.FormaPagoTarjeta;
+    using EM.Dominio.Repositorio.FormaPagoTarjeta;
+    using EM.IServicio.FormaPagoTarjeta;
+    using EM.Servicio.FormaPagoTarjetaTarjeta;
 
     public static class RegisterServices
     {
@@ -186,9 +190,13 @@
             services.AddSingleton<IFacturaDetalleRepositorio, FacturaDetalleRepositorio>();
             services.AddSingleton<IFacturaDetalleServicio, FacturaDetalleServicio>();
 
-            //FacturaDetalle
+            //FormaPago
             services.AddSingleton<IFormaPagoRepositorio, FormaPagoRepositorio>();
             services.AddSingleton<IFormaPagoServicio, FormaPagoServicio>();
+
+            //FormaPagoTarjeta
+            services.AddSingleton<IFormaPagoTarjetaRepositorio, FormaPagoTarjetaRepositorio>();
+            services.AddSingleton<IFormaPagoTarjetaServicio, FormaPagoTarjetaServicio>();
         }
     }
 }

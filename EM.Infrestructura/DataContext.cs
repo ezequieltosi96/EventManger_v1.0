@@ -38,6 +38,7 @@
             modelBuilder.ApplyConfiguration(new FacturaConfiguracion());
             modelBuilder.ApplyConfiguration(new FacturaDetalleConfiguracion());
             modelBuilder.ApplyConfiguration(new FormaPagoConfiguracion());
+            modelBuilder.ApplyConfiguration(new FormaPagoTarjetaConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -90,5 +91,7 @@
         public DbSet<FacturaDetalle> FacturaDetalles { get; set; }
 
         public DbSet<FormaPago> FormaPago { get; set; }
+
+        public DbSet<FormaPagoTarjeta> FormaPagoTarjetas { get; set; }
     }
 }

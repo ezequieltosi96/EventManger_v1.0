@@ -21,6 +21,7 @@
     using EM.IServicio.Factura.Dto;
     using EM.IServicio.FacturaDetalle.Dto;
     using EM.IServicio.FormaPago.Dto;
+    using EM.IServicio.FormaPagoTarjeta.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -101,6 +102,10 @@
             //FormaPago
             CreateMap<FormaPago, FormaPagoDto>();
             CreateMap<FormaPagoDto, FormaPago>();
+
+            //FormaPago
+            CreateMap<FormaPagoTarjeta, FormaPagoTarjetaDto>();
+            CreateMap<FormaPagoTarjetaDto, FormaPagoTarjeta>();
         }
     }
 }
