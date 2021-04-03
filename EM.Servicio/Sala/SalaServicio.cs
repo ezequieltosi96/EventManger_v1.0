@@ -46,7 +46,7 @@
 
         public async Task<DtoBase> Obtener(long id)
         {
-            var sala = _salaRespositorio.ObtenerPorId(id);
+            var sala = await _salaRespositorio.ObtenerPorId(id);
 
             var dto = _mapper.Map<SalaDto>(sala);
 

@@ -50,8 +50,6 @@
 
             entidad.EstaEliminado = !entidad.EstaEliminado;
 
-            _context.Entry(entidad).State = EntityState.Deleted;
-
             await _context.SaveChangesAsync();
         }
 

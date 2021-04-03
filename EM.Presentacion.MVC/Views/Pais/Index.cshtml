@@ -1,0 +1,80 @@
+﻿@model IEnumerable<EM.Presentacion.MVC.Models.Pais.PaisViewModel>
+@{
+    ViewData["Title"] = "Paises";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<p class="pull-right" style="padding: 1px">
+    <a class="btn btn-default" asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+</p>
+
+<div class="modal fade" id="delete-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="delete-message"></p>
+            </div>
+            <div class="modal-footer">
+                <a id="delete-btn" class="btn btn-danger" asp-action="Delete">Eliminar</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.EstaEliminado)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pais in Model)
+        {
+            <tr>
+                <td>
+                    @pais.Nombre
+                </td>
+                <td>
+                    @pais.EstaEliminado
+                </td>
+                <td>
+                    <a class="btn-sm btn-info" asp-action="Details" asp-route-id="@pais.Id"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                    <a class="btn-sm btn-success" asp-action="Edit" asp-route-id="@pais.Id"><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a class="btn-sm btn-warning" onclick="handleDeleteModalShow('@pais.Nombre-@pais.Id')"><span class="glyphicon glyphicon-trash"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script type="text/javascript">
+        const handleDeleteModalShow = (pais) => {
+            const name = pais.split('-')[0];
+            const id = parseInt(pais.split('-')[1]);
+
+            const message = document.getElementById("delete-message");
+            message.innerText = "Esta seguro que quiere eliminar " + name;
+
+            const btn = document.getElementById("delete-btn");
+            btn.setAttribute("href", btn.getAttribute("href") + '/' +id);
+
+            $('#delete-modal').modal("show");
+        }
+    </script>
+}

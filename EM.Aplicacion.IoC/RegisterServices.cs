@@ -1,9 +1,4 @@
-﻿using EM.Dominio.Repositorio.Evento;
-using EM.Infrestructura.Repositorio.Evento;
-using EM.IServicio.Evento;
-using EM.Servicio.Evento;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -61,6 +56,10 @@ namespace EM.Aplicacion.IoC
     using EM.Servicio.Actividad;
     using EM.Servicio.Establecimiento;
     using EM.Servicio.Sala;
+    using EM.Dominio.Repositorio.Evento;
+    using EM.Infrestructura.Repositorio.Evento;
+    using EM.IServicio.Evento;
+    using EM.Servicio.Evento;
 
     public static class RegisterServices
     {
@@ -87,63 +86,63 @@ namespace EM.Aplicacion.IoC
             services.AddSingleton(mapper);
 
             // repositorio base
-            services.AddSingleton<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
+            services.AddScoped<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
 
             // pais
-            services.AddSingleton<IPaisRepositorio, PaisRepositorio>();
-            services.AddSingleton<IPaisServicio, PaisServicio>();
+            services.AddScoped<IPaisRepositorio, PaisRepositorio>();
+            services.AddScoped<IPaisServicio, PaisServicio>();
 
             // provincia
-            services.AddSingleton<IProvinciaRepositorio, ProvinciaRepositorio>();
-            services.AddSingleton<IProvinciaServicio, ProvinciaServicio>();
+            services.AddScoped<IProvinciaRepositorio, ProvinciaRepositorio>();
+            services.AddScoped<IProvinciaServicio, ProvinciaServicio>();
 
             // localidad
-            services.AddSingleton<ILocalidadRepositorio, LocalidadRepositorio>();
-            services.AddSingleton<ILocalidadServicio, LocalidadServicio>();
+            services.AddScoped<ILocalidadRepositorio, LocalidadRepositorio>();
+            services.AddScoped<ILocalidadServicio, LocalidadServicio>();
 
             //BeneficioEntrada
-            services.AddSingleton<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
-            services.AddSingleton<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
+            services.AddScoped<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
+            services.AddScoped<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
 
             // direccion
-            services.AddSingleton<IDireccionRepositorio, DireccionRepositorio>();
-            services.AddSingleton<IDireccionServicio, DireccionServicio>();
+            services.AddScoped<IDireccionRepositorio, DireccionRepositorio>();
+            services.AddScoped<IDireccionServicio, DireccionServicio>();
 
             // direccion
-            services.AddSingleton<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
-            services.AddSingleton<ITipoEntradaServicio, TipoEntradaServicio>();
+            services.AddScoped<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
+            services.AddScoped<ITipoEntradaServicio, TipoEntradaServicio>();
 
             // persona
-            services.AddSingleton<IPersonaRepositorio, PersonaRepositorio>();
-            services.AddSingleton<IPersonaServicio, PersonaServicio>();
+            services.AddScoped<IPersonaRepositorio, PersonaRepositorio>();
+            services.AddScoped<IPersonaServicio, PersonaServicio>();
 
             // cliente
-            services.AddSingleton<IClienteRepositorio, ClienteRepositorio>();
-            services.AddSingleton<IClienteServicio, ClienteServicio>();
+            services.AddScoped<IClienteRepositorio, ClienteRepositorio>();
+            services.AddScoped<IClienteServicio, ClienteServicio>();
 
             // empresa
-            services.AddSingleton<IEmpresaRepositorio, EmpresaRepositorio>();
-            services.AddSingleton<IEmpresaServicio, EmpresaServicio>();
+            services.AddScoped<IEmpresaRepositorio, EmpresaRepositorio>();
+            services.AddScoped<IEmpresaServicio, EmpresaServicio>();
 
             // disertante
-            services.AddSingleton<IDisertanteRepositorio, DisertanteRepositorio>();
-            services.AddSingleton<IDisertanteServicio, DisertanteServicio>();
+            services.AddScoped<IDisertanteRepositorio, DisertanteRepositorio>();
+            services.AddScoped<IDisertanteServicio, DisertanteServicio>();
 
             // establecimiento
-            services.AddSingleton<IEstablecimientoRepositorio, EstablecimientoRepositorio>();
-            services.AddSingleton<IEstablecimientoServicio, EstablecimientoServicio>();
+            services.AddScoped<IEstablecimientoRepositorio, EstablecimientoRepositorio>();
+            services.AddScoped<IEstablecimientoServicio, EstablecimientoServicio>();
 
             // sala
-            services.AddSingleton<ISalaRespositorio, SalaRepositorio>();
-            services.AddSingleton<ISalaServicio, SalaServicio>();
+            services.AddScoped<ISalaRespositorio, SalaRepositorio>();
+            services.AddScoped<ISalaServicio, SalaServicio>();
 
             // actividad
-            services.AddSingleton<IActividadRepositorio, ActividadRepositorio>();
-            services.AddSingleton<IActividadServicio, ActividadServicio>();
+            services.AddScoped<IActividadRepositorio, ActividadRepositorio>();
+            services.AddScoped<IActividadServicio, ActividadServicio>();
 
             // evento 
-            services.AddSingleton<IEventoRepositorio, EventoRepositorio>();
-            services.AddSingleton<IEventoServicio, EventoServicio>();
+            services.AddScoped<IEventoRepositorio, EventoRepositorio>();
+            services.AddScoped<IEventoServicio, EventoServicio>();
         }
     }
 }

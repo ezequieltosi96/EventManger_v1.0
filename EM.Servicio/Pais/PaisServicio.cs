@@ -57,9 +57,17 @@ namespace EM.Servicio.Pais
 
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
-            Expression<Func<Dominio.Entidades.Pais, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+            Expression<Func<Dominio.Entidades.Pais, bool>> filtro = x =>
+                x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
 
-            var paises = await _paisRepositorio.ObtenerFiltrado(filtro);
+            if (mostrarTodos)
+            {
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar);
+            }
+
+
+            var paises = await _paisRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(p => p.Nombre));
 
             var dtos = _mapper.Map<IEnumerable<PaisDto>>(paises);
 
