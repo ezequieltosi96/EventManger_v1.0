@@ -11,15 +11,15 @@
             context.Database.EnsureCreated();
 
             // Metodos seed
-            SeedPaises(context);
-            SeedProvincias(context);
-            SeedLocalidades(context);
-            SeedDirecciones(context);
-            SeedBeneficiosEntradas(context);
-            SeedTipoEntrada(context);
+            //SeedPaises(context);
+            //SeedProvincias(context);
+            //SeedLocalidades(context);
+            //SeedDirecciones(context);
+            //SeedBeneficiosEntradas(context);
+            //SeedTipoEntrada(context);
 
             // Guardar cambios
-            context.SaveChanges();
+            //context.SaveChanges();
         }
 
         private static void SeedDirecciones(DataContext context)

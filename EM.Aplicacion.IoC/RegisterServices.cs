@@ -60,6 +60,14 @@
     using EM.Infrestructura.Repositorio.Evento;
     using EM.IServicio.Evento;
     using EM.Servicio.Evento;
+    using EM.Dominio.Repositorio.Evento;
+    using EM.Infrestructura.Repositorio.Evento;
+    using EM.IServicio.Evento;
+    using EM.Servicio.Evento;
+    using EM.Dominio.Repositorio.Entrada;
+    using EM.IServicio.Entrada;
+    using EM.Servicio.Entrada;
+    using EM.Infrestructura.Repositorio.Entrada;
 
     public static class RegisterServices
     {
@@ -143,6 +151,12 @@
             // evento 
             services.AddScoped<IEventoRepositorio, EventoRepositorio>();
             services.AddScoped<IEventoServicio, EventoServicio>();
+            services.AddSingleton<IEventoRepositorio, EventoRepositorio>();
+            services.AddSingleton<IEventoServicio, EventoServicio>();
+
+            //Entrada
+            services.AddSingleton<IEntradaRepositorio, EntradaRepositorio>();
+            services.AddSingleton<IEntradaServicio, EntradaServicio>();
         }
     }
 }

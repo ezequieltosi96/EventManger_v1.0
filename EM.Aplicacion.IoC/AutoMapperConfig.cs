@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using EM.IServicio.Evento.Dto;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using AutoMapper;
     using EM.Dominio.Entidades;
@@ -18,6 +15,8 @@ namespace EM.Aplicacion.IoC
     using EM.IServicio.Establecimiento.Dto;
     using EM.IServicio.Sala.Dto;
     using EM.IServicio.Actividad.Dto;
+    using EM.IServicio.Entrada.Dto;
+    using EM.IServicio.Evento.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -78,6 +77,10 @@ namespace EM.Aplicacion.IoC
             // evento
             CreateMap<Evento, EventoDto>();
             CreateMap<EventoDto, Evento>();
+
+            // Entrada
+            CreateMap<Entrada, EntradaDto>();
+            CreateMap<EntradaDto, Entrada>();
         }
     }
 }
