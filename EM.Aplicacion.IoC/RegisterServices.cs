@@ -72,6 +72,18 @@
     using EM.Infrestructura.Repositorio.Inscripcion;
     using EM.Servicio.Inscripcion;
     using EM.IServicio.Inscripcion;
+    using EM.Dominio.Repositorio.Factura;
+    using EM.IServicio.Factura;
+    using EM.Infrestructura.Repositorio.Factura;
+    using EM.Servicio.Factura;
+    using EM.Dominio.Repositorio.FacturaDetalle;
+    using EM.Servicio.FacturaDetalleDetalle;
+    using EM.IServicio.FacturaDetalle;
+    using EM.Infrestructura.Repositorio.FacturaDetalle;
+    using EM.Servicio.FormaPago;
+    using EM.Dominio.Repositorio.FormaPago;
+    using EM.Infrestructura.Repositorio.FormaPago;
+    using EM.IServicio.FormaPago;
 
     public static class RegisterServices
     {
@@ -165,6 +177,18 @@
             //Inscripcion
             services.AddSingleton<IInscripcionRepositorio, InscripcionRepositorio>();
             services.AddSingleton<IInscripcionServicio, InscripcionServicio>();
+
+            //Factura
+            services.AddSingleton<IFacturaRepositorio, FacturaRepositorio>();
+            services.AddSingleton<IFacturaServicio, FacturaServicio>();
+
+            //FacturaDetalle
+            services.AddSingleton<IFacturaDetalleRepositorio, FacturaDetalleRepositorio>();
+            services.AddSingleton<IFacturaDetalleServicio, FacturaDetalleServicio>();
+
+            //FacturaDetalle
+            services.AddSingleton<IFormaPagoRepositorio, FormaPagoRepositorio>();
+            services.AddSingleton<IFormaPagoServicio, FormaPagoServicio>();
         }
     }
 }

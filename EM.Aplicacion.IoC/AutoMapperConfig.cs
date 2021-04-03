@@ -18,6 +18,9 @@
     using EM.IServicio.Entrada.Dto;
     using EM.IServicio.Evento.Dto;
     using EM.IServicio.Inscripcion.Dto;
+    using EM.IServicio.Factura.Dto;
+    using EM.IServicio.FacturaDetalle.Dto;
+    using EM.IServicio.FormaPago.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -86,6 +89,18 @@
             //Inscripcion
             CreateMap<Inscripcion, InscripcionDto>();
             CreateMap<InscripcionDto, Inscripcion>();
+
+            //Factura
+            CreateMap<Factura, FacturaDto>();
+            CreateMap<FacturaDto, Factura>();
+
+            //FacturaDetalle
+            CreateMap<FacturaDetalle, FacturaDetalleDto>();
+            CreateMap<FacturaDetalleDto, FacturaDetalle>();
+
+            //FormaPago
+            CreateMap<FormaPago, FormaPagoDto>();
+            CreateMap<FormaPagoDto, FormaPago>();
         }
     }
 }

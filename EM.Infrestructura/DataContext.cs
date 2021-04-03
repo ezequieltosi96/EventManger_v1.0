@@ -35,6 +35,9 @@
             modelBuilder.ApplyConfiguration(new EventoConfiguracion());
             modelBuilder.ApplyConfiguration(new EntradaConfiguracion());
             modelBuilder.ApplyConfiguration(new InscripcionConfiguracion());
+            modelBuilder.ApplyConfiguration(new FacturaConfiguracion());
+            modelBuilder.ApplyConfiguration(new FacturaDetalleConfiguracion());
+            modelBuilder.ApplyConfiguration(new FormaPagoConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -81,5 +84,11 @@
         public DbSet<Entrada> Entradas { get; set; }
 
         public DbSet<Inscripcion> Inscripciones { get; set; }
+
+        public DbSet<Factura> Facturas { get; set; }
+
+        public DbSet<FacturaDetalle> FacturaDetalles { get; set; }
+
+        public DbSet<FormaPago> FormaPago { get; set; }
     }
 }
