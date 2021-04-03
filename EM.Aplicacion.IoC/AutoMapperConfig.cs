@@ -17,6 +17,7 @@
     using EM.IServicio.Actividad.Dto;
     using EM.IServicio.Entrada.Dto;
     using EM.IServicio.Evento.Dto;
+    using EM.IServicio.Inscripcion.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -81,6 +82,10 @@
             // Entrada
             CreateMap<Entrada, EntradaDto>();
             CreateMap<EntradaDto, Entrada>();
+
+            //Inscripcion
+            CreateMap<Inscripcion, InscripcionDto>();
+            CreateMap<InscripcionDto, Inscripcion>();
         }
     }
 }

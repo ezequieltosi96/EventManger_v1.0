@@ -64,6 +64,10 @@
     using EM.IServicio.Entrada;
     using EM.Servicio.Entrada;
     using EM.Infrestructura.Repositorio.Entrada;
+    using EM.Dominio.Repositorio.Inscripcion;
+    using EM.Infrestructura.Repositorio.Inscripcion;
+    using EM.Servicio.Inscripcion;
+    using EM.IServicio.Inscripcion;
 
     public static class RegisterServices
     {
@@ -151,6 +155,10 @@
             //Entrada
             services.AddSingleton<IEntradaRepositorio, EntradaRepositorio>();
             services.AddSingleton<IEntradaServicio, EntradaServicio>();
+
+            //Inscripcion
+            services.AddSingleton<IInscripcionRepositorio, InscripcionRepositorio>();
+            services.AddSingleton<IInscripcionServicio, InscripcionServicio>();
         }
     }
 }
