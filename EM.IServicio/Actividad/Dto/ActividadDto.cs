@@ -12,5 +12,7 @@
         public long DisertanteId { get; set; }
 
         public long SalaId { get; set; }
+
+        public long EventoId { get; set; }
     }
 }

@@ -1,4 +1,9 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using EM.Dominio.Repositorio.Evento;
+using EM.Infrestructura.Repositorio.Evento;
+using EM.IServicio.Evento;
+using EM.Servicio.Evento;
+
+namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -135,6 +140,10 @@
             // actividad
             services.AddSingleton<IActividadRepositorio, ActividadRepositorio>();
             services.AddSingleton<IActividadServicio, ActividadServicio>();
+
+            // evento 
+            services.AddSingleton<IEventoRepositorio, EventoRepositorio>();
+            services.AddSingleton<IEventoServicio, EventoServicio>();
         }
     }
 }

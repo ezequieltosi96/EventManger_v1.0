@@ -13,6 +13,10 @@
 
         public long SalaId { get; set; }
 
+        public long EventoId { get; set; }
+
+        public Evento Evento { get; set; }
+
         public virtual Disertante Disertante { get; set; }
 
         public virtual Sala Sala { get; set; }

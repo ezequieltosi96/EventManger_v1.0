@@ -1,4 +1,7 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using System.Linq;
+using EM.IServicio.Evento.Dto;
+
+namespace EM.Aplicacion.IoC
 {
     using AutoMapper;
     using EM.Dominio.Entidades;
@@ -71,6 +74,10 @@
             // actividad
             CreateMap<Actividad, ActividadDto>();
             CreateMap<ActividadDto, Actividad>();
+
+            // evento
+            CreateMap<Evento, EventoDto>();
+            CreateMap<EventoDto, Evento>();
         }
     }
 }
