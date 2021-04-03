@@ -33,6 +33,7 @@
             modelBuilder.ApplyConfiguration(new SalaConfiguracion());
             modelBuilder.ApplyConfiguration(new ActividadConfiguracion());
             modelBuilder.ApplyConfiguration(new EventoConfiguracion());
+            modelBuilder.ApplyConfiguration(new EntradaConfiguracion());
             // fin configuracion FluentApi
 
             // Desactivar le borrado en cascada
@@ -75,5 +76,7 @@
         public DbSet<Actividad> Actividades { get; set; }
 
         public DbSet<Evento> Eventos { get; set; }
+
+        public DbSet<Entrada> Entradas { get; set; }
     }
 }

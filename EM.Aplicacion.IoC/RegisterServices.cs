@@ -1,9 +1,4 @@
-﻿using EM.Dominio.Repositorio.Evento;
-using EM.Infrestructura.Repositorio.Evento;
-using EM.IServicio.Evento;
-using EM.Servicio.Evento;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -61,6 +56,14 @@ namespace EM.Aplicacion.IoC
     using EM.Servicio.Actividad;
     using EM.Servicio.Establecimiento;
     using EM.Servicio.Sala;
+    using EM.Dominio.Repositorio.Evento;
+    using EM.Infrestructura.Repositorio.Evento;
+    using EM.IServicio.Evento;
+    using EM.Servicio.Evento;
+    using EM.Dominio.Repositorio.Entrada;
+    using EM.IServicio.Entrada;
+    using EM.Servicio.Entrada;
+    using EM.Infrestructura.Repositorio.Entrada;
 
     public static class RegisterServices
     {
@@ -144,6 +147,10 @@ namespace EM.Aplicacion.IoC
             // evento 
             services.AddSingleton<IEventoRepositorio, EventoRepositorio>();
             services.AddSingleton<IEventoServicio, EventoServicio>();
+
+            //Entrada
+            services.AddSingleton<IEntradaRepositorio, EntradaRepositorio>();
+            services.AddSingleton<IEntradaServicio, EntradaServicio>();
         }
     }
 }
