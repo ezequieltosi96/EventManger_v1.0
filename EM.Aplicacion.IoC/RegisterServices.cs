@@ -1,13 +1,4 @@
-﻿using EM.Dominio.Repositorio.Establecimiento;
-using EM.Dominio.Repositorio.Sala;
-using EM.Infrestructura.Repositorio.Establecimiento;
-using EM.Infrestructura.Repositorio.Sala;
-using EM.IServicio.Establecimiento;
-using EM.IServicio.Sala;
-using EM.Servicio.Establecimiento;
-using EM.Servicio.Sala;
-
-namespace EM.Aplicacion.IoC
+﻿namespace EM.Aplicacion.IoC
 {
     using Dominio.Repositorio;
     using DominioBase;
@@ -53,6 +44,18 @@ namespace EM.Aplicacion.IoC
     using EM.Infrestructura.Repositorio.Disertante;
     using EM.IServicio.Disertante;
     using EM.Servicio.Disertante;
+    using EM.Dominio.Repositorio.Actividad;
+    using EM.Dominio.Repositorio.Establecimiento;
+    using EM.Dominio.Repositorio.Sala;
+    using EM.Infrestructura.Repositorio.Actividad;
+    using EM.Infrestructura.Repositorio.Establecimiento;
+    using EM.Infrestructura.Repositorio.Sala;
+    using EM.IServicio.Actividad;
+    using EM.IServicio.Establecimiento;
+    using EM.IServicio.Sala;
+    using EM.Servicio.Actividad;
+    using EM.Servicio.Establecimiento;
+    using EM.Servicio.Sala;
 
     public static class RegisterServices
     {
@@ -128,6 +131,10 @@ namespace EM.Aplicacion.IoC
             // sala
             services.AddSingleton<ISalaRespositorio, SalaRepositorio>();
             services.AddSingleton<ISalaServicio, SalaServicio>();
+
+            // actividad
+            services.AddSingleton<IActividadRepositorio, ActividadRepositorio>();
+            services.AddSingleton<IActividadServicio, ActividadServicio>();
         }
     }
 }
