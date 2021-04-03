@@ -8,6 +8,8 @@
 
         public long ClienteId { get; set; }
 
+        public long FormaPagoId { get; set; }
+
         public TipoFactura TipoFactura { get; set; }
 
         public decimal Total { get; set; }

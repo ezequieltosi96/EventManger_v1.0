@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EM.Servicio.FormaPago
+﻿namespace EM.Servicio.FormaPago
 {
     using System;
     using System.Collections.Generic;
