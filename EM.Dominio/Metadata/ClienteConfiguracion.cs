@@ -13,6 +13,7 @@
             builder.Property(c => c.Nombre).HasMaxLength(100).IsRequired();
             builder.Property(c => c.Apellido).HasMaxLength(100).IsRequired();
             builder.Property(c => c.Dni).HasMaxLength(8).IsRequired();
+            builder.Property(c => c.Email).HasMaxLength(200).IsRequired(false);
         }
     }
 }

@@ -2,8 +2,6 @@
 {
     public class Cliente : Persona
     {
-        public long UsuarioId { get; set; }
-
-        public virtual Usuario Usuario { get; set; }
+        public string Email { get; set; }
     }
 }

@@ -1,11 +1,7 @@
-﻿using EM.Dominio.Repositorio.Cliente;
-using EM.Dominio.Repositorio.Usuario;
-using EM.Infrestructura.Repositorio.Cliente;
-using EM.Infrestructura.Repositorio.Usuario;
-using EM.IServicio.Cliente;
-using EM.IServicio.Usuario;
-using EM.Servicio.Cliente;
-using EM.Servicio.Usuario;
+﻿using EM.Dominio.Repositorio.Evento;
+using EM.Infrestructura.Repositorio.Evento;
+using EM.IServicio.Evento;
+using EM.Servicio.Evento;
 
 namespace EM.Aplicacion.IoC
 {
@@ -40,22 +36,49 @@ namespace EM.Aplicacion.IoC
     using EM.Dominio.Repositorio.Persona;
     using EM.IServicio.Persona;
     using EM.Servicio.Persona;
-    using EM.Dominio.Repositorio.Rol;
-    using EM.Infrestructura.Repositorio.Rol;
-    using EM.IServicio.Rol;
-    using EM.Servicio.Rol;
-    using EM.Dominio.Repositorio.Usuario;
-    using EM.Infrestructura.Repositorio.Usuario;
-    using EM.IServicio.Usuario;
-    using EM.Servicio.Usuario;
+    using EM.Dominio.Repositorio.Cliente;
+    using EM.Infrestructura.Repositorio.Cliente;
+    using EM.IServicio.Cliente;
+    using EM.Servicio.Cliente;
+    using EM.Dominio.Identity;
+    using EM.Dominio.Repositorio.Empresa;
+    using EM.Infrestructura.Repositorio.Empresa;
+    using EM.IServicio.Empresa;
+    using EM.Servicio.Empresa;
+    using EM.Dominio.Repositorio.Disertante;
+    using EM.Infrestructura.Repositorio.Disertante;
+    using EM.IServicio.Disertante;
+    using EM.Servicio.Disertante;
+    using EM.Dominio.Repositorio.Actividad;
+    using EM.Dominio.Repositorio.Establecimiento;
+    using EM.Dominio.Repositorio.Sala;
+    using EM.Infrestructura.Repositorio.Actividad;
+    using EM.Infrestructura.Repositorio.Establecimiento;
+    using EM.Infrestructura.Repositorio.Sala;
+    using EM.IServicio.Actividad;
+    using EM.IServicio.Establecimiento;
+    using EM.IServicio.Sala;
+    using EM.Servicio.Actividad;
+    using EM.Servicio.Establecimiento;
+    using EM.Servicio.Sala;
 
-    public class RegisterServices
+    public static class RegisterServices
     {
-        public void Register(IServiceCollection services)
+        public static void Register(IServiceCollection services)
         {
-            // general
+            // dbContext
             services.AddDbContext<DataContext>();
-            services.AddScoped<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
+            // identity
+            services.AddIdentity<AppUser, AppRole>(opt =>
+            {
+                opt.User.RequireUniqueEmail = true;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequiredLength = 8;
+            }).AddEntityFrameworkStores<DataContext>();
+            // automapper
             var mapperConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new AutoMapperConfig());
@@ -63,45 +86,64 @@ namespace EM.Aplicacion.IoC
             IMapper mapper = mapperConfig.CreateMapper();
             services.AddSingleton(mapper);
 
+            // repositorio base
+            services.AddSingleton<IRepositorio<EntidadBase>, Repositorio<EntidadBase>>();
+
             // pais
-            services.AddTransient<IPaisRepositorio, PaisRepositorio>();
-            services.AddTransient<IPaisServicio, PaisServicio>();
+            services.AddSingleton<IPaisRepositorio, PaisRepositorio>();
+            services.AddSingleton<IPaisServicio, PaisServicio>();
 
             // provincia
-            services.AddTransient<IProvinciaRepositorio, ProvinciaRepositorio>();
-            services.AddTransient<IProvinciaServicio, ProvinciaServicio>();
+            services.AddSingleton<IProvinciaRepositorio, ProvinciaRepositorio>();
+            services.AddSingleton<IProvinciaServicio, ProvinciaServicio>();
 
             // localidad
-            services.AddTransient<ILocalidadRepositorio, LocalidadRepositorio>();
-            services.AddTransient<ILocalidadServicio, LocalidadServicio>();
+            services.AddSingleton<ILocalidadRepositorio, LocalidadRepositorio>();
+            services.AddSingleton<ILocalidadServicio, LocalidadServicio>();
 
             //BeneficioEntrada
-            services.AddTransient<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
-            services.AddTransient<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
+            services.AddSingleton<IBeneficioEntradaRepositorio, BeneficioEntradaRepositorio>();
+            services.AddSingleton<IBeneficioEntradaServicio, BeneficioEntradaServicio>();
 
             // direccion
-            services.AddTransient<IDireccionRepositorio, DireccionRepositorio>();
-            services.AddTransient<IDireccionServicio, DireccionServicio>();
+            services.AddSingleton<IDireccionRepositorio, DireccionRepositorio>();
+            services.AddSingleton<IDireccionServicio, DireccionServicio>();
 
             // direccion
-            services.AddTransient<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
-            services.AddTransient<ITipoEntradaServicio, TipoEntradaServicio>();
+            services.AddSingleton<ITipoEntradaRepositorio, TipoEntradaRepositorio>();
+            services.AddSingleton<ITipoEntradaServicio, TipoEntradaServicio>();
 
             // persona
-            services.AddTransient<IPersonaRepositorio, PersonaRepositorio>();
-            services.AddTransient<IPersonaServicio, PersonaServicio>();
-
-            // rol
-            services.AddTransient<IRolRepositorio, RolRepositorio>();
-            services.AddTransient<IRolServicio, RolServicio>();
-
-            // usuario
-            services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
-            services.AddTransient<IUsuarioServicio, UsuarioServicio>();
+            services.AddSingleton<IPersonaRepositorio, PersonaRepositorio>();
+            services.AddSingleton<IPersonaServicio, PersonaServicio>();
 
             // cliente
-            services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
-            services.AddTransient<IClienteServicio, ClienteServicio>();
+            services.AddSingleton<IClienteRepositorio, ClienteRepositorio>();
+            services.AddSingleton<IClienteServicio, ClienteServicio>();
+
+            // empresa
+            services.AddSingleton<IEmpresaRepositorio, EmpresaRepositorio>();
+            services.AddSingleton<IEmpresaServicio, EmpresaServicio>();
+
+            // disertante
+            services.AddSingleton<IDisertanteRepositorio, DisertanteRepositorio>();
+            services.AddSingleton<IDisertanteServicio, DisertanteServicio>();
+
+            // establecimiento
+            services.AddSingleton<IEstablecimientoRepositorio, EstablecimientoRepositorio>();
+            services.AddSingleton<IEstablecimientoServicio, EstablecimientoServicio>();
+
+            // sala
+            services.AddSingleton<ISalaRespositorio, SalaRepositorio>();
+            services.AddSingleton<ISalaServicio, SalaServicio>();
+
+            // actividad
+            services.AddSingleton<IActividadRepositorio, ActividadRepositorio>();
+            services.AddSingleton<IActividadServicio, ActividadServicio>();
+
+            // evento 
+            services.AddSingleton<IEventoRepositorio, EventoRepositorio>();
+            services.AddSingleton<IEventoServicio, EventoServicio>();
         }
     }
 }

@@ -4,6 +4,6 @@
 
     public class ClienteDto : PersonaDto
     {
-        public long UsuarioId { get; set; }
+        public string Email { get; set; }
     }
 }

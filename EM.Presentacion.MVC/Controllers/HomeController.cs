@@ -12,6 +12,8 @@ namespace EM.Presentacion.MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewData["Message"] = "Your application home page.";
+
             return View();
         }
 

@@ -1,4 +1,7 @@
-﻿namespace EM.Aplicacion.IoC
+﻿using System.Linq;
+using EM.IServicio.Evento.Dto;
+
+namespace EM.Aplicacion.IoC
 {
     using AutoMapper;
     using EM.Dominio.Entidades;
@@ -10,8 +13,11 @@
     using EM.IServicio.TipoEntrada.Dto;
     using EM.IServicio.Cliente.Dto;
     using EM.IServicio.Persona.Dto;
-    using EM.IServicio.Rol.Dto;
-    using EM.IServicio.Usuario.Dto;
+    using EM.IServicio.Empresa.Dto;
+    using EM.IServicio.Disertante.Dto;
+    using EM.IServicio.Establecimiento.Dto;
+    using EM.IServicio.Sala.Dto;
+    using EM.IServicio.Actividad.Dto;
 
     public class AutoMapperConfig : Profile
     {
@@ -41,14 +47,6 @@
             CreateMap<Persona, PersonaDto>();
             CreateMap<PersonaDto, Persona>();
 
-            // rol
-            CreateMap<Rol, RolDto>();
-            CreateMap<RolDto, Rol>();
-
-            // usuario
-            CreateMap<Usuario, UsuarioDto>();
-            CreateMap<UsuarioDto, Usuario>();
-
             // cliente
             CreateMap<Cliente, ClienteDto>();
             CreateMap<ClienteDto, Cliente>();
@@ -56,6 +54,30 @@
             //TipoEntrada
             CreateMap<TipoEntrada, TipoEntradaDto>();
             CreateMap<TipoEntradaDto, TipoEntrada>();
+
+            // empresa
+            CreateMap<Empresa, EmpresaDto>();
+            CreateMap<EmpresaDto, Empresa>();
+
+            // disertante 
+            CreateMap<Disertante, DisertanteDto>();
+            CreateMap<DisertanteDto, Disertante>();
+
+            // establecimiento
+            CreateMap<Establecimiento, EstablecimientoDto>();
+            CreateMap<EstablecimientoDto, Establecimiento>();
+
+            // sala
+            CreateMap<Sala, SalaDto>();
+            CreateMap<SalaDto, Sala>();
+
+            // actividad
+            CreateMap<Actividad, ActividadDto>();
+            CreateMap<ActividadDto, Actividad>();
+
+            // evento
+            CreateMap<Evento, EventoDto>();
+            CreateMap<EventoDto, Evento>();
         }
     }
 }
