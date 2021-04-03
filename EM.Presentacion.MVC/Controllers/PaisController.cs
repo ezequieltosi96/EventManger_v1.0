@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +13,10 @@ namespace EM.Presentacion.MVC.Controllers
     public class PaisController : Controller
     {
         private readonly IPaisServicio _paisServicio;
-        private readonly IMapper _mapper;
 
-        public PaisController(IPaisServicio paisServicio, IMapper mapper)
+        public PaisController(IPaisServicio paisServicio)
         {
             _paisServicio = paisServicio;
-            _mapper = mapper;
         }
 
         // GET: PaisController
@@ -55,7 +52,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return View(vm);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -88,7 +85,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View(vm);
             }
@@ -110,7 +107,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return View(vm);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -138,9 +135,9 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception)
             {
-                return View(vm.Id);
+                return View(vm);
             }
         }
 
@@ -150,43 +147,14 @@ namespace EM.Presentacion.MVC.Controllers
             try
             {
                 await _paisServicio.Eliminar(id);
+
+                return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
             }
-
-            return RedirectToAction(nameof(Index));
-
         }
 
-        // POST: PaisController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Delete(PaisViewModel vm)
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid)
-        //        {
-        //            throw new Exception("Error de validacion no controlado");
-        //        }
-
-        //        var paisDto = new PaisDto()
-        //        {
-        //            Id = vm.Id,
-        //            EstaEliminado = vm.EstaEliminado.Equals("Si"),
-        //            Nombre = vm.Nombre,
-        //        };
-
-        //        await _paisServicio.Modificar(paisDto);
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View(vm.Id);
-        //    }
-        //}
     }
 }

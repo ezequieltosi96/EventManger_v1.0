@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EM.IServicio.Pais;
-using EM.IServicio.Pais.Dto;
 using EM.IServicio.Provincia;
 using EM.IServicio.Provincia.Dto;
 using EM.Presentacion.MVC.Helpers.Pais;
@@ -62,7 +60,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return View(vm);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -100,7 +98,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View(vm);
             }
@@ -123,7 +121,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return View(vm);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
             }
@@ -151,7 +149,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View(vm);
             }
@@ -165,7 +163,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
             }
