@@ -1,0 +1,83 @@
+﻿@model EM.Presentacion.MVC.Models.Localidad.LocalidadViewModel
+@{
+    ViewData["Title"] = "Editar Localidad";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form id="formulario" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaisId" class="control-label"></label>
+                <select asp-for="PaisId" asp-items="Model.Paises" class="form-control">
+                    <option value="">Seleccionar Pais</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinciaId" class="control-label"></label>
+                <select asp-for="ProvinciaId" asp-items="Model.Provincias" class="form-control">
+                    <option value="">Seleccionar Provincia</option>
+                </select>
+                <span id="provinciaValidator" asp-validation-for="ProvinciaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input id="btn-submit" type="submit" value="Crear" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-default" asp-action="Index"><span class="glyphicon glyphicon-menu-left"></span>Volver a la lista</a>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $("#PaisId").change(() => {
+                if ($("#PaisId").val() === 0) {
+                    $("#ProvinciaId").prop("disabled", true);
+                } else {
+                    $("#ProvinciaId").prop("disabled", false);
+                }
+                const url = '@Url.Content("~/")' + 'Localidad/ObtenerProvinciasPorPais';
+                const paisId = $("#PaisId").val();
+                $.getJSON(url,
+                    { paisId: paisId },
+                    (data) => {
+                        let items = "<option value='0' selected>Seleccionar Provincia</option>";
+                        
+                        $("#ProvinciaId").empty();
+                        $.each(data,
+                            (i, provincia) => {
+                                items += "<option value='" + provincia.value + "'>" + provincia.text + "</option>";
+                            });
+                        if (data.length === 0) {
+                            items = "<option value='0' selected>No Existen Provincias</option>";
+                            $("#ProvinciaId").prop("disabled", true);
+                        }
+                        $("#ProvinciaId").html(items);
+                    });
+            });
+
+            $("#btn-submit").click(function(e) {
+                e.preventDefault();
+                if ($("#ProvinciaId").val() === "" || $("#ProvinciaId").val() === "0") {
+                    $("#provinciaValidator").text("El Campo Provincia es requerido.");
+                } else {
+                    $("#formulario").submit();
+                }
+            });
+        });
+    </script>
+
+}

@@ -1,4 +1,6 @@
-﻿namespace EM.Servicio.Localidad
+﻿using System.Linq;
+
+namespace EM.Servicio.Localidad
 {
     using System;
     using System.Collections.Generic;
@@ -54,9 +56,14 @@
 
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
-            Expression<Func<Dominio.Entidades.Localidad, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+            Expression<Func<Dominio.Entidades.Localidad, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
 
-            var localidades = await _localidadRepositorio.ObtenerFiltrado(filtro);
+            if (mostrarTodos)
+            {
+                filtro = x => x.Nombre.Contains(cadenaBuscar);
+            }
+
+            var localidades = await _localidadRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(l => l.Provincia.Nombre).ThenBy(l => l.Nombre));
 
             var dtos = _mapper.Map<IEnumerable<LocalidadDto>>(localidades);
 

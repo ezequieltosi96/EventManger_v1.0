@@ -1,4 +1,7 @@
-﻿namespace EM.Servicio.Provincia
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+namespace EM.Servicio.Provincia
 {
     using System.Linq.Expressions;
     using AutoMapper;
@@ -62,7 +65,18 @@
                 filtro = x => x.Nombre.Contains(cadenaBuscar);
             }
 
-            var provincias = await _provinciaRepositorio.ObtenerFiltrado(filtro);
+            var provincias = await _provinciaRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(p => p.Pais.Nombre).ThenBy(p => p.Nombre));
+
+            var dtos = _mapper.Map<IEnumerable<ProvinciaDto>>(provincias);
+
+            return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorPais(long id)
+        {
+            Expression<Func<Dominio.Entidades.Provincia, bool>> filtro = x => x.PaisId == id && !x.EstaEliminado;
+
+            var provincias = await _provinciaRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(p => p.Pais.Nombre).ThenBy(p => p.Nombre));
 
             var dtos = _mapper.Map<IEnumerable<ProvinciaDto>>(provincias);
 

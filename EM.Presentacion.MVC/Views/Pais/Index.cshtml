@@ -88,7 +88,7 @@
             const title = document.getElementById('modal-title');
             const message = document.getElementById("delete-message");
             const btn = document.getElementById("delete-btn");
-            btn.setAttribute("href", btn.getAttribute("href") + '/' + id);
+            btn.setAttribute("href", '/Pais/Delete/' + id);
 
             if (pais.split('-')[2] === 'eliminado') {
                 message.innerText = "Esta seguro que quiere restaurar " + name;
