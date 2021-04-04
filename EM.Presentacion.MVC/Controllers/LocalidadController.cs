@@ -24,9 +24,11 @@ namespace EM.Presentacion.MVC.Controllers
             _helperPais = helperPais;
         }
 
-        public async Task<IActionResult> Index(bool mostrarTodos = false)
+        public async Task<IActionResult> Index(string cadenaBuscar = "", bool mostrarTodos = false)
         {
-            var dtos = (IEnumerable<LocalidadDto>)await _localidadServicio.Obtener(String.Empty, mostrarTodos);
+            if (cadenaBuscar == null) cadenaBuscar = "";
+
+            var dtos = (IEnumerable<LocalidadDto>)await _localidadServicio.Obtener(cadenaBuscar, mostrarTodos);
 
             var models = dtos.Select(l => new LocalidadViewModel()
             {
@@ -42,6 +44,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
 
             ViewBag.MostrarTodos = mostrarTodos;
+            ViewBag.CadenaBuscar = cadenaBuscar;
 
             return View(models);
         }

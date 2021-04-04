@@ -19,9 +19,11 @@ namespace EM.Presentacion.MVC.Controllers
         }
 
         // GET: PaisController
-        public async Task<IActionResult> Index(bool mostrarTodos = false)
+        public async Task<IActionResult> Index(string cadenaBuscar = "", bool mostrarTodos = false)
         {
-            var dtos = (IEnumerable<PaisDto>)await _paisServicio.Obtener(String.Empty, mostrarTodos);
+            if (cadenaBuscar == null) cadenaBuscar = "";
+
+            var dtos = (IEnumerable<PaisDto>)await _paisServicio.Obtener(cadenaBuscar, mostrarTodos);
 
             var models = dtos.Select(d => new PaisViewModel()
             {
@@ -31,6 +33,7 @@ namespace EM.Presentacion.MVC.Controllers
             }).ToList();
 
             ViewBag.MostrarTodos = mostrarTodos;
+            ViewBag.CadenaBuscar = cadenaBuscar;
 
             return View(models);
         }

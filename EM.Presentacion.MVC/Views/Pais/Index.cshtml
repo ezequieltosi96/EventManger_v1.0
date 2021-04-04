@@ -5,18 +5,50 @@
 
 <h1 class="text-center">@ViewData["Title"]</h1>
 
-<p class="pull-right" style="padding: 1px">
-    <a class="btn btn-default" asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
-    @if (ViewBag.MostrarTodos)
-    {
-        <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false">Ocultar eliminados</a>
-    }
-    else
-    {
-        <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true">Mostrar eliminados</a>
-    }
+@*<div class="row">
+        <div class="col-md-4 col-md-offset-5">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pais Nombre...">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="button">Buscar</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <a class="btn btn-default" asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+            @if (ViewBag.MostrarTodos)
+            {
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false">Ocultar eliminados</a>
+            }
+            else
+            {
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true">Mostrar eliminados</a>
+            }
+        </div>
+    </div>*@
 
-</p>
+<div class="contenedor">
+    <form asp-action="Index" asp-route-mostrarTodos="false">
+        <div class="input-group p-5" style="max-width: 350px;">
+            <input type="text" class="form-control" placeholder="Pais..." value="@ViewBag.CadenaBuscar" name="cadenaBuscar">
+            <div class="input-group-btn">
+                <input type="submit" value="Buscar" class="btn btn-default" />
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar=""><span class="glyphicon glyphicon-remove-circle"></span></a>
+            </div>
+        </div>
+    </form>
+    <div class="p-5">
+        <a class="btn btn-default" asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+        @if (ViewBag.MostrarTodos)
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar">Ocultar eliminados</a>
+        }
+        else
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar">Mostrar eliminados</a>
+        }
+    </div>
+</div>
 
 <table class="table table-responsive table-striped text-center">
     <thead>
@@ -103,7 +135,7 @@
                 btn.classList.remove('btn-success');
                 btn.classList.add('btn-danger');
             }
-            
+
 
             $('#delete-modal').modal("show");
         }

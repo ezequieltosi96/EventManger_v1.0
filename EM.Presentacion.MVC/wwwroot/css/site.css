@@ -28,8 +28,22 @@ body {
     margin: 15px;
 }
 
-.btn-transparent {
-    border: #fff;
+.p-5 {
+    padding: 1rem;
+}
+
+.contenedor {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 610px) {
+    .contenedor {
+        flex-direction: column-reverse;
+    }
 }
 
 /* Hide/rearrange for smaller screens */
