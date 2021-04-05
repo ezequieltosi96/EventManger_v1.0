@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using EM.Aplicacion.IoC;
+using EM.Dominio.Identity;
 using EM.Infrestructura;
 using EM.Presentacion.MVC.Helpers.RegistrarServicios;
+using Microsoft.AspNetCore.Identity;
 
 namespace EM.Presentacion.MVC
 {
@@ -37,7 +39,7 @@ namespace EM.Presentacion.MVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, DataContext context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             if (env.IsDevelopment())
             {
@@ -55,8 +57,7 @@ namespace EM.Presentacion.MVC
 
             app.UseAuthentication();
 
-            // Seed Database
-            // SeedDb.Seed(context);
+            DbInitializer.SeedAdminUser(userManager, roleManager);
 
             app.UseMvc(routes =>
             {
