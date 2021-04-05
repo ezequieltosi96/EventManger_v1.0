@@ -45,6 +45,7 @@
                         </ul>
                     </li>
                 </ul>
+                <partial name="_LoginPartial" />
             </div>
         </div>
     </nav>
@@ -53,8 +54,9 @@
 
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
+        
+        <footer class="navbar-fixed-bottom text-center footer">
+            <hr />
             <p>&copy; 2021 - EventManager</p>
         </footer>
     </div>

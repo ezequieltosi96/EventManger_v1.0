@@ -1,0 +1,70 @@
+﻿@model EM.Presentacion.MVC.Models.Identity.UsuarioClienteViewModel
+
+@{
+    ViewData["Title"] = "Registro Cliente";
+}
+
+
+<div class="jumbotron" style="background: transparent;">
+    <div class="text-center">
+        <h1>Registro</h1>
+    </div>
+    @if (ViewBag.ClienteDuplicado)
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Ya se encuentra registrado un usuario con ese DNI.
+        </div>
+    }
+    <div class="form-login-cliente-container">
+        <div class="login-form-header">
+            <p class="lead">Completa tus datos</p>
+            <a asp-action="EmpresaRegister" style="cursor: pointer;">Crear una cuenta empresa<span class="glyphicon glyphicon-menu-right"></span></a>
+        </div>
+        <form asp-action="Register">
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="Cliente.Nombre" class="control-label"></label>
+                    <input asp-for="Cliente.Nombre" class="form-control"/>
+                    <span asp-validation-for="Cliente.Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cliente.Apellido" class="control-label"></label>
+                    <input asp-for="Cliente.Apellido" class="form-control"/>
+                    <span asp-validation-for="Cliente.Apellido" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group" style="width: 48%;">
+                <label asp-for="Cliente.Dni" class="control-label"></label>
+                <input asp-for="Cliente.Dni" class="form-control"/>
+                <span asp-validation-for="Cliente.Dni" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cliente.Email" class="control-label"></label>
+                <input asp-for="Cliente.Email" class="form-control"/>
+                @if (ViewBag.EmailRequerido)
+                {
+                    <span class="text-danger field-validation-error" data-valmsg-for="Cliente.Email" data-valmsg-replace="true">El Email es requerido.</span>
+                }
+                <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control"/>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control"/>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Regístrate" class="btn btn-primary btn-lg pull-right"/>
+            </div>
+        </form>
+    </div>
+
+</div>

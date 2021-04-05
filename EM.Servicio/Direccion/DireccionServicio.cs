@@ -1,4 +1,6 @@
-﻿namespace EM.Servicio.Direccion
+﻿using System.Linq;
+
+namespace EM.Servicio.Direccion
 {
     using System;
     using System.Collections.Generic;
@@ -63,6 +65,19 @@
             var dtos = _mapper.Map<IEnumerable<DireccionDto>>(direcciones);
 
             return dtos;
+        }
+
+        public async Task<long?> ExisteDireccion(long localidadId, string descripcion)
+        {
+            Expression<Func<Dominio.Entidades.Direccion, bool>> filtro = x =>
+                x.LocalidadId == localidadId && x.Descripcion.Equals(descripcion);
+
+            var direcciones = await _direccionRepositorio.ObtenerFiltrado(filtro);
+
+            var direccion =
+                direcciones.FirstOrDefault(d => d.LocalidadId == localidadId && d.Descripcion.Equals(descripcion));
+
+            return direccion?.Id;
         }
     }
 }

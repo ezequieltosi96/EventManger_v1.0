@@ -69,5 +69,16 @@ namespace EM.Servicio.Localidad
 
             return dtos;
         }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorProvincia(long id)
+        {
+            Expression<Func<Dominio.Entidades.Localidad, bool>> filtro = x => x.ProvinciaId == id && !x.EstaEliminado;
+
+            var localidades = await _localidadRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(p => p.Provincia.Nombre).ThenBy(p => p.Nombre));
+
+            var dtos = _mapper.Map<IEnumerable<LocalidadDto>>(localidades);
+
+            return dtos;
+        }
     }
 }

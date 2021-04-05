@@ -6,6 +6,6 @@
     {
         public string Descripcion { get; set; }
 
-        public long LoclidadId { get; set; }
+        public long LocalidadId { get; set; }
     }
 }

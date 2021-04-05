@@ -4,5 +4,6 @@
 
     public class AppUser : IdentityUser
     {
+        public string NombreMostrar { get; set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace EM.Servicio.Empresa
+﻿using System.Linq;
+
+namespace EM.Servicio.Empresa
 {
     using System;
     using System.Collections.Generic;
@@ -63,6 +65,29 @@
             var dtos = _mapper.Map<IEnumerable<EmpresaDto>>(empresas);
 
             return dtos;
+        }
+
+        public async Task<DtoBase> ObtenerPorEmail(string email)
+        {
+            Expression<Func<Dominio.Entidades.Empresa, bool>> filtro = x => x.Email.Equals(email);
+
+            var empresas = await _empresaRepositorio.ObtenerFiltrado(filtro);
+
+            var empresa = empresas.First(e => e.Email.Equals(email));
+
+            var dto = _mapper.Map<EmpresaDto>(empresa);
+
+            return dto;
+        }
+
+        public async Task<bool> Existe(string cuil, string razonSocial)
+        {
+            Expression<Func<Dominio.Entidades.Empresa, bool>> filtro = x =>
+                x.Cuil.Equals(cuil) && x.RazonSocial.Equals(razonSocial);
+
+            var empresas = await _empresaRepositorio.ObtenerFiltrado(filtro);
+
+            return empresas.Any();
         }
     }
 }

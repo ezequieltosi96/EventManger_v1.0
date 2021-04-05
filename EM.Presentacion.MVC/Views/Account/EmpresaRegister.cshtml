@@ -1,0 +1,176 @@
+﻿@model EM.Presentacion.MVC.Models.Identity.UsuarioEmpresaViewModel
+
+@{
+    ViewData["Title"] = "Registro Empresa";
+}
+
+
+<div class="jumbotron" style="background: transparent;">
+    <div class="text-center">
+        <h1>Registro Empresa</h1>
+    </div>
+    @if (ViewBag.EmpresaDuplicada)
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Ya se encuentra registrado un usuario con ese Cuil o Razon Social.
+        </div>
+    }
+    <div class="form-login-cliente-container">
+        <div class="login-form-header">
+            <p class="lead">Completar los datos</p>
+            <a asp-action="Register" style="cursor: pointer;">Crear cuenta personal<span class="glyphicon glyphicon-menu-right"></span></a>
+        </div>
+        <form asp-action="EmpresaRegister">
+            <div class="form-group-flex">
+                <div class="form-group" style="max-width: 196px;">
+                    <label asp-for="Empresa.RazonSocial" class="control-label"></label>
+                    <input asp-for="Empresa.RazonSocial" class="form-control" />
+                    <span asp-validation-for="Empresa.RazonSocial" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="max-width: 196px;">
+                    <label asp-for="Empresa.NombreFantasia" class="control-label"></label>
+                    <input asp-for="Empresa.NombreFantasia" class="form-control" />
+                    <span asp-validation-for="Empresa.NombreFantasia" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="PaisId" class="control-label"></label>
+                    <select asp-for="PaisId" asp-items="Model.Paises" class="form-control">
+                        <option value="">Seleccionar Pais</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProvinciaId" class="control-label"></label>
+                    <select disabled="disabled" asp-for="ProvinciaId" asp-items="@(new SelectList(String.Empty, "ProvinciaId", "Nombre"))" class="form-control">
+                        <option value="">Seleccionar Provincia</option>
+                    </select>
+                    <span id="provinciaValidator" asp-validation-for="ProvinciaId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empresa.Direccion.LocalidadId" class="control-label"></label>
+                <select disabled="disabled" asp-for="Empresa.Direccion.LocalidadId" asp-items="@(new SelectList(String.Empty, "LocalidadId", "Nombre"))" class="form-control">
+                    <option value="">Seleccionar Localidad</option>
+                </select>
+                <span id="localidadValidator" asp-validation-for="Empresa.Direccion.LocalidadId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Empresa.Direccion.Descripcion" class="control-label"></label>
+                <input asp-for="Empresa.Direccion.Descripcion" class="form-control" />
+                <span asp-validation-for="Empresa.Direccion.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="Empresa.Cuil" class="control-label"></label>
+                    <input asp-for="Empresa.Cuil" class="form-control" />
+                    <span asp-validation-for="Empresa.Cuil" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Empresa.Email" class="control-label"></label>
+                    <input asp-for="Empresa.Email" class="form-control" />
+                    @if (ViewBag.EmailRequerido)
+                    {
+                        <span class="text-danger field-validation-error" data-valmsg-for="Empresa.Email" data-valmsg-replace="true">El Email es requerido.</span>
+                    }
+                    <span asp-validation-for="Empresa.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group-flex">
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Registrar Empresa" class="btn btn-primary btn-lg pull-right" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $("#PaisId").change(() => {
+                $("#Empresa_Direccion_LocalidadId").empty();
+                $("#Empresa_Direccion_LocalidadId").html("<option value='0' selected>Seleccionar Localidad</option>");
+                $("#Empresa_Direccion_LocalidadId").prop("disabled", true);
+                if ($("#PaisId").val() === 0) {
+                    $("#ProvinciaId").prop("disabled", true);
+                } else {
+                    $("#ProvinciaId").prop("disabled", false);
+                }
+                const url = '@Url.Content("~/")' + 'Localidad/ObtenerProvinciasPorPais';
+                const paisId = $("#PaisId").val();
+                $.getJSON(url,
+                    { paisId: paisId },
+                    (data) => {
+                        let items = "<option value='0' selected>Seleccionar Provincia</option>";
+
+                        $("#ProvinciaId").empty();
+                        $.each(data,
+                            (i, provincia) => {
+                                items += "<option value='" + provincia.value + "'>" + provincia.text + "</option>";
+                            });
+                        if (data.length === 0) {
+                            items = "<option value='0' selected>No Existen Provincias</option>";
+                            $("#ProvinciaId").prop("disabled", true);
+                        }
+                        $("#ProvinciaId").html(items);
+                    });
+            });
+
+            $("#ProvinciaId").change(() => {
+                if ($("#ProvinciaId").val() === 0) {
+                    $("#Empresa_Direccion_LocalidadId").prop("disabled", true);
+                } else {
+                    $("#Empresa_Direccion_LocalidadId").prop("disabled", false);
+                }
+                const url = '@Url.Content("~/")' + 'Domicilio/ObtenerLocalidadesPorProvincia';
+                const provinciaId = $("#ProvinciaId").val();
+
+                $.getJSON(url,
+                    { provinciaId: provinciaId },
+                    (data) => {
+                        let items = "<option value='0' selected>Seleccionar Localidad</option>";
+
+                        $("#Empresa_Direccion_LocalidadId").empty();
+                        $.each(data,
+                            (i, localidad) => {
+                                items += "<option value='" + localidad.value + "'>" + localidad.text + "</option>";
+                            });
+                        if (data.length === 0) {
+                            items = "<option value='0' selected>No Existen Localidades</option>";
+                            $("#Empresa_Direccion_LocalidadId").prop("disabled", true);
+                        }
+                        $("#Empresa_Direccion_LocalidadId").html(items);
+                    });
+            });
+
+            $("#btn-submit").click(function(e) {
+                e.preventDefault();
+                if ($("#ProvinciaId").val() === "" || $("#ProvinciaId").val() === "0") {
+                    $("#provinciaValidator").text("El Campo Provincia es requerido.");
+                } else {
+                    if ($("#LocaEmpresa_Direccion_LocalidadIdlidadId").val() === "" || $("#Empresa_Direccion_LocalidadId").val() === "0") {
+                        $("#localidadValidator").text("El Campo Provincia es requerido.");
+                    } else {
+                        $("#formulario").submit();
+                    }
+                }
+            });
+        });
+    </script>
+}
