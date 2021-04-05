@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using EM.IServicio.Cliente;
 using EM.IServicio.Cliente.Dto;
 using EM.Presentacion.MVC.Models.Cliente;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -15,6 +16,7 @@ namespace EM.Presentacion.MVC.Controllers
             _clienteServicio = clienteServicio;
         }
 
+        [Authorize(Roles = "Cliente, Admin")]
         public async Task<IActionResult> Profile(string email)
         {
             var dto = (ClienteDto)await _clienteServicio.ObtenerPorEmail(email);

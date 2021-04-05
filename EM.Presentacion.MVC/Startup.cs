@@ -58,6 +58,7 @@ namespace EM.Presentacion.MVC
             app.UseAuthentication();
 
             DbInitializer.SeedAdminUser(userManager, roleManager);
+            DbInitializer.SeedRoles(roleManager);
 
             app.UseMvc(routes =>
             {

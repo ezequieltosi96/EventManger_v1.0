@@ -33,5 +33,36 @@ namespace EM.Infrestructura
                 }
             }
         }
+
+        public static void SeedRoles(RoleManager<AppRole> roleManager)
+        {
+            if (roleManager.FindByNameAsync("Admin").Result == null)
+            {
+                var role = new AppRole()
+                {
+                    Name = "Admin",
+                };
+
+                roleManager.CreateAsync(role).Wait();
+            }
+            if (roleManager.FindByNameAsync("Cliente").Result == null)
+            {
+                var role = new AppRole()
+                {
+                    Name = "Cliente",
+                };
+
+                roleManager.CreateAsync(role).Wait();
+            }
+            if (roleManager.FindByNameAsync("Empresa").Result == null)
+            {
+                var role = new AppRole()
+                {
+                    Name = "Empresa",
+                };
+
+                roleManager.CreateAsync(role).Wait();
+            }
+        }
     }
 }

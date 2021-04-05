@@ -7,6 +7,7 @@ using EM.IServicio.Empresa;
 using EM.IServicio.Empresa.Dto;
 using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Models.Empresa;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -21,6 +22,7 @@ namespace EM.Presentacion.MVC.Controllers
             _helperDireccion = helperDireccion;
         }
 
+        [Authorize(Roles = "Empresa, Admin")]
         public async Task<IActionResult> Profile(string email)
         {
             var dto = (EmpresaDto)await _empresaServicio.ObtenerPorEmail(email);

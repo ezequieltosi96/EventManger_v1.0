@@ -1,7 +1,15 @@
 ﻿<ul class="nav navbar-nav navbar-right">
     @if (User.Identity.IsAuthenticated)
     {
-        <li><a asp-area="" asp-controller="Account" asp-action="Profile"><span class="glyphicon glyphicon-user"></span> Mi Perfil</a></li>
+        @if (User.IsInRole("Admin") || User.IsInRole("Empresa"))
+         {
+             <li><a asp-area="" asp-controller="Account" asp-action="Profile"><span class="glyphicon glyphicon-wrench"></span> Administrar</a></li>
+         }
+         else
+         {
+             <li><a asp-area="" asp-controller="Account" asp-action="Profile"><span class="glyphicon glyphicon-user"></span> Mi Perfil</a></li>
+         }
+        
         <li><a asp-area="" asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
     }
     else

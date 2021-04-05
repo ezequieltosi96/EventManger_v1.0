@@ -7,6 +7,7 @@ using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Helpers.Empresa;
 using EM.Presentacion.MVC.Helpers.Pais;
 using EM.Presentacion.MVC.Models.Identity;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 
 namespace EM.Presentacion.MVC.Controllers
@@ -211,6 +212,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Empresa, Cliente, Admin")]
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
@@ -245,6 +247,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Empresa, Cliente, Admin")]
         public async Task<IActionResult> Profile()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -263,6 +266,7 @@ namespace EM.Presentacion.MVC.Controllers
             return RedirectToAction(nameof(AdminProfile));
         }
 
+        [Authorize(Roles = "Admin")]
         public IActionResult AdminProfile()
         {
             return View();

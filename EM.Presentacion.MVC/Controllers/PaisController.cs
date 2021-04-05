@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using EM.IServicio.Pais;
 using EM.IServicio.Pais.Dto;
 using EM.Presentacion.MVC.Models.Pais;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -18,7 +19,7 @@ namespace EM.Presentacion.MVC.Controllers
             _paisServicio = paisServicio;
         }
 
-        // GET: PaisController
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string cadenaBuscar = "", bool mostrarTodos = false)
         {
             if (cadenaBuscar == null) cadenaBuscar = "";
@@ -38,7 +39,7 @@ namespace EM.Presentacion.MVC.Controllers
             return View(models);
         }
 
-        // GET: PaisController/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(long id)
         {
             try
@@ -60,13 +61,13 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
-        // GET: PaisController/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PaisController/Create
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PaisViewModel vm)
@@ -93,7 +94,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
-        // GET: PaisController/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long id)
         {
             try
@@ -115,7 +116,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
-        // POST: PaisController/Edit/5
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(PaisViewModel vm)
@@ -143,7 +144,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
-        // GET: PaisController/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long id)
         {
             try

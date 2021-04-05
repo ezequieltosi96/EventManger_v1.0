@@ -8,6 +8,7 @@ using EM.IServicio.Localidad.Dto;
 using EM.Presentacion.MVC.Helpers.Pais;
 using EM.Presentacion.MVC.Helpers.Provincia;
 using EM.Presentacion.MVC.Models.Localidad;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -24,6 +25,7 @@ namespace EM.Presentacion.MVC.Controllers
             _helperPais = helperPais;
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(string cadenaBuscar = "", bool mostrarTodos = false)
         {
             if (cadenaBuscar == null) cadenaBuscar = "";
@@ -49,6 +51,7 @@ namespace EM.Presentacion.MVC.Controllers
             return View(models);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(long id)
         {
             try
@@ -72,6 +75,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create()
         {
             var paises = await _helperPais.PoblarSelect();
@@ -84,6 +88,7 @@ namespace EM.Presentacion.MVC.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LocalidadViewModel vm)
@@ -109,6 +114,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(long id)
         {
             try
@@ -136,6 +142,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(LocalidadViewModel vm)
@@ -161,6 +168,7 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(long id)
         {
             try
