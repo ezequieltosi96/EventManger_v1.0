@@ -21,7 +21,7 @@
             <p class="lead">Completar los datos</p>
             <a asp-action="Register" style="cursor: pointer;">Crear cuenta personal<span class="glyphicon glyphicon-menu-right"></span></a>
         </div>
-        <form asp-action="EmpresaRegister">
+        <form asp-action="EmpresaRegister" id="formulario">
             <div class="form-group-flex">
                 <div class="form-group" style="max-width: 196px;">
                     <label asp-for="Empresa.RazonSocial" class="control-label"></label>
@@ -91,7 +91,7 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Registrar Empresa" class="btn btn-primary btn-lg pull-right" />
+                <input id="btn-submit" type="submit" value="Registrar Empresa" class="btn btn-primary btn-lg pull-right" />
             </div>
         </form>
     </div>
@@ -164,7 +164,7 @@
                 if ($("#ProvinciaId").val() === "" || $("#ProvinciaId").val() === "0") {
                     $("#provinciaValidator").text("El Campo Provincia es requerido.");
                 } else {
-                    if ($("#LocaEmpresa_Direccion_LocalidadIdlidadId").val() === "" || $("#Empresa_Direccion_LocalidadId").val() === "0") {
+                    if ($("#Empresa_Direccion_LocalidadId").val() === "" || $("#Empresa_Direccion_LocalidadId").val() === "0") {
                         $("#localidadValidator").text("El Campo Provincia es requerido.");
                     } else {
                         $("#formulario").submit();

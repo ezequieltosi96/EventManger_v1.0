@@ -3,7 +3,7 @@
     {
         @if (User.IsInRole("Admin") || User.IsInRole("Empresa"))
          {
-             <li><a asp-area="" asp-controller="Account" asp-action="Profile"><span class="glyphicon glyphicon-wrench"></span> Administrar</a></li>
+             <li><a asp-area="" asp-controller="Account" asp-action="Profile"><span class="glyphicon glyphicon-cog"></span> Administrar</a></li>
          }
          else
          {

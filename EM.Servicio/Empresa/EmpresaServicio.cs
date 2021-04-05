@@ -57,8 +57,15 @@ namespace EM.Servicio.Empresa
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Empresa, bool>> filtro = x =>
-                x.RazonSocial.Contains(cadenaBuscar) || x.NombreFantasia.Contains(cadenaBuscar) ||
-                x.Cuil.Equals(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                (x.RazonSocial.Contains(cadenaBuscar) || x.NombreFantasia.Contains(cadenaBuscar) ||
+                x.Cuil.Equals(cadenaBuscar)) && !x.EstaEliminado;
+
+            if (mostrarTodos)
+            {
+                filtro = x =>
+                    x.RazonSocial.Contains(cadenaBuscar) || x.NombreFantasia.Contains(cadenaBuscar) ||
+                    x.Cuil.Equals(cadenaBuscar);
+            }
 
             var empresas = await _empresaRepositorio.ObtenerFiltrado(filtro);
 

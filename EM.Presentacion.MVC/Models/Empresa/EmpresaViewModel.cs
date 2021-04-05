@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using EM.Presentacion.MVC.Models.Direccion;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Models.Empresa
 {
@@ -36,5 +37,16 @@ namespace EM.Presentacion.MVC.Models.Empresa
 
         [DisplayName("Dirección")]
         public DireccionViewModel Direccion { get; set; }
+
+        [DisplayName("Pais")]
+        public long PaisId { get; set; }
+
+        public long ProvinciaId { get; set; }
+
+        public IEnumerable<SelectListItem> Paises { get; set; }
+
+        public IEnumerable<SelectListItem> Provincias { get; set; }
+
+        public IEnumerable<SelectListItem> Localidades { get; set; }
     }
 }

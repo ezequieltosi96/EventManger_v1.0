@@ -42,22 +42,7 @@
 
 /* Sidebar Styles */
 
-.open-menu {
-    font-size: 2em;
-    color: #222;
-    text-decoration: none;
-    cursor: pointer;
-}
 
-    .open-menu:hover {
-        color: #222;
-    }
-.open-menu:visited {
-        color: #222;
-    }
-.open-menu:focus {
-    color: #222;
-}
 .sidebar-nav {
     position: absolute;
     top: 0;
@@ -104,17 +89,7 @@
                 background: none;
             }
 
-.dropdown-menu li {
-    background-color: #222;
-    border: none;
-}
 
-.dropdown-menu {
-    background: #222;
-    box-shadow: none;
-    border: none;
-    width: 100%;
-}
 
 @media(min-width:768px) {
     #wrapper {

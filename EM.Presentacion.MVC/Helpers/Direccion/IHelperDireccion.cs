@@ -13,5 +13,6 @@ namespace EM.Presentacion.MVC.Helpers.Direccion
         Task<long> NuevaDireccion(DireccionViewModel model);
 
         Task<DireccionViewModel> ObtenerDireccion(long id);
+
     }
 }
