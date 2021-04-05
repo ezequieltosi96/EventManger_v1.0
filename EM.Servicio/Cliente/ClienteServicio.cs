@@ -58,8 +58,15 @@ namespace EM.Servicio.Cliente
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Cliente, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar) &&
-                (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar)) &&
+                !x.EstaEliminado;
+
+            if (mostrarTodos)
+            {
+                filtro = x =>
+                    (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) ||
+                     x.Dni.Equals(cadenaBuscar));
+            }
 
             var clientes = await _clienteRepositorio.ObtenerFiltrado(filtro);
 

@@ -35,6 +35,10 @@ namespace EM.Presentacion.MVC.Controllers
 
         public IActionResult Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Profile");
+            }
             ViewBag.ClienteDuplicado = false;
             ViewBag.EmailRequerido = false;
             return View();
@@ -117,6 +121,10 @@ namespace EM.Presentacion.MVC.Controllers
 
         public async Task<IActionResult> EmpresaRegister()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Profile");
+            }
             ViewBag.EmpresaDuplicada = false;
             ViewBag.EmailRequerido = false;
             var paises = await _helperPais.PoblarSelect();

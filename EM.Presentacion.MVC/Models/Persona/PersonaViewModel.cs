@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EM.Presentacion.MVC.Models.Persona
 {
@@ -21,5 +22,8 @@ namespace EM.Presentacion.MVC.Models.Persona
         [MinLength(7, ErrorMessage = "El campo {0} debe tener al menos {1} caracteres.")]
         [RegularExpression(@"^[0-9]*$", ErrorMessage = "El {0} solo puede contener números.")]
         public string Dni { get; set; }
+
+        [DisplayName("Nombre Completo")]
+        public string ApyNom => $"{Apellido} {Nombre}";
     }
 }

@@ -1,6 +1,6 @@
 ﻿#wrapper {
     padding-left: 0;
-   /* -webkit-transition: all 0.5s ease;
+    /* -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;*/
@@ -19,7 +19,7 @@
     margin-left: -250px;
     overflow-y: auto;
     background: #222;
-/*    -webkit-transition: all 0.5s ease;
+    /*    -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;*/
@@ -42,6 +42,24 @@
 
 /* Sidebar Styles */
 
+.open-menu {
+    font-size: 2em;
+    color: #222;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .open-menu:hover {
+        color: #222;
+    }
+
+    .open-menu:visited {
+        color: #222;
+    }
+
+    .open-menu:focus {
+        color: #222;
+    }
 
 .sidebar-nav {
     position: absolute;

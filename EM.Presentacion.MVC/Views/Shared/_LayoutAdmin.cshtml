@@ -22,7 +22,14 @@
 
     <partial name="_CookieConsentPartial" />
     <div id="wrapper">
-        <partial name="_AdminSideBar" />
+        @if (User.IsInRole("Admin"))
+        {
+            <partial name="_AdminSideBar" />
+        }
+        @if (User.IsInRole("Empresa"))
+        {
+            <partial name="_EmpresaSideBar" />
+        }
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <a href="#menu-toggle" class="open-menu" id="menu-toggle"><span class="glyphicon glyphicon-tasks"></span></a>
