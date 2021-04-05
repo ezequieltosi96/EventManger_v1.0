@@ -40,6 +40,25 @@
     margin-right: -250px;
 }
 
+
+.go-back {
+    color: #222;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+    .go-back:hover {
+        color: #222;
+        text-decoration: none;
+    }
+
+    .go-back:visited {
+        color: #222;
+    }
+
+    .go-back:focus {
+        color: #222;
+    }
 /* Sidebar Styles */
 
 .open-menu {

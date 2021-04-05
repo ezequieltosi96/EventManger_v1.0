@@ -1,4 +1,6 @@
-﻿namespace EM.Servicio.Disertante
+﻿using System.Linq;
+
+namespace EM.Servicio.Disertante
 {
     using System;
     using System.Collections.Generic;
@@ -56,8 +58,28 @@
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Disertante, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar) &&
-                (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar)) && !x.EstaEliminado;
+
+            if (mostrarTodos)
+                filtro = x =>
+                    (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) ||
+                     x.Dni.Equals(cadenaBuscar));
+
+            var disertantes = await _disertanteRepositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<DisertanteDto>>(disertantes);
+
+            return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.Disertante, bool>> filtro = x => x.EmpresaId == empresaId &&
+                (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar)) && !x.EstaEliminado;
+
+            if (mostarTodos)
+                filtro = x => x.EmpresaId == empresaId &&
+                              (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar));
 
             var disertantes = await _disertanteRepositorio.ObtenerFiltrado(filtro);
 

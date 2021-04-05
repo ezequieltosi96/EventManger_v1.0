@@ -8,5 +8,9 @@ namespace EM.Presentacion.MVC.Helpers.Empresa
         Task<bool> ExisteEmpresa(string cuil, string razonSocial);
 
         Task<bool> NuevaEmpresa(EmpresaViewModel model);
+
+        Task<EmpresaViewModel> ObtenerEmpresaActual(string email);
+
+        Task<EmpresaViewModel> ObtenerEmpresa(long id);
     }
 }
