@@ -1,4 +1,7 @@
-﻿namespace EM.Servicio.Establecimiento
+﻿using System.Linq;
+using EM.IServicio.Direccion;
+
+namespace EM.Servicio.Establecimiento
 {
     using System;
     using System.Collections.Generic;
@@ -12,11 +15,13 @@
 
     public class EstablecimientoServicio : IEstablecimientoServicio
     {
+        private readonly IDireccionServicio _direccionServicio;
         private readonly IEstablecimientoRepositorio _establecimientoRepositorio;
         private readonly IMapper _mapper;
 
-        public EstablecimientoServicio(IEstablecimientoRepositorio establecimientoRepositorio, IMapper mapper)
+        public EstablecimientoServicio(IDireccionServicio direccionServicio, IEstablecimientoRepositorio establecimientoRepositorio, IMapper mapper)
         {
+            _direccionServicio = direccionServicio;
             _establecimientoRepositorio = establecimientoRepositorio;
             _mapper = mapper;
         }
@@ -56,13 +61,51 @@
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Establecimiento, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
+
+            if (mostrarTodos)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar);
 
             var establecimientos = await _establecimientoRepositorio.ObtenerFiltrado(filtro);
 
             var dtos = _mapper.Map<IEnumerable<EstablecimientoDto>>(establecimientos);
 
             return dtos;
+        }
+
+        public async Task<bool> Existe(string nombre, string direccionDescripcion, long direccionLocalidadId)
+        {
+            var establecimientosporNombre = (IEnumerable<EstablecimientoDto>)await Obtener(nombre);
+
+            if (!establecimientosporNombre.Any()) return false;
+
+            var direccionId = await _direccionServicio.ExisteDireccion(direccionLocalidadId, direccionDescripcion);
+
+            if (!direccionId.HasValue) return false;
+
+            if (!establecimientosporNombre.Any(e => e.DireccionId == direccionId)) return false;
+
+            return true;
+        }
+
+        public async Task<bool> Existe(string nombre, string direccionDescripcion, long direccionLocalidadId, long id)
+        {
+            var establecimientosporNombre = (IEnumerable<EstablecimientoDto>)await Obtener(nombre);
+
+            if (!establecimientosporNombre.Any()) return false;
+
+            var direccionId = await _direccionServicio.ExisteDireccion(direccionLocalidadId, direccionDescripcion);
+
+            if (!direccionId.HasValue) return false;
+
+            var est = establecimientosporNombre.FirstOrDefault(e => e.DireccionId == direccionId);
+
+            if (est == null) return false;
+
+            if (est.Id == id) return false;
+
+            return true;
         }
     }
 }

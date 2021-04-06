@@ -70,6 +70,8 @@ namespace EM.Presentacion.MVC.Helpers.Empresa
         {
             var dto = (EmpresaDto)await _empresaServicio.Obtener(id);
 
+            if (dto == null) return null;
+
             var direccion = await _helperDireccion.ObtenerDireccion(dto.DireccionId);
 
             var model = new EmpresaViewModel()

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using EM.Presentacion.MVC.Models.Localidad;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Helpers.Localidad
@@ -11,5 +12,6 @@ namespace EM.Presentacion.MVC.Helpers.Localidad
         Task<long> ObtenerPaisIdPorLocalidad(long localidadId);
 
         Task<long> ObtenerProvinciaIdPorLocalidad(long localidadId);
+
     }
 }

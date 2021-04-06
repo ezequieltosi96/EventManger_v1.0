@@ -17,5 +17,8 @@ namespace EM.Presentacion.MVC.Models.Direccion
 
         [DisplayName("Localidad")]
         public LocalidadViewModel Localidad { get; set; }
+
+        [DisplayName("Ubicación")]
+        public string Ubicacion { get; set; }
     }
 }

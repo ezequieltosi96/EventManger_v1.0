@@ -67,7 +67,7 @@ namespace EM.Servicio.Empresa
                     x.Cuil.Equals(cadenaBuscar);
             }
 
-            var empresas = await _empresaRepositorio.ObtenerFiltrado(filtro);
+            var empresas = await _empresaRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(e => e.RazonSocial).ThenBy(e => e.NombreFantasia));
 
             var dtos = _mapper.Map<IEnumerable<EmpresaDto>>(empresas);
 

@@ -1,0 +1,139 @@
+﻿@model EM.Presentacion.MVC.Models.Establecimiento.EstablecimientoViewModel
+@{
+    ViewData["Title"] = "Editar Establecimiento";
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        @if (ViewBag.EstablecimientoDuplicado)
+        {
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Ya existe un establecimiento con esos datos.
+            </div>
+        }
+        <form asp-action="Edit" id="formulario">
+            <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="DireccionId" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PaisId" class="control-label"></label>
+                <select asp-for="PaisId" asp-items="Model.Paises" class="form-control">
+                    <option value="">Seleccionar Pais</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinciaId" class="control-label"></label>
+                <select asp-for="ProvinciaId" asp-items="Model.Provincias" class="form-control">
+                    <option value="">Seleccionar Provincia</option>
+                </select>
+                <span id="provinciaValidator" asp-validation-for="ProvinciaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion.LocalidadId" class="control-label"></label>
+                <select asp-for="Direccion.LocalidadId" asp-items="Model.Localidades" class="form-control">
+                    <option value="">Seleccionar Localidad</option>
+                </select>
+                <span id="localidadValidator" asp-validation-for="Direccion.LocalidadId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Direccion.Descripcion" class="control-label"></label>
+                <input asp-for="Direccion.Descripcion" class="form-control" />
+                <span asp-validation-for="Direccion.Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input id="btn-submit" type="submit" value="Editar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-default" asp-action="Index"><span class="glyphicon glyphicon-menu-left"></span>Volver a la lista</a>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $(document).ready(() => {
+            $("#PaisId").change(() => {
+                $("#Direccion_LocalidadId").empty();
+                $("#Direccion_LocalidadId").html("<option value='0' selected>Seleccionar Localidad</option>");
+                $("#Direccion_LocalidadId").prop("disabled", true);
+                if ($("#PaisId").val() === 0) {
+                    $("#ProvinciaId").prop("disabled", true);
+                } else {
+                    $("#ProvinciaId").prop("disabled", false);
+                }
+                const url = '@Url.Content("~/")' + 'Localidad/ObtenerProvinciasPorPais';
+                const paisId = $("#PaisId").val();
+                $.getJSON(url,
+                    { paisId: paisId },
+                    (data) => {
+                        let items = "<option value='0' selected>Seleccionar Provincia</option>";
+
+                        $("#ProvinciaId").empty();
+                        $.each(data,
+                            (i, provincia) => {
+                                items += "<option value='" + provincia.value + "'>" + provincia.text + "</option>";
+                            });
+                        if (data.length === 0) {
+                            items = "<option value='0' selected>No Existen Provincias</option>";
+                            $("#ProvinciaId").prop("disabled", true);
+                        }
+                        $("#ProvinciaId").html(items);
+                    });
+            });
+
+            $("#ProvinciaId").change(() => {
+                if ($("#ProvinciaId").val() === 0) {
+                    $("#Direccion_LocalidadId").prop("disabled", true);
+                } else {
+                    $("#Direccion_LocalidadId").prop("disabled", false);
+                }
+                const url = '@Url.Content("~/")' + 'Domicilio/ObtenerLocalidadesPorProvincia';
+                const provinciaId = $("#ProvinciaId").val();
+
+                $.getJSON(url,
+                    { provinciaId: provinciaId },
+                    (data) => {
+                        let items = "<option value='0' selected>Seleccionar Localidad</option>";
+
+                        $("#Direccion_LocalidadId").empty();
+                        $.each(data,
+                            (i, localidad) => {
+                                items += "<option value='" + localidad.value + "'>" + localidad.text + "</option>";
+                            });
+                        if (data.length === 0) {
+                            items = "<option value='0' selected>No Existen Localidades</option>";
+                            $("#Direccion_LocalidadId").prop("disabled", true);
+                        }
+                        $("#Direccion_LocalidadId").html(items);
+                    });
+            });
+
+            $("#btn-submit").click(function(e) {
+                e.preventDefault();
+                if ($("#ProvinciaId").val() === "" || $("#ProvinciaId").val() === "0") {
+                    $("#provinciaValidator").text("El Campo Provincia es requerido.");
+                } else {
+                    if ($("#Direccion_LocalidadId").val() === "" || $("#Direccion_LocalidadId").val() === "0") {
+                        $("#localidadValidator").text("El Campo Localidad es requerido.");
+                    } else {
+                        $("#formulario").submit();
+                    }
+                }
+            });
+        });
+    </script>
+
+}

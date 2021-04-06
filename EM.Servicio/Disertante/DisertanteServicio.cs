@@ -81,7 +81,7 @@ namespace EM.Servicio.Disertante
                 filtro = x => x.EmpresaId == empresaId &&
                               (x.Nombre.Contains(cadenaBuscar) || x.Apellido.Contains(cadenaBuscar) || x.Dni.Equals(cadenaBuscar));
 
-            var disertantes = await _disertanteRepositorio.ObtenerFiltrado(filtro);
+            var disertantes = await _disertanteRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(d => d.Apellido).ThenBy(d => d.Nombre).ThenBy(d => d.Dni));
 
             var dtos = _mapper.Map<IEnumerable<DisertanteDto>>(disertantes);
 
