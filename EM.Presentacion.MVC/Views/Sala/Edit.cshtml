@@ -1,0 +1,47 @@
+﻿@model EM.Presentacion.MVC.Models.Sala.SalaViewModel
+@{
+    ViewData["Title"] = "Editar Sala";
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form asp-action="Edit" asp-route-vbEstablecimiento="@ViewBag.EstablecimientoId">
+            <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            @if (ViewBag.EstablecimientoId == null)
+            {
+                <div class="form-group">
+                    <label asp-for="EstablecimientoId" class="control-label"></label>
+                    <select asp-for="EstablecimientoId" asp-items="Model.Establecimientos" class="form-control">
+                        <option value="">Seleccionar Establecimiento</option>
+                    </select>
+                    <span asp-validation-for="EstablecimientoId" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="EstablecimientoId" />
+            }
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-default" asp-action="Index" asp-route-establecimientoId="@ViewBag.EstablecimientoId"><span class="glyphicon glyphicon-menu-left"></span>Volver a la lista</a>
+</div>
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

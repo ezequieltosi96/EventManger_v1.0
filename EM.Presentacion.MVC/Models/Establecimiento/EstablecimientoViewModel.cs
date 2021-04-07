@@ -11,6 +11,7 @@ namespace EM.Presentacion.MVC.Models.Establecimiento
 {
     public class EstablecimientoViewModel : ViewModelBase
     {
+        [DisplayName("Establecimiento")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [MaxLength(200, ErrorMessage = "El campo {0} no debe permite mas de {1} caracteres.")]
         public string Nombre { get; set; }

@@ -1,6 +1,7 @@
 ﻿using EM.Presentacion.MVC.Helpers.Cliente;
 using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Helpers.Empresa;
+using EM.Presentacion.MVC.Helpers.Establecimiento;
 using EM.Presentacion.MVC.Helpers.Localidad;
 using EM.Presentacion.MVC.Helpers.Pais;
 using EM.Presentacion.MVC.Helpers.Provincia;
@@ -18,6 +19,7 @@ namespace EM.Presentacion.MVC.Helpers.RegistrarServicios
             services.AddScoped<IHelperDireccion, HelperDireccion>();
             services.AddScoped<IHelperEmpresa, HelperEmpresa>();
             services.AddScoped<IHelperLocalidad, HelperLocalidad>();
+            services.AddScoped<IHelperEstablecimiento, HelperEstablecimiento>();
         }
     }
 }

@@ -56,7 +56,27 @@
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Sala, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
+
+            if (mostrarTodos)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar);
+
+            var salas = await _salaRespositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<SalaDto>>(salas);
+
+            return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorEstablecimiento(long establecimientoId, string cadenaBuscar = "", bool mostrarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.Sala, bool>> filtro = x =>
+                x.Nombre.Contains(cadenaBuscar) && x.EstablecimientoId == establecimientoId && !x.EstaEliminado;
+
+            if (mostrarTodos)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar) && x.EstablecimientoId == establecimientoId;
 
             var salas = await _salaRespositorio.ObtenerFiltrado(filtro);
 

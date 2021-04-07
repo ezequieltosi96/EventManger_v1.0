@@ -1,0 +1,30 @@
+﻿@model EM.Presentacion.MVC.Models.Sala.SalaViewModel
+@{
+    ViewData["Title"] = "Detalle Sala";
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <dl class="dl-horizontal">
+            <dt>@Html.DisplayNameFor(model => model.Nombre)</dt>
+            <dd>@Model.Nombre</dd>
+            <dt>@Html.DisplayNameFor(model => model.Establecimiento.Nombre)</dt>
+            <dd>@Model.Establecimiento.Nombre</dd>
+            <dt>@Html.DisplayNameFor(model => model.Establecimiento.Direccion.Ubicacion)</dt>
+            <dd>@Model.Establecimiento.Direccion.Ubicacion</dd>
+            <dt>@Html.DisplayNameFor(model => model.EstaEliminado)</dt>
+            <dd>@Model.EstaEliminado</dd>
+        </dl>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-default" asp-action="Index" asp-route-establecimientoId="@ViewBag.EstablecimientoId"><span class="glyphicon glyphicon-menu-left"></span>Volver a la lista</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id" asp-route-vbEstablecimiento="@ViewBag.EstablecimientoId"><span class="glyphicon glyphicon-pencil"></span></a>
+    }
+</div>
