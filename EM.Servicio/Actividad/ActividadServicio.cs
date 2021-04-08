@@ -1,4 +1,7 @@
-﻿namespace EM.Servicio.Actividad
+﻿using System.Linq;
+using Microsoft.EntityFrameworkCore;
+
+namespace EM.Servicio.Actividad
 {
     using System;
     using System.Collections.Generic;
@@ -56,9 +59,33 @@
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Actividad, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
+
+            if (mostrarTodos)
+            {
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar);
+            }
 
             var actividades = await _actividadRepositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<ActividadDto>>(actividades);
+
+            return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorSalaYFecha(long salaId, DateTime fecha, long? eventoId = null)
+        {
+            Expression<Func<Dominio.Entidades.Actividad, bool>> filtro = x =>
+                x.SalaId == salaId && x.FechaHora.Date == fecha.Date && !x.EstaEliminado;
+
+            if (eventoId.HasValue)
+            {
+                filtro = x => x.EventoId != eventoId.Value && x.SalaId == salaId && x.FechaHora.Date == fecha.Date && !x.EstaEliminado;
+            }
+
+            var actividades = await _actividadRepositorio.ObtenerFiltrado(filtro,
+                x => x.OrderBy(a => a.Evento.Nombre).ThenBy(a => a.Nombre), x => x.Include(a => a.Evento));
 
             var dtos = _mapper.Map<IEnumerable<ActividadDto>>(actividades);
 

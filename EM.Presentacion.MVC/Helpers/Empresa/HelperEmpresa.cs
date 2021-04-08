@@ -1,10 +1,13 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using EM.Dominio.Identity;
 using EM.IServicio.Empresa;
 using EM.IServicio.Empresa.Dto;
 using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Models.Empresa;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Helpers.Empresa
 {
@@ -88,6 +91,14 @@ namespace EM.Presentacion.MVC.Helpers.Empresa
             };
 
             return model;
+        }
+
+        public async Task<IEnumerable<SelectListItem>> PoblarCombo()
+        {
+            var empresas =
+                (IEnumerable<EmpresaDto>)await _empresaServicio.Obtener(String.Empty, false);
+
+            return new SelectList(empresas, "Id", "RazonSocial");
         }
     }
 }

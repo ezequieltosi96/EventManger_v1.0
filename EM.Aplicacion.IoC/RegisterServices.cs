@@ -171,8 +171,6 @@
             // evento 
             services.AddScoped<IEventoRepositorio, EventoRepositorio>();
             services.AddScoped<IEventoServicio, EventoServicio>();
-            services.AddSingleton<IEventoRepositorio, EventoRepositorio>();
-            services.AddSingleton<IEventoServicio, EventoServicio>();
 
             //Entrada
             services.AddSingleton<IEntradaRepositorio, EntradaRepositorio>();

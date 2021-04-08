@@ -8,6 +8,7 @@ namespace EM.Presentacion.MVC.Helpers.Establecimiento
     public interface IHelperEstablecimiento
     {
         Task<EstablecimientoViewModel> ObtenerEstablecimiento(long id);
+
         Task<IEnumerable<SelectListItem>> PoblarCombo();
     }
 }

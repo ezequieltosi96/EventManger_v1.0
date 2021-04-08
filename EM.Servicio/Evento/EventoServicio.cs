@@ -1,4 +1,6 @@
-﻿namespace EM.Servicio.Evento
+﻿using System.Linq;
+
+namespace EM.Servicio.Evento
 {
     using System;
     using System.Collections.Generic;
@@ -57,13 +59,51 @@
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Evento, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+                x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
 
-            var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro, null, x => x.Include(e => e.Actividades));
+            if (mostrarTodos)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar);
+
+            var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(e => e.Fecha).ThenBy(e => e.Nombre), x => x.Include(e => e.Actividades));
 
             var dtos = _mapper.Map<IEnumerable<EventoDto>>(eventos);
 
             return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostrarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.Evento, bool>> filtro = x =>
+                x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId && !x.EstaEliminado;
+
+            if (mostrarTodos)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId;
+
+            var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(e => e.Fecha).ThenBy(e => e.Nombre), x => x.Include(e => e.Actividades));
+
+            var dtos = _mapper.Map<IEnumerable<EventoDto>>(eventos);
+
+            return dtos;
+        }
+
+        public async Task<bool> Existe(EventoDto dto)
+        {
+            Expression<Func<Dominio.Entidades.Evento, bool>> filtro = x =>
+                x.EmpresaId == dto.EmpresaId && x.Fecha == dto.Fecha && x.Nombre.Equals(dto.Nombre) &&
+                x.EstalecimientoId == dto.EstalecimientoId && !x.EstaEliminado;
+
+            if (dto.Id != 0)
+            {
+                filtro = x =>
+                    x.Id != dto.Id && x.EmpresaId == dto.EmpresaId && x.Fecha == dto.Fecha &&
+                    x.Nombre.Equals(dto.Nombre) && x.EstalecimientoId == dto.EstalecimientoId && !x.EstaEliminado;
+            }
+
+            var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro);
+
+            return eventos.Any();
         }
     }
 }
