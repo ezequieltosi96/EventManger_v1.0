@@ -35,8 +35,11 @@ namespace EM.Presentacion.MVC.Controllers
             _helperActividad = helperActividad;
         }
 
+
+        //TODO mostrar solo los eventos proximos - solo permitir editar los eventos proximos
+
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> Index(long? empresaId = null, string cadenaBuscar = "", bool mostrarTodos = false)
+        public async Task<IActionResult> Index(long? empresaId = null, string cadenaBuscar = "", bool mostrarTodos = false, bool mostrarPasados = false)
         {
             // si empresaId == null muestro todos los eventos sino muestro solo los de la empresa
             if (cadenaBuscar == null) cadenaBuscar = "";
@@ -45,19 +48,19 @@ namespace EM.Presentacion.MVC.Controllers
             {
                 if (User.IsInRole("Admin"))
                 {
-                    eventos = (IEnumerable<EventoDto>)await _eventoServicio.Obtener(cadenaBuscar, mostrarTodos);
+                    eventos = (IEnumerable<EventoDto>)await _eventoServicio.Obtener(cadenaBuscar, mostrarTodos, mostrarPasados);
                 }
                 else
                 {
                     var empresa = await _helperEmpresa.ObtenerEmpresaActual(User.Identity.Name);
                     empresaId = empresa.Id;
-                    eventos = (IEnumerable<EventoDto>)await _eventoServicio.ObtenerPorEmpresa(empresaId.Value, cadenaBuscar, mostrarTodos);
+                    eventos = (IEnumerable<EventoDto>)await _eventoServicio.ObtenerPorEmpresa(empresaId.Value, cadenaBuscar, mostrarTodos, mostrarPasados);
                 }
 
             }
             else
             {
-                eventos = (IEnumerable<EventoDto>)await _eventoServicio.ObtenerPorEmpresa(empresaId.Value, cadenaBuscar, mostrarTodos);
+                eventos = (IEnumerable<EventoDto>)await _eventoServicio.ObtenerPorEmpresa(empresaId.Value, cadenaBuscar, mostrarTodos, mostrarPasados);
             }
 
             var models = eventos.Select(e => new EventoViewModel()
@@ -95,6 +98,7 @@ namespace EM.Presentacion.MVC.Controllers
 
             ViewBag.CadenaBuscar = cadenaBuscar;
             ViewBag.MostrarTodos = mostrarTodos;
+            ViewBag.MostrarPasados = mostrarPasados;
             ViewBag.EmpresaId = empresaId;
 
             return View(models);

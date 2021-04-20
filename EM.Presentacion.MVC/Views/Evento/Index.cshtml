@@ -30,12 +30,21 @@
         {
             @if (ViewBag.MostrarTodos)
             {
-                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar" asp-route-empresaId="@ViewBag.EmpresaId">Ocultar eliminados</a>
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar" asp-route-empresaId="@ViewBag.EmpresaId" asp-route-mostrarPasados="@ViewBag.MostrarPasados">Ocultar eliminados</a>
             }
             else
             {
-                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar" asp-route-empresaId="@ViewBag.EmpresaId">Mostrar eliminados</a>
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar" asp-route-empresaId="@ViewBag.EmpresaId" asp-route-mostrarPasados="@ViewBag.MostrarPasados">Mostrar eliminados</a>
             }
+        }
+
+        @if (ViewBag.MostrarPasados)
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="@ViewBag.MostrarTodos" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar" asp-route-empresaId="@ViewBag.EmpresaId" asp-route-mostrarPasados="false">Ocultar pasados</a>
+        }
+        else
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="@ViewBag.MostrarTodos" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar" asp-route-empresaId="@ViewBag.EmpresaId" asp-route-mostrarPasados="true">Mostrar pasados</a>
         }
     </div>
 </div>
@@ -51,9 +60,6 @@
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.Establecimiento.Nombre)
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.Establecimiento.Direccion.Descripcion)
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.Establecimiento.Direccion.Ubicacion)
@@ -85,9 +91,6 @@
                     @evento.Establecimiento.Nombre
                 </td>
                 <td>
-                    @evento.Establecimiento.Direccion.Descripcion
-                </td>
-                <td>
                     @evento.Establecimiento.Direccion.Ubicacion
                 </td>
                 <td>
@@ -103,7 +106,7 @@
                     @if (evento.EstaEliminado.Equals("No"))
                     {
                         <a class="btn-sm btn-info" asp-action="Details" asp-route-id="@evento.Id" asp-route-vbEmpresa="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-zoom-in"></span></a>
-                        if (User.IsInRole("Admin"))
+                        if (User.IsInRole("Admin") && evento.Fecha.Date > DateTime.Now.Date)
                         {
                             <a class="btn-sm btn-success" asp-action="Edit" asp-route-id="@evento.Id" asp-route-vbEmpresa="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-pencil"></span></a>
                             <a class="btn-sm btn-warning" onclick="handleDeleteModalShow('@evento.Nombre-@evento.Id-@ViewBag.EmpresaId')"><span class="glyphicon glyphicon-trash"></span></a>

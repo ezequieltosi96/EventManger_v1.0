@@ -91,5 +91,53 @@ namespace EM.Servicio.Actividad
 
             return dtos;
         }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorDisertanteYFecha(long disertanteId, DateTime fecha)
+        {
+            Expression<Func<Dominio.Entidades.Actividad, bool>> filtro = x =>
+                x.DisertanteId == disertanteId && x.FechaHora.Date == fecha.Date && !x.EstaEliminado;
+
+            //if (eventoId.HasValue)
+            //{
+            //    filtro = x => x.EventoId != eventoId.Value && x.SalaId == salaId && x.FechaHora.Date == fecha.Date && !x.EstaEliminado;
+            //}
+
+            var actividades = await _actividadRepositorio.ObtenerFiltrado(filtro,
+                x => x.OrderBy(a => a.Evento.Nombre).ThenBy(a => a.Nombre), x => x.Include(a => a.Evento));
+
+            var dtos = _mapper.Map<IEnumerable<ActividadDto>>(actividades);
+
+            return dtos;
+        }
+
+        public async Task<bool> DisertanteEstaDisponible(long disertanteId, DateTime fecha)
+        {
+            Expression<Func<Dominio.Entidades.Actividad, bool>> filtro = x =>
+                x.DisertanteId == disertanteId && x.FechaHora.Date == fecha.Date && !x.EstaEliminado;
+
+            var actividades = await _actividadRepositorio.ObtenerFiltrado(filtro);
+
+            return !actividades.Any();
+        }
+
+        public async Task<bool> SalaEstaDisponible(long salaId, DateTime fecha)
+        {
+            Expression<Func<Dominio.Entidades.Actividad, bool>> filtro = x =>
+                x.SalaId == salaId && x.FechaHora.Date == fecha.Date && !x.EstaEliminado;
+
+            var actividades = await _actividadRepositorio.ObtenerFiltrado(filtro);
+
+            return !actividades.Any();
+        }
+
+        public async Task<bool> Existe(string nombre, long eventoId)
+        {
+            Expression<Func<Dominio.Entidades.Actividad, bool>> filtro = x =>
+                x.Nombre.Equals(nombre) && x.EventoId == eventoId && !x.EstaEliminado;
+
+            var actividades = await _actividadRepositorio.ObtenerFiltrado(filtro);
+
+            return actividades.Any();
+        }
     }
 }

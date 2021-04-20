@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using EM.Presentacion.MVC.Models.Disertante;
 using EM.Presentacion.MVC.Models.Evento;
 using EM.Presentacion.MVC.Models.Sala;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Models.Actividad
 {
@@ -35,5 +37,13 @@ namespace EM.Presentacion.MVC.Models.Actividad
         public SalaViewModel Sala { get; set; }
 
         public EventoViewModel Evento { get; set; }
+
+        public DateTime Fecha { get; set; }
+
+        public DateTime Hora { get; set; }
+
+        public IEnumerable<SelectListItem> Salas { get; set; }
+
+        public IEnumerable<SelectListItem> Disertantes { get; set; }
     }
 }

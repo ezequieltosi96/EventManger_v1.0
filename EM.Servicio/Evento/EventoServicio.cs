@@ -72,14 +72,46 @@ namespace EM.Servicio.Evento
             return dtos;
         }
 
-        public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostrarTodos = true)
+        public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostrarTodos = true, bool mostrarPasados = true)
         {
             Expression<Func<Dominio.Entidades.Evento, bool>> filtro = x =>
-                x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId && !x.EstaEliminado;
+                x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId && !x.EstaEliminado && x.Fecha.Date >= DateTime.Now.Date;
 
             if (mostrarTodos)
                 filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId && x.Fecha.Date >= DateTime.Now.Date;
+
+            if (mostrarPasados)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId && !x.EstaEliminado;
+
+            if (mostrarTodos && mostrarPasados)
+                filtro = x =>
                     x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId;
+
+            var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(e => e.Fecha).ThenBy(e => e.Nombre), x => x.Include(e => e.Actividades));
+
+            var dtos = _mapper.Map<IEnumerable<EventoDto>>(eventos);
+
+            return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true, bool mostrarPasados = true)
+        {
+            Expression<Func<Dominio.Entidades.Evento, bool>> filtro = x =>
+                x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado && x.Fecha.Date >= DateTime.Now.Date;
+
+            if (mostrarTodos)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar) && x.Fecha.Date >= DateTime.Now.Date;
+
+            if (mostrarPasados)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
+
+            if (mostrarTodos && mostrarPasados)
+                filtro = x =>
+                    x.Nombre.Contains(cadenaBuscar);
 
             var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro, x => x.OrderBy(e => e.Fecha).ThenBy(e => e.Nombre), x => x.Include(e => e.Actividades));
 

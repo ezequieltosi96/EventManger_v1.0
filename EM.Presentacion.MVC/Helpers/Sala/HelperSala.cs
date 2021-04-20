@@ -5,6 +5,7 @@ using EM.IServicio.Sala;
 using EM.IServicio.Sala.Dto;
 using EM.Presentacion.MVC.Helpers.Actividad;
 using EM.Presentacion.MVC.Models.Sala;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Helpers.Sala
 {
@@ -48,6 +49,15 @@ namespace EM.Presentacion.MVC.Helpers.Sala
             }
 
             return false;
+        }
+
+        public async Task<IEnumerable<SelectListItem>> PoblarComboPorEstablecimiento(long establecimientoId, DateTime? fecha = null)
+        {
+            var salas = (IEnumerable<SalaDto>)await _salaServicio.ObtenerPorEstablecimiento(establecimientoId, String.Empty, false);
+
+            var salasDisponibles = await _helperActividad.FiltrarSalasDisponibles(salas, fecha);
+
+            return new SelectList(salasDisponibles, "Id", "Nombre");
         }
     }
 }

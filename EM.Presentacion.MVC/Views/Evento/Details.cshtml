@@ -30,7 +30,7 @@
             <dd>@Model.EstaEliminado</dd>
             <br />
             <dt>Actividades</dt>
-            @if (!Model.Actividades.Any())
+            @if (!Model.Actividades.Where(a=>a.EstaEliminado.Equals("No")).ToList().Any())
             {
                 <dd>No tiene actividades asignadas por el momento.</dd>
             }
@@ -41,14 +41,19 @@
             <div style="margin-left: 100px;">
                 @foreach (var actividad in Model.Actividades)
                 {
-                    <dt>Nombre</dt>
-                    <dd>@actividad.Nombre</dd>
-                    <dt>Fecha y Hora</dt>
-                    <dd>@actividad.FechaHora.ToString("f")</dd>
-                    <dt>Sala</dt>
-                    <dd>@actividad.Sala.Nombre</dd>
-                    <dt>Disertante</dt>
-                    <dd>@actividad.Disertante.Nombre</dd>
+                    if (actividad.EstaEliminado.Equals("No"))
+                    {
+                        <dt>Nombre</dt>
+                        <dd>@actividad.Nombre</dd>
+                        <dt>Fecha y Hora</dt>
+                        <dd>@actividad.FechaHora.ToString("f")</dd>
+                        <dt>Sala</dt>
+                        <dd>@actividad.Sala.Nombre</dd>
+                        <dt>Disertante</dt>
+                        <dd>@actividad.Disertante.Nombre</dd>
+                        <dt></dt>
+                        <dd><a asp-controller="Actividad" asp-action="Delete" asp-route-id="@actividad.Id" asp-route-eventoId="@Model.Id" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></dd>   
+                    }
                 }
             </div>
             <br />
@@ -58,10 +63,44 @@
 </div>
 
 <div>
-    <a class="btn btn-default" asp-action="Index" asp-route-establecimientoId="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-menu-left"></span>Volver a la lista</a>
-    @if (User.IsInRole("Admin"))
+    <a class="btn btn-default" asp-action="Index" asp-route-empresaId="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-menu-left"></span>Volver a la lista</a>
+    @if (Model.Fecha.Date > DateTime.Now.Date)
     {
-        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id" asp-route-vbEstablecimiento="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-pencil"></span></a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Id" asp-route-vbEmpresa="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-pencil"></span></a>
+        }
+        <a class="btn btn-primary" asp-controller="Actividad" asp-action="Create" asp-route-eventoId="@Model.Id" asp-route-empresaId="@Model.EmpresaId" asp-route-vbEmpresa="@ViewBag.EmpresaId" asp-route-establecimientoId="@Model.EstablecimientoId" asp-route-fecha="@Model.Fecha.Date.ToString()"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>
+        @*<a class="btn btn-primary" onclick="handleCreateModalShow(@Model.Id)"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>*@
     }
-    <a class="btn btn-primary" asp-action="AgregarActividades" asp-route-eventoId="@Model.Id"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>
+
 </div>
+
+
+@*<div class="modal fade" id="create-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title text-center" id="modal-title">Nueva Actividad</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        const handleCreateModalShow = (eventoId) => {
+
+            $("#modal-body").load("/Actividad/CreatePartial?eventoId=" + eventoId);
+
+            $('#create-modal').modal("show");
+        }
+    </script>*@

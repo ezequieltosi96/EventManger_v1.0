@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using EM.IServicio.Actividad;
 using EM.IServicio.Actividad.Dto;
+using EM.IServicio.Disertante.Dto;
+using EM.IServicio.Sala.Dto;
 
 namespace EM.Presentacion.MVC.Helpers.Actividad
 {
@@ -22,5 +24,45 @@ namespace EM.Presentacion.MVC.Helpers.Actividad
 
             return actividades.Any();
         }
+
+        public async Task<bool> ExistePorDisertanteYFecha(long disertanteId, DateTime fecha)
+        {
+            var actividades =
+                (IEnumerable<ActividadDto>) await _actividadServicio.ObtenerPorDisertanteYFecha(disertanteId, fecha);
+
+            return actividades.Any();
+        }
+
+        public async Task<IEnumerable<SalaDto>> FiltrarSalasDisponibles(IEnumerable<SalaDto> salas, DateTime? fecha)
+        {
+            if (!fecha.HasValue) return salas;
+
+            foreach (var sala in salas)
+            {
+                if (ExistePorSalaYFecha(sala.Id, fecha.Value).Result)
+                {
+                    salas = salas.Where(s => s.Id != sala.Id);
+                }    
+            }
+
+            return salas;
+        }
+
+        public async Task<IEnumerable<DisertanteDto>> FiltrarDisertantesDisponibles(IEnumerable<DisertanteDto> disertantes, DateTime? fecha = null)
+        {
+            if (!fecha.HasValue) return disertantes;
+
+            foreach (var disertante in disertantes)
+            {
+                if (ExistePorDisertanteYFecha(disertante.Id, fecha.Value).Result)
+                {
+                    disertantes = disertantes.Where(d => d.Id != disertante.Id);
+                }
+            }
+
+            return disertantes;
+        }
+
+        
     }
 }

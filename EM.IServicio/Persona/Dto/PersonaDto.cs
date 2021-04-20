@@ -9,6 +9,5 @@
         public string Apellido { get; set; }
 
         public string Dni { get; set; }
-
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using EM.Presentacion.MVC.Models.Sala;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Helpers.Sala
 {
@@ -9,5 +11,7 @@ namespace EM.Presentacion.MVC.Helpers.Sala
         Task<SalaViewModel> ObtenerSala(long id);
 
         Task<bool> ExisteSalaDisponible(long establecimientoId, DateTime fecha, long? eventoId = null);
+
+        Task<IEnumerable<SelectListItem>> PoblarComboPorEstablecimiento(long establecimientoId, DateTime? fecha = null);
     }
 }

@@ -1,0 +1,51 @@
+﻿@model EM.Presentacion.MVC.Models.Actividad.ActividadViewModel
+
+
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <form method="post" data-ajax-url="@Url.Content("~/")/Actividad/CreatePartial" data-ajax="true" data-ajax-method="post" data-ajax-complete="completed" data-ajax-failure="failure" data-ajax-update="#modal-body">
+            <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+            <input type="hidden" asp-for="EventoId" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisertanteId" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="DisertanteId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SalaId" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="SalaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaHora" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="FechaHora" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="submit" value="Crear" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        await Html.RenderPartialAsync("_UnobtrusiveAjaxScriptsPartial");
+    }
+
+    <script>
+        const completed = () => {
+            alert('Posted using Unobtrusive AJAX');
+        };
+        const failure = () => {
+            alert('HEYYYY');
+        };
+    </script>
+}
