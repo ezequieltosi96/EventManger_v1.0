@@ -54,7 +54,12 @@
 
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
-            Expression<Func<Dominio.Entidades.BeneficioEntrada, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+            Expression<Func<Dominio.Entidades.BeneficioEntrada, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
+            if (mostrarTodos)
+            {
+                filtro = x =>
+                    (x.Nombre.Contains(cadenaBuscar));
+            }
 
             var beneficioEntradas = await _beneficioEntradaRepositorio.ObtenerFiltrado(filtro);
 
