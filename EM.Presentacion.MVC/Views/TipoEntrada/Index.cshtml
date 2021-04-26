@@ -1,0 +1,128 @@
+﻿@model IEnumerable<EM.Presentacion.MVC.Models.TipoEntrada.TipoEntradaViewModel>
+@{
+    ViewData["Title"] = "Tipos Entradas";
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="contenedor">
+    <form asp-action="Index" asp-route-mostrarTodos="false">
+        <div class="input-group p-5" style="max-width: 350px;">
+            <input type="text" class="form-control" placeholder="Tipo Entrada..." value="@ViewBag.CadenaBuscar" name="cadenaBuscar">
+            <div class="input-group-btn">
+                <input type="submit" value="Buscar" class="btn btn-default" />
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar=""><span class="glyphicon glyphicon-remove-circle"></span></a>
+            </div>
+        </div>
+    </form>
+    <div class="p-5">
+        <a class="btn btn-default" asp-action="Create"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+        @if (ViewBag.MostrarTodos)
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar">Ocultar eliminados</a>
+        }
+        else
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar">Mostrar eliminados</a>
+        }
+    </div>
+</div>
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.BeneficioEntradaNombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.EstaEliminado)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tipoEntrada in Model)
+        {
+            <tr>
+                <td>
+                    @tipoEntrada.Nombre
+                </td>
+                <td>
+                    @tipoEntrada.BeneficioEntradaNombre
+                </td>
+                <td>
+                    @tipoEntrada.EstaEliminado
+                </td>
+                <td>
+                    @if (tipoEntrada.EstaEliminado.Equals("No"))
+                    {
+                        <a class="btn-sm btn-info" asp-action="Details" asp-route-id="@tipoEntrada.Id"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                        <a class="btn-sm btn-success" asp-action="Edit" asp-route-id="@tipoEntrada.Id"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn-sm btn-warning" onclick="handleDeleteModalShow('@tipoEntrada.Nombre-@tipoEntrada.Id')"><span class="glyphicon glyphicon-trash"></span></a>
+                    }
+                    else
+                    {
+                        <a class="btn-sm btn-success" onclick="handleDeleteModalShow('@tipoEntrada.Nombre-@tipoEntrada.Id-eliminado')"><span class="glyphicon glyphicon-refresh"></span></a>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="modal fade" id="delete-modal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h3 class="modal-title text-center" id="modal-title"></h3>
+            </div>
+            <div class="modal-body">
+                <p id="delete-message"></p>
+            </div>
+            <div class="modal-footer">
+                <a id="delete-btn" class="btn btn-danger" asp-action="Delete">Eliminar</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        const handleDeleteModalShow = (beneficioEntrada) => {
+            const name = beneficioEntrada.split('-')[0];
+            const id = parseInt(beneficioEntrada.split('-')[1]);
+
+            const title = document.getElementById('modal-title');
+            const message = document.getElementById("delete-message");
+            const btn = document.getElementById("delete-btn");
+            btn.setAttribute("href", '/TipoEntrada/Delete/' + id);
+
+            if (beneficioEntrada.split('-')[2] === 'eliminado') {
+                message.innerText = "Esta seguro que quiere restaurar " + name;
+                btn.innerText = "Restaurar";
+                title.innerText = "Restaurar el tipo de entrada eliminada";
+                btn.classList.add('btn-success');
+                btn.classList.remove('btn-danger');
+            } else {
+                message.innerText = "Esta seguro que quiere eliminar " + name;
+                btn.innerText = "Eliminar";
+                title.innerText = "Eliminar Tipo Entrada";
+                btn.classList.remove('btn-success');
+                btn.classList.add('btn-danger');
+            }
+
+
+            $('#delete-modal').modal("show");
+        }
+    </script>
+}
