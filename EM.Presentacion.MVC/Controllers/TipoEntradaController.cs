@@ -33,7 +33,7 @@ namespace EM.Presentacion.MVC.Controllers
                 Id = b.Id,
                 EstaEliminado = b.EliminadoStr,
                 Nombre = b.Nombre,
-                BeneficioEntradaId = b.BeneficioEntradaId               
+                BeneficioEntradaId = b.BeneficioEntradaId
             }).ToList();
             foreach (var model in models)
             {
@@ -115,6 +115,8 @@ namespace EM.Presentacion.MVC.Controllers
             {
                 var dto = (TipoEntradaDto)await _tipoEntradaServicio.Obtener(id);
 
+                var beneficiosEntrada = await _helperBeneficioEntrada.PoblarSelect();
+
                 var vm = new TipoEntradaViewModel()
                 {
                     Id = dto.Id,
@@ -122,6 +124,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Nombre = dto.Nombre,
                     BeneficioEntradaId = dto.BeneficioEntradaId,
                     BeneficioEntradaNombre = await _helperBeneficioEntrada.ObtenerNombreBeneficioEntrada(dto.BeneficioEntradaId),
+                    BeneficiosEntrada = beneficiosEntrada
                 };
 
                 return View(vm);

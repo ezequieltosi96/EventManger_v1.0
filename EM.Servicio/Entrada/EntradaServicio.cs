@@ -54,8 +54,9 @@
 
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
-            Expression<Func<Dominio.Entidades.Entrada, bool>> filtro = x =>
-                (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+            Expression<Func<Dominio.Entidades.Entrada, bool>> filtro = x => !x.EstaEliminado;
+
+            if (mostrarTodos) filtro = x => x.EstaEliminado && !x.EstaEliminado;
 
             var entradas = await _entradaRepositorio.ObtenerFiltrado(filtro);
 

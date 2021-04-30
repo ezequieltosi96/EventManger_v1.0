@@ -1,4 +1,5 @@
 ﻿using EM.Presentacion.MVC.Helpers.Actividad;
+using EM.Presentacion.MVC.Helpers.BeneficioEntrada;
 using EM.Presentacion.MVC.Helpers.Cliente;
 using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Helpers.Disertante;
@@ -26,6 +27,7 @@ namespace EM.Presentacion.MVC.Helpers.RegistrarServicios
             services.AddScoped<IHelperActividad, HelperActividad>();
             services.AddScoped<IHelperDisertante, HelperDisertante>();
             services.AddScoped<IHelperSala, HelperSala>();
+            services.AddScoped<IHelperBeneficioEntrada, HelperBeneficioEntrada>();
         }
     }
 }

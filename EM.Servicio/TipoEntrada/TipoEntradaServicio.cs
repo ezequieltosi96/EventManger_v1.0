@@ -59,7 +59,9 @@ namespace EM.Servicio.TipoEntrada
 
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
-            Expression<Func<Dominio.Entidades.TipoEntrada, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+            Expression<Func<Dominio.Entidades.TipoEntrada, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && !x.EstaEliminado;
+
+            if (mostrarTodos) filtro = x => x.Nombre.Contains(cadenaBuscar);
 
             var tipoEntradas = await _tipoEntradaRepositorio.ObtenerFiltrado(filtro);
 
