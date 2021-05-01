@@ -5,7 +5,7 @@
     {
         public decimal Precio { get; set; }
 
-        public long ClienteId { get; set; }
+        public long? ClienteId { get; set; }
 
         public long EventoId { get; set; }
 

@@ -4,14 +4,16 @@ using EM.Infrestructura;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EM.Infrestructura.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210430230100_TableEntradasRenamed")]
+    partial class TableEntradasRenamed
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -126,7 +128,7 @@ namespace EM.Infrestructura.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("ClienteId");
+                    b.Property<long>("ClienteId");
 
                     b.Property<bool>("EstaEliminado");
 
@@ -701,7 +703,8 @@ namespace EM.Infrestructura.Migrations
                 {
                     b.HasOne("EM.Dominio.Entidades.Cliente", "Cliente")
                         .WithMany()
-                        .HasForeignKey("ClienteId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EM.Dominio.Entidades.Evento", "Evento")
                         .WithMany()

@@ -1,4 +1,5 @@
-﻿@model EM.Presentacion.MVC.Models.Evento.EventoViewModel
+﻿@using System.Collections.Specialized
+@model EM.Presentacion.MVC.Models.Evento.EventoViewModel
 @{
     ViewData["Title"] = "Detalle Evento";
     Layout = "_LayoutAdmin";
@@ -30,7 +31,7 @@
             <dd>@Model.EstaEliminado</dd>
             <br />
             <dt>Actividades</dt>
-            @if (!Model.Actividades.Where(a=>a.EstaEliminado.Equals("No")).ToList().Any())
+            @if (!Model.Actividades.Where(a => a.EstaEliminado.Equals("No")).ToList().Any())
             {
                 <dd>No tiene actividades asignadas por el momento.</dd>
             }
@@ -52,7 +53,8 @@
                         <dt>Disertante</dt>
                         <dd>@actividad.Disertante.Nombre</dd>
                         <dt></dt>
-                        <dd><a asp-controller="Actividad" asp-action="Delete" asp-route-id="@actividad.Id" asp-route-eventoId="@Model.Id" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></dd>   
+                        <dd><a asp-controller="Actividad" asp-action="Delete" asp-route-id="@actividad.Id" asp-route-eventoId="@Model.Id" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash"></span></a></dd>
+
                     }
                 }
             </div>
@@ -72,6 +74,8 @@
         }
         <a class="btn btn-primary" asp-controller="Actividad" asp-action="Create" asp-route-eventoId="@Model.Id" asp-route-empresaId="@Model.EmpresaId" asp-route-vbEmpresa="@ViewBag.EmpresaId" asp-route-establecimientoId="@Model.EstablecimientoId" asp-route-fecha="@Model.Fecha.Date.ToString()"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>
         @*<a class="btn btn-primary" onclick="handleCreateModalShow(@Model.Id)"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>*@
+        <a class="btn btn-primary" asp-controller="Entrada" asp-action="ListGeneric" asp-route-eventoId="@Model.Id"><span class="glyphicon glyphicon-tag"></span> Tipos de entrada</a>
+        <a class="btn btn-primary" asp-controller="Entrada" asp-action="List" asp-route-eventoId="@Model.Id"><span class="glyphicon glyphicon-tags"></span> Entradas venidas</a>
     }
 
 </div>

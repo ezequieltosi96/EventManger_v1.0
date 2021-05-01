@@ -54,5 +54,22 @@ namespace EM.Presentacion.MVC.Helpers.Cliente
 
             return model;
         }
+
+        public async Task<ClienteViewModel> Obtener(long clienteId)
+        {
+            var dto = (ClienteDto)await _clienteServicio.Obtener(clienteId);
+
+            var model = new ClienteViewModel()
+            {
+                Id = dto.Id,
+                Nombre = dto.Nombre,
+                Apellido = dto.Apellido,
+                Dni = dto.Dni,
+                Email = dto.Email,
+                EstaEliminado = dto.EliminadoStr
+            };
+
+            return model;
+        }
     }
 }

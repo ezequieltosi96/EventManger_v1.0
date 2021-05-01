@@ -173,28 +173,28 @@
             services.AddScoped<IEventoServicio, EventoServicio>();
 
             //Entrada
-            services.AddSingleton<IEntradaRepositorio, EntradaRepositorio>();
-            services.AddSingleton<IEntradaServicio, EntradaServicio>();
+            services.AddScoped<IEntradaRepositorio, EntradaRepositorio>();
+            services.AddScoped<IEntradaServicio, EntradaServicio>();
 
             //Inscripcion
-            services.AddSingleton<IInscripcionRepositorio, InscripcionRepositorio>();
-            services.AddSingleton<IInscripcionServicio, InscripcionServicio>();
+            services.AddScoped<IInscripcionRepositorio, InscripcionRepositorio>();
+            services.AddScoped<IInscripcionServicio, InscripcionServicio>();
 
             //Factura
-            services.AddSingleton<IFacturaRepositorio, FacturaRepositorio>();
-            services.AddSingleton<IFacturaServicio, FacturaServicio>();
+            services.AddScoped<IFacturaRepositorio, FacturaRepositorio>();
+            services.AddScoped<IFacturaServicio, FacturaServicio>();
 
             //FacturaDetalle
-            services.AddSingleton<IFacturaDetalleRepositorio, FacturaDetalleRepositorio>();
-            services.AddSingleton<IFacturaDetalleServicio, FacturaDetalleServicio>();
+            services.AddScoped<IFacturaDetalleRepositorio, FacturaDetalleRepositorio>();
+            services.AddScoped<IFacturaDetalleServicio, FacturaDetalleServicio>();
 
             //FormaPago
-            services.AddSingleton<IFormaPagoRepositorio, FormaPagoRepositorio>();
-            services.AddSingleton<IFormaPagoServicio, FormaPagoServicio>();
+            services.AddScoped<IFormaPagoRepositorio, FormaPagoRepositorio>();
+            services.AddScoped<IFormaPagoServicio, FormaPagoServicio>();
 
             //FormaPagoTarjeta
-            services.AddSingleton<IFormaPagoTarjetaRepositorio, FormaPagoTarjetaRepositorio>();
-            services.AddSingleton<IFormaPagoTarjetaServicio, FormaPagoTarjetaServicio>();
+            services.AddScoped<IFormaPagoTarjetaRepositorio, FormaPagoTarjetaRepositorio>();
+            services.AddScoped<IFormaPagoTarjetaServicio, FormaPagoTarjetaServicio>();
         }
     }
 }

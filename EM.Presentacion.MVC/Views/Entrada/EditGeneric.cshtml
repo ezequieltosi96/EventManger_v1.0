@@ -1,0 +1,44 @@
+﻿@model EM.Presentacion.MVC.Models.Entrada.EntradaViewModel
+@{
+    ViewData["Title"] = "Editar entrada de evento";
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form asp-action="EditGeneric">
+            <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+            <input type="hidden" asp-for="EventoId" />
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="TipoEntradaId" class="control-label"></label>
+                <select asp-for="TipoEntradaId" asp-items="Model.TiposEntradas" class="form-control">
+                    <option value="">Seleccionar Tipo de Entrada</option>
+                </select>
+                <span asp-validation-for="TipoEntradaId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Editar" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-default" asp-action="ListGeneric" asp-route-eventoId="@Model.EventoId"><span class="glyphicon glyphicon-blackboard"></span>Ir a lista</a>
+</div>
+
+
+@section Scripts
+{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

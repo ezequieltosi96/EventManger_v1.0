@@ -5,16 +5,16 @@
     {
         public decimal Precio { get; set; }
 
-        public long ClienteId { get; set; }
+        public long? ClienteId { get; set; }
 
         public long EventoId { get; set; }
 
         public long TipoEntradaId { get; set; }
 
-        public virtual Cliente Clientes { get; set; }
+        public virtual Cliente Cliente { get; set; }
 
-        public virtual Evento Eventos { get; set; }
+        public virtual Evento Evento { get; set; }
 
-        public virtual TipoEntrada TiposEntradas { get; set; }
+        public virtual TipoEntrada TiposEntrada { get; set; }
     }
 }

@@ -8,7 +8,7 @@
     {
         public void Configure(EntityTypeBuilder<Entrada> builder)
         {
-            builder.ToTable("Entrada");
+            builder.ToTable("Entradas");
 
             builder.Property(e => e.Precio).IsRequired();
         }

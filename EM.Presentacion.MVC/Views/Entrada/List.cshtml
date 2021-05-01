@@ -1,0 +1,62 @@
+﻿@model IEnumerable<EM.Presentacion.MVC.Models.Entrada.EntradaViewModel>
+@{
+    ViewData["Title"] = "Entradas vendidas";
+    Layout = "_LayoutAdmin";
+}
+
+<h4>
+    <a class="go-back p-5 m-5" asp-action="Details" asp-controller="Evento" asp-route-id="@ViewBag.EventoId"><span class="glyphicon glyphicon-backward"></span> Ir a Evento</a>
+</h4>
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TipoEntrada.Nombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TipoEntrada.BeneficioEntradaNombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Cliente.ApyNom)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Cliente.Dni)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entrada in Model)
+        {
+            <tr>
+                <td>
+                    @entrada.TipoEntrada.Nombre
+                </td>
+                <td>
+                    @entrada.TipoEntrada.BeneficioEntradaNombre
+                </td>
+                <td>
+                    @entrada.Cliente.ApyNom
+                </td>
+                <td>
+                    @entrada.Cliente.Dni
+                </td>
+                <td>
+                    $@entrada.Precio
+                </td>
+                <td>
+                    <a class="btn-sm btn-success" asp-action="Details" asp-route-id="@entrada.Id"><span class="glyphicon glyphicon-qrcode"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

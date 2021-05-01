@@ -5,10 +5,12 @@ using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Helpers.Disertante;
 using EM.Presentacion.MVC.Helpers.Empresa;
 using EM.Presentacion.MVC.Helpers.Establecimiento;
+using EM.Presentacion.MVC.Helpers.Evento;
 using EM.Presentacion.MVC.Helpers.Localidad;
 using EM.Presentacion.MVC.Helpers.Pais;
 using EM.Presentacion.MVC.Helpers.Provincia;
 using EM.Presentacion.MVC.Helpers.Sala;
+using EM.Presentacion.MVC.Helpers.TipoEntrada;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace EM.Presentacion.MVC.Helpers.RegistrarServicios
@@ -28,6 +30,8 @@ namespace EM.Presentacion.MVC.Helpers.RegistrarServicios
             services.AddScoped<IHelperDisertante, HelperDisertante>();
             services.AddScoped<IHelperSala, HelperSala>();
             services.AddScoped<IHelperBeneficioEntrada, HelperBeneficioEntrada>();
+            services.AddScoped<IHelperTipoEntrada, HelperTipoEntrada>();
+            services.AddScoped<IHelperEvento, HelperEvento>();
         }
     }
 }

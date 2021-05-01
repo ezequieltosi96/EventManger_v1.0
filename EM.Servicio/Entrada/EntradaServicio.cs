@@ -64,5 +64,31 @@
 
             return dtos;
         }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerGenericByEvento(long eventoId, bool mostrarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.Entrada, bool>> filtro = x => !x.EstaEliminado && x.EventoId == eventoId && x.ClienteId == null;
+
+            if (mostrarTodos) filtro = x => x.EventoId == eventoId && x.ClienteId == null;
+
+            var entradas = await _entradaRepositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<EntradaDto>>(entradas);
+
+            return dtos;
+        }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerByEvento(long eventoId, bool mostrarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.Entrada, bool>> filtro = x => !x.EstaEliminado && x.EventoId == eventoId && x.ClienteId != null;
+
+            if (mostrarTodos) filtro = x => x.EventoId == eventoId && x.ClienteId != null;
+
+            var entradas = await _entradaRepositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<EntradaDto>>(entradas);
+
+            return dtos;
+        }
     }
 }
