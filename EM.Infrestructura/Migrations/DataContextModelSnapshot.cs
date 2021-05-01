@@ -186,9 +186,7 @@ namespace EM.Infrestructura.Migrations
 
                     b.Property<bool>("EstaEliminado");
 
-                    b.Property<long?>("EstablecimientoId");
-
-                    b.Property<long>("EstalecimientoId");
+                    b.Property<long>("EstablecimientoId");
 
                     b.Property<DateTime>("Fecha");
 
@@ -216,6 +214,8 @@ namespace EM.Infrestructura.Migrations
                     b.Property<long>("EmpresaId");
 
                     b.Property<bool>("EstaEliminado");
+
+                    b.Property<DateTime>("Fecha");
 
                     b.Property<long>("FormaPagoId");
 
@@ -733,7 +733,8 @@ namespace EM.Infrestructura.Migrations
 
                     b.HasOne("EM.Dominio.Entidades.Establecimiento", "Establecimiento")
                         .WithMany()
-                        .HasForeignKey("EstablecimientoId");
+                        .HasForeignKey("EstablecimientoId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("EM.Dominio.Entidades.Factura", b =>
@@ -762,7 +763,7 @@ namespace EM.Infrestructura.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EM.Dominio.Entidades.Factura", "Factura")
-                        .WithMany()
+                        .WithMany("FacturaDetalles")
                         .HasForeignKey("FacturaId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

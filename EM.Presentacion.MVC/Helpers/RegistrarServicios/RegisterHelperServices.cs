@@ -6,6 +6,7 @@ using EM.Presentacion.MVC.Helpers.Disertante;
 using EM.Presentacion.MVC.Helpers.Empresa;
 using EM.Presentacion.MVC.Helpers.Establecimiento;
 using EM.Presentacion.MVC.Helpers.Evento;
+using EM.Presentacion.MVC.Helpers.FormaPago;
 using EM.Presentacion.MVC.Helpers.Localidad;
 using EM.Presentacion.MVC.Helpers.Pais;
 using EM.Presentacion.MVC.Helpers.Provincia;
@@ -30,6 +31,7 @@ namespace EM.Presentacion.MVC.Helpers.RegistrarServicios
             services.AddScoped<IHelperDisertante, HelperDisertante>();
             services.AddScoped<IHelperSala, HelperSala>();
             services.AddScoped<IHelperBeneficioEntrada, HelperBeneficioEntrada>();
+            services.AddScoped<IHelperFormaPago, HelperFormaPago>();
             services.AddScoped<IHelperTipoEntrada, HelperTipoEntrada>();
             services.AddScoped<IHelperEvento, HelperEvento>();
         }

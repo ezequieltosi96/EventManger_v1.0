@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EM.Servicio.Factura
+﻿namespace EM.Servicio.Factura
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +9,7 @@ namespace EM.Servicio.Factura
     using EM.IServicio.Factura;
     using EM.IServicio.Factura.Dto;
     using EM.ServicioBase.Dto;
+    using Microsoft.EntityFrameworkCore;
 
     public class FacturaServicio : IFacturaServicio
     {
@@ -50,7 +47,7 @@ namespace EM.Servicio.Factura
 
         public async Task<DtoBase> Obtener(long id)
         {
-            var factura = await _facturaRepositorio.ObtenerPorId(id);
+            var factura = await _facturaRepositorio.ObtenerPorId(id, f => f.Include(e => e.FacturaDetalles));
 
             var dto = _mapper.Map<FacturaDto>(factura);
 
@@ -59,10 +56,13 @@ namespace EM.Servicio.Factura
 
         public async Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true)
         {
-            Expression<Func<Dominio.Entidades.Factura, bool>> filtro = x =>
-                (mostrarTodos ? !x.EstaEliminado : x.EstaEliminado);
+            Expression<Func<Dominio.Entidades.Factura, bool>> filtro = x => !x.EstaEliminado;
 
-            var facturas = await _facturaRepositorio.ObtenerFiltrado(filtro, null);
+            if (mostrarTodos)
+            {
+                filtro = x => x.EstaEliminado || !x.EstaEliminado;
+            }
+            var facturas = await _facturaRepositorio.ObtenerFiltrado(filtro,null, f => f.Include(e => e.FacturaDetalles));
 
             var dtos = _mapper.Map<IEnumerable<FacturaDto>>(facturas);
 

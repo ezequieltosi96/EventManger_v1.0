@@ -86,7 +86,7 @@
 
         public DbSet<Inscripcion> Inscripciones { get; set; }
 
-        public DbSet<Factura> Facturas { get; set; }
+        public DbSet<Factura> Factura { get; set; }
 
         public DbSet<FacturaDetalle> FacturaDetalles { get; set; }
 
