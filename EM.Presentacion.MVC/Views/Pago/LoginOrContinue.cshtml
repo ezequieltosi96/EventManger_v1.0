@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Pago";
+    Layout = "_Layout";
+}
+
+<div class="buttons-container">
+    <a class="btn-option" asp-controller="Account" asp-action="LogIn" asp-route-eventoId="@ViewBag.EventoId">Iniciar Sesion</a>
+    <a class="btn-option" asp-action="SeleccionarEntradas" asp-route-eventoId="@ViewBag.EventoId">Continuar Como Invitado</a>
+</div>

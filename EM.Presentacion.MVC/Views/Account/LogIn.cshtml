@@ -10,15 +10,15 @@
         <h1>Iniciar Sesion</h1>
     </div>
     <div class="form-login-cliente-container">
-        <form asp-action="LogIn">
+        <form asp-action="LogIn" asp-route-eventoId="@ViewBag.EventoId">
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" value="admin@eventmanager.com"/>
+                <input asp-for="Email" class="form-control" value="admin@eventmanager.com" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" value="EventManager"/>
+                <input asp-for="Password" class="form-control" value="EventManager" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
 

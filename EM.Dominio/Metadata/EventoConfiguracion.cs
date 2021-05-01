@@ -14,6 +14,7 @@
             builder.Property(e => e.Descripcion).HasMaxLength(250).IsRequired();
             builder.Property(e => e.Fecha).IsRequired();
             builder.Property(e => e.Cupo).IsRequired();
+            builder.Property(e => e.CupoDisponible).IsRequired();
 
             builder.HasMany(e => e.Actividades).WithOne(a => a.Evento).HasForeignKey(a => a.EventoId);
         }

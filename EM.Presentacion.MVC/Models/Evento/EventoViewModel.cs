@@ -27,6 +27,9 @@ namespace EM.Presentacion.MVC.Models.Evento
         [Range(1, Int32.MaxValue, ErrorMessage = "El campo {0} debe ser mayor a {1}.")]
         public int Cupo { get; set; }
 
+        [DisplayName("Cupo Disponible")]
+        public int CupoDisponible { get; set; }
+
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [DateGreaterThanOrEqualToToday] // implementacion de una validacion personalizada -> ./Helpers/CustomValidations
         public DateTime Fecha { get; set; }

@@ -26,6 +26,7 @@ namespace EM.Presentacion.MVC.Helpers.Evento
                 Id = evento.Id,
                 EstaEliminado = evento.EliminadoStr,
                 Cupo = evento.Cupo,
+                CupoDisponible = evento.CupoDisponible,
                 Nombre = evento.Nombre,
                 Descripcion = evento.Descripcion,
                 Fecha = evento.Fecha,

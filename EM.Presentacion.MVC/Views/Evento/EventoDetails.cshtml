@@ -1,0 +1,40 @@
+﻿@model EM.Presentacion.MVC.Models.Evento.EventoViewModel
+@{
+    ViewData["Title"] = "Detalle Evento";
+    Layout = "_Layout";
+}
+
+<div class="evento-container">
+    <div class="evento-info">
+        <h1>@Model.Nombre</h1>
+        <p>@Model.Fecha.ToString("D") - @Model.Establecimiento.Direccion.Ubicacion</p>
+        <h2>Sobre el evento</h2>
+        <p>@Model.Descripcion</p>
+        <br />
+        <h2>Actividades</h2>
+        @foreach (var actividad in Model.Actividades)
+        {
+            <h3>@actividad.Nombre</h3>
+            <p>@actividad.FechaHora - @actividad.Sala.Nombre</p>
+            <p>Disertante @actividad.Disertante.ApyNom</p>
+            <hr />
+        }
+        <br />
+        <p>@Model.Establecimiento.Nombre - @Model.Establecimiento.Direccion.Descripcion - @Model.Establecimiento.Direccion.Ubicacion</p>
+        <p>Organiza @Model.Empresa.NombreFantasia - @Model.Empresa.RazonSocial</p>
+
+
+    </div>
+
+    <div class="evento-sidebar">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <a class="btn-big" asp-controller="Pago" asp-action="SeleccionarEntradas" asp-route-eventoId="@Model.Id">Adquirir Entrada</a>
+        }
+        else
+        {
+            <a class="btn-big" asp-controller="Pago" asp-action="LoginOrContinue" asp-route-eventoId="@Model.Id">Adquirir Entrada</a>
+        }
+        <p style="margin-top: 20px;">Cupos disponibles: @Model.CupoDisponible</p>
+    </div>
+</div>

@@ -27,6 +27,7 @@
         <form asp-action="Edit" asp-route-vbEmpresa="@ViewBag.EmpresaId">
             <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
             <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="CupoDisponible" />
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />

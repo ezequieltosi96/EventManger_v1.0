@@ -13,6 +13,8 @@
 
         public int Cupo { get; set; }
 
+        public int CupoDisponible { get; set; }
+
         public DateTime Fecha { get; set; }
 
         public long EstalecimientoId { get; set; }

@@ -227,14 +227,15 @@ namespace EM.Presentacion.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult LogIn()
+        public IActionResult LogIn(long? eventoId = null)
         {
+            ViewBag.EventoId = eventoId;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogIn(UsuarioViewModel vm)
+        public async Task<IActionResult> LogIn(UsuarioViewModel vm, long? eventoId = null)
         {
             try
             {
@@ -247,10 +248,16 @@ namespace EM.Presentacion.MVC.Controllers
                     throw new Exception("Error al iniciar sesion.");
                 }
 
+                if (eventoId.HasValue)
+                {
+                    return RedirectToAction("SeleccionarEntradas", "Pago", new { eventoId = eventoId.Value });
+                }
+
                 return RedirectToAction("Index", "Home");
             }
             catch (Exception)
             {
+                ViewBag.EventoId = eventoId;
                 return View(vm);
             }
         }

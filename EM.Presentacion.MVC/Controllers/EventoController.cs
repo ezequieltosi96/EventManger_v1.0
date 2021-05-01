@@ -70,6 +70,7 @@ namespace EM.Presentacion.MVC.Controllers
                 Nombre = e.Nombre,
                 Descripcion = e.Descripcion,
                 Cupo = e.Cupo,
+                CupoDisponible = e.CupoDisponible,
                 EstablecimientoId = e.EstalecimientoId,
                 EmpresaId = e.EmpresaId,
                 Fecha = e.Fecha,
@@ -118,6 +119,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Id = evento.Id,
                     EstaEliminado = evento.EliminadoStr,
                     Cupo = evento.Cupo,
+                    CupoDisponible = evento.CupoDisponible,
                     Nombre = evento.Nombre,
                     Descripcion = evento.Descripcion,
                     Fecha = evento.Fecha,
@@ -207,6 +209,7 @@ namespace EM.Presentacion.MVC.Controllers
                 var dto = new EventoDto()
                 {
                     Cupo = vm.Cupo,
+                    CupoDisponible = vm.Cupo,
                     Descripcion = vm.Descripcion,
                     EmpresaId = vm.EmpresaId,
                     EstalecimientoId = vm.EstablecimientoId,
@@ -264,6 +267,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Id = evento.Id,
                     EstaEliminado = evento.EliminadoStr,
                     Cupo = evento.Cupo,
+                    CupoDisponible = evento.CupoDisponible,
                     Nombre = evento.Nombre,
                     Descripcion = evento.Descripcion,
                     Fecha = evento.Fecha,
@@ -297,6 +301,7 @@ namespace EM.Presentacion.MVC.Controllers
                 {
                     Id = vm.Id,
                     Cupo = vm.Cupo,
+                    CupoDisponible = vm.CupoDisponible,
                     Descripcion = vm.Descripcion,
                     EmpresaId = vm.EmpresaId,
                     EstalecimientoId = vm.EstablecimientoId,
@@ -350,6 +355,47 @@ namespace EM.Presentacion.MVC.Controllers
             catch (Exception)
             {
                 return RedirectToAction(nameof(Index), new { empresaId = vbEmpresa });
+            }
+        }
+
+        public async Task<IActionResult> EventoDetails(long id)
+        {
+            try
+            {
+                var evento = (EventoDto)await _eventoServicio.Obtener(id);
+
+                var model = new EventoViewModel()
+                {
+                    Id = evento.Id,
+                    EstaEliminado = evento.EliminadoStr,
+                    Cupo = evento.Cupo,
+                    CupoDisponible = evento.CupoDisponible,
+                    Nombre = evento.Nombre,
+                    Descripcion = evento.Descripcion,
+                    Fecha = evento.Fecha,
+                    EmpresaId = evento.EmpresaId,
+                    EstablecimientoId = evento.EstalecimientoId,
+                    Actividades = evento.Actividades.Select(a => new ActividadViewModel()
+                    {
+                        Id = a.Id,
+                        DisertanteId = a.DisertanteId,
+                        EstaEliminado = a.EliminadoStr,
+                        EventoId = a.EventoId,
+                        SalaId = a.SalaId,
+                        FechaHora = a.FechaHora,
+                        Nombre = a.Nombre,
+                        Disertante = _helperDisertante.ObtenerDisertante(a.DisertanteId).Result,
+                        Sala = _helperSala.ObtenerSala(a.SalaId).Result
+                    }),
+                    Empresa = _helperEmpresa.ObtenerEmpresa(evento.EmpresaId).Result,
+                    Establecimiento = _helperEstablecimiento.ObtenerEstablecimiento(evento.EstalecimientoId).Result,
+                };
+
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction(nameof(Index), "Home");
             }
         }
     }

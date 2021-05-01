@@ -1,0 +1,15 @@
+﻿@model IEnumerable<EM.Presentacion.MVC.Models.Evento.EventoViewModel>
+
+<div class="card-container">
+    @foreach (var evento in Model)
+    {
+        <div class="panel panel-default card">
+            <div class="card-content">
+                <h3 style="color: #101010;">@evento.Nombre</h3>
+                <p style="padding-top: 10px;">@evento.Descripcion</p>
+                <p class="evento-fecha"><span class="glyphicon glyphicon-calendar"></span> @evento.Fecha.ToString("D")</p>
+            </div>
+            @Html.ActionLink("Ver Evento", "EventoDetails", "Evento", new { id = evento.Id }, new { @class = "btn-fill" })
+        </div>
+    }
+</div>

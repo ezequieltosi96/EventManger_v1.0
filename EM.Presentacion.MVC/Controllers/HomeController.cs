@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using EM.Presentacion.MVC.Models.Localidad;
+using EM.Presentacion.MVC.Models.Pais;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -12,8 +14,6 @@ namespace EM.Presentacion.MVC.Controllers
     {
         public IActionResult Index()
         {
-            ViewData["Message"] = "Your application home page.";
-
             return View();
         }
 
