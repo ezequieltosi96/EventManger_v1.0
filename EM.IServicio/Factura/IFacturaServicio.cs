@@ -1,6 +1,7 @@
 ﻿namespace EM.IServicio.Factura
 {
-    public interface IFacturaServicio : ServicioBase.Servicio.IServicio
+    using ServicioBase.Servicio;
+    public interface IFacturaServicio : IServicio
     {
     }
 }

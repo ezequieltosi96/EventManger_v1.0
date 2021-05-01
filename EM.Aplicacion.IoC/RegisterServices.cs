@@ -60,10 +60,6 @@
     using EM.Infrestructura.Repositorio.Evento;
     using EM.IServicio.Evento;
     using EM.Servicio.Evento;
-    using EM.Dominio.Repositorio.Evento;
-    using EM.Infrestructura.Repositorio.Evento;
-    using EM.IServicio.Evento;
-    using EM.Servicio.Evento;
     using EM.Dominio.Repositorio.Entrada;
     using EM.IServicio.Entrada;
     using EM.Servicio.Entrada;
@@ -88,6 +84,8 @@
     using EM.Dominio.Repositorio.FormaPagoTarjeta;
     using EM.IServicio.FormaPagoTarjeta;
     using EM.Servicio.FormaPagoTarjetaTarjeta;
+    using EM.Dominio.Repositorio.Pais;
+    using EM.Dominio.Enum;
 
     public static class RegisterServices
     {
@@ -181,20 +179,23 @@
             services.AddSingleton<IInscripcionServicio, InscripcionServicio>();
 
             //Factura
-            services.AddSingleton<IFacturaRepositorio, FacturaRepositorio>();
-            services.AddSingleton<IFacturaServicio, FacturaServicio>();
+            services.AddScoped<IFacturaRepositorio, FacturaRepositorio>();
+            services.AddScoped<IFacturaServicio, FacturaServicio>();
 
             //FacturaDetalle
-            services.AddSingleton<IFacturaDetalleRepositorio, FacturaDetalleRepositorio>();
-            services.AddSingleton<IFacturaDetalleServicio, FacturaDetalleServicio>();
+            services.AddScoped<IFacturaDetalleRepositorio, FacturaDetalleRepositorio>();
+            services.AddScoped<IFacturaDetalleServicio, FacturaDetalleServicio>();
 
             //FormaPago
-            services.AddSingleton<IFormaPagoRepositorio, FormaPagoRepositorio>();
-            services.AddSingleton<IFormaPagoServicio, FormaPagoServicio>();
+            services.AddScoped<IFormaPagoRepositorio, FormaPagoRepositorio>();
+            services.AddScoped<IFormaPagoServicio, FormaPagoServicio>();
 
             //FormaPagoTarjeta
-            services.AddSingleton<IFormaPagoTarjetaRepositorio, FormaPagoTarjetaRepositorio>();
-            services.AddSingleton<IFormaPagoTarjetaServicio, FormaPagoTarjetaServicio>();
+            services.AddScoped<IFormaPagoTarjetaRepositorio, FormaPagoTarjetaRepositorio>();
+            services.AddScoped<IFormaPagoTarjetaServicio, FormaPagoTarjetaServicio>();
+
+            //Enum
+            //services.AddTransient<FacturaServicio>(sp => new FacturaServicio(TipoFactura.B));
         }
     }
 }

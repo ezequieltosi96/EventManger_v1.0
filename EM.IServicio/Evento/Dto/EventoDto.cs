@@ -15,7 +15,7 @@
 
         public DateTime Fecha { get; set; }
 
-        public long EstalecimientoId { get; set; }
+        public long EstablecimientoId { get; set; }
 
         public long EmpresaId { get; set; }
 

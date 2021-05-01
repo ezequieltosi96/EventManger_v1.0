@@ -70,7 +70,7 @@ namespace EM.Presentacion.MVC.Controllers
                 Nombre = e.Nombre,
                 Descripcion = e.Descripcion,
                 Cupo = e.Cupo,
-                EstablecimientoId = e.EstalecimientoId,
+                EstablecimientoId = e.EstablecimientoId,
                 EmpresaId = e.EmpresaId,
                 Fecha = e.Fecha,
                 Actividades = e.Actividades.Select(a => new ActividadViewModel()
@@ -122,7 +122,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Descripcion = evento.Descripcion,
                     Fecha = evento.Fecha,
                     EmpresaId = evento.EmpresaId,
-                    EstablecimientoId = evento.EstalecimientoId,
+                    EstablecimientoId = evento.EstablecimientoId,
                     Actividades = evento.Actividades.Select(a => new ActividadViewModel()
                     {
                         Id = a.Id,
@@ -136,7 +136,7 @@ namespace EM.Presentacion.MVC.Controllers
                         Sala = _helperSala.ObtenerSala(a.SalaId).Result
                     }),
                     Empresa = _helperEmpresa.ObtenerEmpresa(evento.EmpresaId).Result,
-                    Establecimiento = _helperEstablecimiento.ObtenerEstablecimiento(evento.EstalecimientoId).Result,
+                    Establecimiento = _helperEstablecimiento.ObtenerEstablecimiento(evento.EstablecimientoId).Result,
                 };
 
                 return View(model);
@@ -209,7 +209,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Cupo = vm.Cupo,
                     Descripcion = vm.Descripcion,
                     EmpresaId = vm.EmpresaId,
-                    EstalecimientoId = vm.EstablecimientoId,
+                    EstablecimientoId = vm.EstablecimientoId,
                     Fecha = vm.Fecha,
                     Nombre = vm.Nombre
                 };
@@ -268,7 +268,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Descripcion = evento.Descripcion,
                     Fecha = evento.Fecha,
                     EmpresaId = evento.EmpresaId,
-                    EstablecimientoId = evento.EstalecimientoId,
+                    EstablecimientoId = evento.EstablecimientoId,
                     Empresas = await _helperEmpresa.PoblarCombo(),
                     Establecimientos = await _helperEstablecimiento.PoblarCombo()
                 };
@@ -299,7 +299,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Cupo = vm.Cupo,
                     Descripcion = vm.Descripcion,
                     EmpresaId = vm.EmpresaId,
-                    EstalecimientoId = vm.EstablecimientoId,
+                    EstablecimientoId = vm.EstablecimientoId,
                     Fecha = vm.Fecha,
                     Nombre = vm.Nombre
                 };

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<EM.Presentacion.MVC.Models.Factura.FacturaViewModel>
+@{
+    ViewData["Title"] = "Factura";
+    Layout = "_LayoutAdmin";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="contenedor">
+    <form asp-action="Index" asp-route-mostrarTodos="false">
+        <div class="input-group p-5" style="max-width: 350px;">
+            <input type="text" class="form-control" placeholder="Factura..." value="@ViewBag.CadenaBuscar" name="cadenaBuscar">
+            <div class="input-group-btn">
+                <input type="submit" value="Buscar" class="btn btn-default" />
+                <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar=""><span class="glyphicon glyphicon-remove-circle"></span></a>
+            </div>
+        </div>
+    </form>
+    <div class="p-5">
+        @if (ViewBag.MostrarTodos)
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="false" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar">Ocultar eliminados</a>
+        }
+        else
+        {
+            <a class="btn btn-default" asp-action="Index" asp-route-mostrarTodos="true" asp-route-cadenaBuscar="@ViewBag.CadenaBuscar">Mostrar eliminados</a>
+        }
+    </div>
+</div>
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TipoFactura)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.EstaEliminado)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var factura in Model)
+        {
+            <tr>
+                <td>
+                    @factura.Fecha
+                </td>
+                <td>
+                    @factura.TipoFactura
+                </td>
+                <td>
+                    @factura.Total
+                </td>
+                <td>
+                    @factura.EstaEliminado
+                </td>
+                <td>
+                    @if (factura.EstaEliminado.Equals("No"))
+                    {
+                        <a class="btn-sm btn-info" asp-action="Details" asp-route-id="@factura.Id"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

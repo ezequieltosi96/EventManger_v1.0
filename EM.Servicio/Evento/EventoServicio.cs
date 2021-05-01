@@ -124,13 +124,13 @@ namespace EM.Servicio.Evento
         {
             Expression<Func<Dominio.Entidades.Evento, bool>> filtro = x =>
                 x.EmpresaId == dto.EmpresaId && x.Fecha == dto.Fecha && x.Nombre.Equals(dto.Nombre) &&
-                x.EstalecimientoId == dto.EstalecimientoId && !x.EstaEliminado;
+                x.EstablecimientoId == dto.EstablecimientoId && !x.EstaEliminado;
 
             if (dto.Id != 0)
             {
                 filtro = x =>
                     x.Id != dto.Id && x.EmpresaId == dto.EmpresaId && x.Fecha == dto.Fecha &&
-                    x.Nombre.Equals(dto.Nombre) && x.EstalecimientoId == dto.EstalecimientoId && !x.EstaEliminado;
+                    x.Nombre.Equals(dto.Nombre) && x.EstablecimientoId == dto.EstablecimientoId && !x.EstaEliminado;
             }
 
             var eventos = await _eventoRepositorio.ObtenerFiltrado(filtro);

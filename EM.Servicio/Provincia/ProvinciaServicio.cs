@@ -1,8 +1,6 @@
-﻿using System.Linq;
-using Microsoft.EntityFrameworkCore;
-
-namespace EM.Servicio.Provincia
+﻿namespace EM.Servicio.Provincia
 {
+    using System.Linq;
     using System.Linq.Expressions;
     using AutoMapper;
     using EM.Dominio.Repositorio.Provincia;

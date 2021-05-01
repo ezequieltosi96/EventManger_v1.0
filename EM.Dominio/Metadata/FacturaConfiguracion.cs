@@ -10,8 +10,11 @@
         {
             builder.ToTable("Factura");
 
+            builder.Property(f => f.Fecha).IsRequired();
             builder.Property(l => l.TipoFactura).IsRequired();
             builder.Property(t => t.Total).IsRequired();
+
+            builder.HasMany(e => e.FacturaDetalles).WithOne(e => e.Factura).HasForeignKey(a => a.FacturaId);
         }
     }
 }
