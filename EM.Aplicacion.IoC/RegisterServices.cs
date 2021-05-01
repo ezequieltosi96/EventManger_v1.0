@@ -60,10 +60,6 @@
     using EM.Infrestructura.Repositorio.Evento;
     using EM.IServicio.Evento;
     using EM.Servicio.Evento;
-    using EM.Dominio.Repositorio.Evento;
-    using EM.Infrestructura.Repositorio.Evento;
-    using EM.IServicio.Evento;
-    using EM.Servicio.Evento;
     using EM.Dominio.Repositorio.Entrada;
     using EM.IServicio.Entrada;
     using EM.Servicio.Entrada;
@@ -88,6 +84,8 @@
     using EM.Dominio.Repositorio.FormaPagoTarjeta;
     using EM.IServicio.FormaPagoTarjeta;
     using EM.Servicio.FormaPagoTarjetaTarjeta;
+    using EM.Dominio.Repositorio.Pais;
+    using EM.Dominio.Enum;
 
     public static class RegisterServices
     {
@@ -195,6 +193,9 @@
             //FormaPagoTarjeta
             services.AddScoped<IFormaPagoTarjetaRepositorio, FormaPagoTarjetaRepositorio>();
             services.AddScoped<IFormaPagoTarjetaServicio, FormaPagoTarjetaServicio>();
+
+            //Enum
+            //services.AddTransient<FacturaServicio>(sp => new FacturaServicio(TipoFactura.B));
         }
     }
 }

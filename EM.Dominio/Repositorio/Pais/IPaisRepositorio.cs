@@ -1,4 +1,4 @@
-﻿namespace EM.Dominio.Repositorio
+﻿namespace EM.Dominio.Repositorio.Pais
 {
     using Entidades;
 
