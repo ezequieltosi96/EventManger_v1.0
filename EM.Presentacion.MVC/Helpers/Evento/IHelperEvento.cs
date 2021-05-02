@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using EM.Presentacion.MVC.Models.Evento;
+﻿using EM.Presentacion.MVC.Models.Evento;
+using System.Threading.Tasks;
 
 namespace EM.Presentacion.MVC.Helpers.Evento
 {

@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using EM.Presentacion.MVC.Models.Disertante;
+﻿using EM.Presentacion.MVC.Models.Disertante;
 using EM.Presentacion.MVC.Models.Evento;
 using EM.Presentacion.MVC.Models.Sala;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EM.Presentacion.MVC.Models.Actividad
 {

@@ -1,9 +1,9 @@
 ﻿namespace EM.IServicio.Evento.Dto
 {
-    using System;
-    using System.Collections.Generic;
     using EM.IServicio.Actividad.Dto;
     using EM.ServicioBase.Dto;
+    using System;
+    using System.Collections.Generic;
 
     public class EventoDto : DtoBase
     {

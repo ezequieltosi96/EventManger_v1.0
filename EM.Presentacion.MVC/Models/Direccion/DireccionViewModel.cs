@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using EM.Presentacion.MVC.Models.Localidad;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using EM.Presentacion.MVC.Models.Localidad;
 
 namespace EM.Presentacion.MVC.Models.Direccion
 {

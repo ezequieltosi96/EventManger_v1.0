@@ -23,7 +23,7 @@
 
         public virtual Cliente Cliente { get; set; }
 
-        public virtual FormaPago FormaPago { get; set; } 
+        public virtual FormaPago FormaPago { get; set; }
 
         public IEnumerable<FacturaDetalle> FacturaDetalles { get; set; }
     }

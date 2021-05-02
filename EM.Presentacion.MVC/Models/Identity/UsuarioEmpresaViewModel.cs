@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using EM.Presentacion.MVC.Models.Empresa;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using EM.Presentacion.MVC.Models.Empresa;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Models.Identity
 {

@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EM.Servicio.FacturaDetalleDetalle
+﻿namespace EM.Servicio.FacturaDetalleDetalle
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
     using AutoMapper;
     using EM.Dominio.Repositorio.FacturaDetalle;
     using EM.IServicio.FacturaDetalle;
     using EM.IServicio.FacturaDetalle.Dto;
     using EM.ServicioBase.Dto;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public class FacturaDetalleServicio : IFacturaDetalleServicio
     {

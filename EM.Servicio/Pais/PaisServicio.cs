@@ -2,15 +2,15 @@
 
 namespace EM.Servicio.Pais
 {
+    using EM.Dominio.Repositorio.Pais;
+    using EM.IServicio.Pais;
+    using EM.IServicio.Pais.Dto;
+    using EM.ServicioBase.Dto;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
-    using EM.Dominio.Repositorio.Pais;
-    using EM.IServicio.Pais;
-    using EM.IServicio.Pais.Dto;
-    using EM.ServicioBase.Dto;
 
     public class PaisServicio : IPaisServicio
     {

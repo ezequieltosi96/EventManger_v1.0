@@ -1,11 +1,11 @@
 ﻿namespace EM.Infrestructura
 {
-    using Microsoft.EntityFrameworkCore;
-    using System.Linq;
     using Dominio.Entidades;
     using Dominio.Metadata;
     using EM.Dominio.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
     using static Aplicacion.CadenaConexion.CadenaConexion;
     public class DataContext : IdentityDbContext<AppUser, AppRole, string>
     {

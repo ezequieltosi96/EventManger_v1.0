@@ -1,8 +1,7 @@
-﻿using System;
+﻿using EM.ServicioBase.Dto;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using EM.IServicio.Actividad.Dto;
-using EM.ServicioBase.Dto;
 
 namespace EM.IServicio.Actividad
 {

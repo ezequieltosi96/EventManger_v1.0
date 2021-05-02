@@ -1,8 +1,8 @@
 ﻿namespace EM.Infrestructura
 {
+    using Dominio.Entidades;
     using System.Collections.Generic;
     using System.Linq;
-    using Dominio.Entidades;
 
     public static class SeedDb
     {

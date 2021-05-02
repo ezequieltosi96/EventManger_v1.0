@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using EM.Presentacion.MVC.Models.Cliente;
+﻿using EM.Presentacion.MVC.Models.Cliente;
 using EM.Presentacion.MVC.Models.Evento;
 using EM.Presentacion.MVC.Models.TipoEntrada;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EM.Presentacion.MVC.Models.Entrada
 {

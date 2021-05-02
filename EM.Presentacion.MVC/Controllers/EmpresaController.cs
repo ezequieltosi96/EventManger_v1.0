@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using EM.Dominio.Identity;
-using EM.IServicio.Empresa;
+﻿using EM.IServicio.Empresa;
 using EM.IServicio.Empresa.Dto;
 using EM.Presentacion.MVC.Helpers.Direccion;
 using EM.Presentacion.MVC.Helpers.Localidad;
@@ -12,7 +6,11 @@ using EM.Presentacion.MVC.Helpers.Pais;
 using EM.Presentacion.MVC.Helpers.Provincia;
 using EM.Presentacion.MVC.Models.Empresa;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EM.Presentacion.MVC.Controllers
 {

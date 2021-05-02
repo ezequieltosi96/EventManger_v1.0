@@ -1,12 +1,6 @@
 ﻿using EM.Presentacion.MVC.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using EM.Presentacion.MVC.Models.Localidad;
-using EM.Presentacion.MVC.Models.Pais;
 
 namespace EM.Presentacion.MVC.Controllers
 {

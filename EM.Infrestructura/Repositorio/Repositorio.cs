@@ -1,14 +1,14 @@
 ﻿namespace EM.Infrestructura.Repositorio
 {
+    using EM.Dominio.Repositorio;
+    using EM.DominioBase;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.Query;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
-    using EM.Dominio.Repositorio;
-    using EM.DominioBase;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.EntityFrameworkCore.Query;
 
     public class Repositorio<T> : IRepositorio<T> where T : EntidadBase
     {

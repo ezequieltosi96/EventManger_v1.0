@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using EM.Presentacion.MVC.Models.BenefinicioEntrada;
 
 namespace EM.Presentacion.MVC.Models.TipoEntrada
 {

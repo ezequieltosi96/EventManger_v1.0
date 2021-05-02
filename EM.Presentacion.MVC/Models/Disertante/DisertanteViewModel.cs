@@ -1,7 +1,7 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using EM.Presentacion.MVC.Models.Empresa;
+﻿using EM.Presentacion.MVC.Models.Empresa;
 using EM.Presentacion.MVC.Models.Persona;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace EM.Presentacion.MVC.Models.Disertante
 {

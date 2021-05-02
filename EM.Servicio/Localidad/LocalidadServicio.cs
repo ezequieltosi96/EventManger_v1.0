@@ -2,15 +2,15 @@
 
 namespace EM.Servicio.Localidad
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
     using AutoMapper;
     using EM.Dominio.Repositorio.Localidad;
     using EM.IServicio.Localidad;
     using EM.IServicio.Localidad.Dto;
     using EM.ServicioBase.Dto;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
     public class LocalidadServicio : ILocalidadServicio
     {
         private readonly ILocalidadRepositorio _localidadRepositorio;

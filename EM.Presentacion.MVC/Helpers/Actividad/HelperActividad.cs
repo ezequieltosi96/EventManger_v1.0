@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EM.IServicio.Actividad;
+﻿using EM.IServicio.Actividad;
 using EM.IServicio.Actividad.Dto;
 using EM.IServicio.Disertante.Dto;
 using EM.IServicio.Sala.Dto;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EM.Presentacion.MVC.Helpers.Actividad
 {
@@ -28,7 +28,7 @@ namespace EM.Presentacion.MVC.Helpers.Actividad
         public async Task<bool> ExistePorDisertanteYFecha(long disertanteId, DateTime fecha)
         {
             var actividades =
-                (IEnumerable<ActividadDto>) await _actividadServicio.ObtenerPorDisertanteYFecha(disertanteId, fecha);
+                (IEnumerable<ActividadDto>)await _actividadServicio.ObtenerPorDisertanteYFecha(disertanteId, fecha);
 
             return actividades.Any();
         }
@@ -42,7 +42,7 @@ namespace EM.Presentacion.MVC.Helpers.Actividad
                 if (ExistePorSalaYFecha(sala.Id, fecha.Value).Result)
                 {
                     salas = salas.Where(s => s.Id != sala.Id);
-                }    
+                }
             }
 
             return salas;
@@ -63,6 +63,6 @@ namespace EM.Presentacion.MVC.Helpers.Actividad
             return disertantes;
         }
 
-        
+
     }
 }

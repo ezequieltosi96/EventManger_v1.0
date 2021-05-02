@@ -1,7 +1,7 @@
 ﻿namespace EM.IServicio.Actividad.Dto
 {
-    using System;
     using EM.ServicioBase.Dto;
+    using System;
 
     public class ActividadDto : DtoBase
     {

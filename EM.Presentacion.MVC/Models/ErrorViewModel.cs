@@ -1,5 +1,3 @@
-using System;
-
 namespace EM.Presentacion.MVC.Models
 {
     public class ErrorViewModel
