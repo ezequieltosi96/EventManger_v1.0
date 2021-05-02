@@ -49,8 +49,8 @@
                             @foreach (var facturaDetalle in Model.FacturaDetalles)
                             {
                                 <tr>
-                                    <td>@facturaDetalle.EntradaId</td>
-                                    <td>@facturaDetalle.EntradaId</td>
+                                    <td>@facturaDetalle.Entrada.TipoEntrada</td>
+                                    <td>@facturaDetalle.Entrada.Precio</td>
                                     <td>@facturaDetalle.Cantidad</td>
                                     <td style="margin-right: 38px;text-align:right !important;">@facturaDetalle.SubTotal</td>
                                 </tr>

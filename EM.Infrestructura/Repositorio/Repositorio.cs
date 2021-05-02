@@ -30,6 +30,19 @@
             await _context.SaveChangesAsync();
         }
 
+        public async Task<long> InsertarDevuelveId(T entidad)
+        {
+            if (entidad == null) throw new Exception("La entidad a insertar no puede ser NULL");
+
+            _context.Entry(entidad).State = EntityState.Added;
+
+            await _context.Set<T>().AddAsync(entidad);
+
+            await _context.SaveChangesAsync();
+
+            return entidad.Id;
+        }
+
         public async Task Actualizar(T entidad)
         {
             if (entidad == null) throw new Exception("La entidad a actualizar no puede ser NULL");

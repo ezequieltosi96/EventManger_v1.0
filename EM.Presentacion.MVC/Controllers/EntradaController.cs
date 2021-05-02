@@ -69,7 +69,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction("ListGeneric", new { eventoId = entradaDto.EventoId });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View(vm);
             }

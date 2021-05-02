@@ -68,5 +68,16 @@
 
             return dtos;
         }
+
+        public async Task<long> InsertarDevuelveId(DtoBase dtoBase)
+        {
+            var dto = (FacturaDto)dtoBase;
+
+            var factura = _mapper.Map<Dominio.Entidades.Factura>(dto);
+
+            await _facturaRepositorio.Insertar(factura);
+
+            return factura.Id;
+        }
     }
 }

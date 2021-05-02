@@ -1,4 +1,5 @@
-﻿using EM.Presentacion.MVC.Models.Factura;
+﻿using EM.Presentacion.MVC.Models.Entrada;
+using EM.Presentacion.MVC.Models.Factura;
 
 namespace EM.Presentacion.MVC.Models.FacturaDetalle
 {
@@ -14,6 +15,6 @@ namespace EM.Presentacion.MVC.Models.FacturaDetalle
 
         public FacturaViewModel Factura { get; set; }
 
-        //public EntradaViewModel Entrada { get; set; }
+        public EntradaViewModel Entrada { get; set; }
     }
 }

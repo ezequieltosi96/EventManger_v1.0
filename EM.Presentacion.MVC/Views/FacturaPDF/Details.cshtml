@@ -49,8 +49,8 @@
                             @foreach (var facturaDetalle in Model.FacturaDetalles)
                             {
                                 <tr>
-                                    <td>@facturaDetalle.EntradaId</td>
-                                    <td>@facturaDetalle.EntradaId</td>
+                                    <td>@facturaDetalle.Entrada.TipoEntrada.Nombre</td>
+                                    <td>@facturaDetalle.Entrada.Precio</td>
                                     <td>@facturaDetalle.Cantidad</td>
                                     <td style="text-align:right!important;">@facturaDetalle.SubTotal</td>
                                 </tr>
@@ -67,4 +67,7 @@
 </div>
 <div>
     @Html.ActionLink("Imprimir", "Imprimir", "FacturaPDF", new { id = @Model.Id})
+</div>
+<div>
+    @Html.ActionLink("CrearFactura", "Alta", "FacturaPDF", new { entradaId = 2 , formaPagoId =  2})
 </div>

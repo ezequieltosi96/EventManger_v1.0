@@ -1,8 +1,12 @@
 ﻿using EM.IServicio.Factura;
 using EM.IServicio.Factura.Dto;
+using EM.IServicio.FacturaDetalle;
+using EM.IServicio.FacturaDetalle.Dto;
 using EM.Presentacion.MVC.Helpers.Cliente;
 using EM.Presentacion.MVC.Helpers.Empresa;
+using EM.Presentacion.MVC.Helpers.Entrada;
 using EM.Presentacion.MVC.Helpers.FormaPago;
+using EM.Presentacion.MVC.Models.Entrada;
 using EM.Presentacion.MVC.Models.Factura;
 using EM.Presentacion.MVC.Models.FacturaDetalle;
 using Microsoft.AspNetCore.Authorization;
@@ -18,15 +22,19 @@ namespace EM.Presentacion.MVC.Controllers
     public class FacturaPDFController : Controller
     {
         private readonly IFacturaServicio _facturaServicio;
+        private readonly IFacturaDetalleServicio _facturadetalleServicio;
         private readonly IHelperEmpresa _helperEmpresa;
         private readonly IHelperCliente _helperCliente;
         private readonly IHelperFormaPago _helperFormaPago;
-        public FacturaPDFController(IFacturaServicio facturaServicio, IHelperEmpresa helperEmpresa, IHelperCliente helperCliente, IHelperFormaPago helperFormaPago)
+        private readonly IHelperEntrada _helperEntrada;
+        public FacturaPDFController(IFacturaServicio facturaServicio, IHelperEmpresa helperEmpresa, IHelperCliente helperCliente, IHelperFormaPago helperFormaPago, IHelperEntrada helperEntrada, IFacturaDetalleServicio facturaDetalleServicio)
         {
             _facturaServicio = facturaServicio;
             _helperEmpresa = helperEmpresa;
             _helperCliente = helperCliente;
             _helperFormaPago = helperFormaPago;
+            _helperEntrada = helperEntrada;
+            _facturadetalleServicio = facturaDetalleServicio;
         }
 
         [Authorize(Roles = "Admin, Empresa")]
@@ -57,7 +65,7 @@ namespace EM.Presentacion.MVC.Controllers
             {
                 var dto = (FacturaDto)await _facturaServicio.Obtener(id);
 
-                var model = new FacturaViewModel()
+                 var model = new FacturaViewModel()
                 {
                     Id = dto.Id,
                     ClienteId = dto.ClienteId,
@@ -70,9 +78,10 @@ namespace EM.Presentacion.MVC.Controllers
                     FacturaDetalles = dto.FacturaDetalles.Select(d => new FacturaDetalleViewModel()
                     {
                         FacturaId = d.FacturaId,
-                        EntradaId = d.EntradaId,
+                        EntradaId = d.EntradaId,                        
                         Cantidad = d.Cantidad,
-                        SubTotal = d.SubTotal
+                        SubTotal = d.SubTotal,
+                        Entrada = _helperEntrada.ObtenerEntrada(d.EntradaId).Result
                     }),
                     Cliente = _helperCliente.ObtenerNombreCliente(dto.ClienteId).Result,
                     Empresa = _helperEmpresa.ObtenerEmpresa(dto.EmpresaId).Result,
@@ -106,7 +115,8 @@ namespace EM.Presentacion.MVC.Controllers
                         FacturaId = d.FacturaId,
                         EntradaId = d.EntradaId,
                         Cantidad = d.Cantidad,
-                        SubTotal = d.SubTotal
+                        SubTotal = d.SubTotal,
+                        Entrada = _helperEntrada.ObtenerEntrada(d.EntradaId).Result
                     }),
                     Cliente = _helperCliente.ObtenerNombreCliente(dto.ClienteId).Result,
                     Empresa = _helperEmpresa.ObtenerEmpresa(dto.EmpresaId).Result,
@@ -123,6 +133,31 @@ namespace EM.Presentacion.MVC.Controllers
         public IActionResult PDF(FacturaViewModel model)
         {
             return View(model);
+        }
+
+        public async Task<ActionResult> Alta(long entradaId, long formaPagoId)
+        {
+            var entrada = await _helperEntrada.ObtenerEntrada(entradaId);
+            var evento = entrada.Evento;
+            var factura = new FacturaDto()
+            {
+                ClienteId = (long)entrada.ClienteId,
+                EmpresaId = evento.EmpresaId,
+                FormaPagoId = formaPagoId,
+                Fecha = DateTime.Today,
+                TipoFactura = Dominio.Enum.TipoFactura.B,
+                Total = entrada.Precio
+            };
+            long facturaId = await _facturaServicio.InsertarDevuelveId(factura);
+            var facturaDetalle = new FacturaDetalleDto()
+            {
+                Cantidad = 1,
+                EntradaId = entradaId,
+                FacturaId = facturaId,
+                SubTotal = entrada.Precio
+            };
+            await _facturadetalleServicio.Insertar(facturaDetalle);
+            return RedirectToAction("Imprimir", "FacturaPDF", new { @id = facturaId }) ;
         }
     }
 }
