@@ -7,6 +7,8 @@ namespace EM.Presentacion.MVC.Helpers.Cliente
     {
         Task<bool> ExisteCliente(string dni);
 
+        Task<bool> ExisteCliente(string dni, string email);
+
         Task<bool> NuevoCliente(ClienteViewModel model);
 
         Task<ClienteViewModel> ObtenerClienteViewModelPorEmail(string email);

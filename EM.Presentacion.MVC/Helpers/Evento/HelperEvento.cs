@@ -33,5 +33,10 @@ namespace EM.Presentacion.MVC.Helpers.Evento
 
             return model;
         }
+
+        public async Task ActualizarCupoDisponible(long eventoId, int cantidad)
+        {
+            await _eventoServicio.ActualizarCupoDisponible(eventoId, cantidad);
+        }
     }
 }

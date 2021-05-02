@@ -95,5 +95,25 @@ namespace EM.Servicio.Cliente
 
             return dto;
         }
+
+        public async Task<bool> ExisteClientePorDniEmail(string dni, string email)
+        {
+            Expression<Func<Dominio.Entidades.Cliente, bool>> filtro = x => x.Dni.Equals(dni) || x.Email.Equals(email);
+
+            var clientes = await _clienteRepositorio.ObtenerFiltrado(filtro);
+
+            return clientes.Any();
+        }
+
+        public async Task<long> InsertarDevuelveId(DtoBase dto)
+        {
+            var clienteDto = (ClienteDto)dto;
+
+            var cliente = _mapper.Map<Dominio.Entidades.Cliente>(clienteDto);
+
+            await _clienteRepositorio.Insertar(cliente);
+
+            return cliente.Id;
+        }
     }
 }

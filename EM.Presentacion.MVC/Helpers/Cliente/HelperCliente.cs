@@ -21,6 +21,13 @@ namespace EM.Presentacion.MVC.Helpers.Cliente
             return existe;
         }
 
+        public async Task<bool> ExisteCliente(string dni, string email)
+        {
+            var existe = await _clienteServicio.ExisteClientePorDniEmail(dni, email);
+
+            return existe;
+        }
+
         public async Task<bool> NuevoCliente(ClienteViewModel model)
         {
             var dto = new ClienteDto()

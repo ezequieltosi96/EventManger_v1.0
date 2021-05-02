@@ -5,8 +5,6 @@ namespace EM.Presentacion.MVC.Models.FormaPagoTarjeta
 {
     public class FormaPagoTarjetaViewModel : FormaPagoViewModel
     {
-        public TipoTarjeta TipoTarjeta { get; set; }
-
         public string NumeroTarjeta { get; set; }
 
         public int MesExp { get; set; }
@@ -17,14 +15,7 @@ namespace EM.Presentacion.MVC.Models.FormaPagoTarjeta
 
         public string DireccionFacturacion { get; set; }
 
-        public string DireccionFacturacion2 { get; set; }
-
-        public long PaisId { get; set; }
-
         public long CodigoPostal { get; set; }
 
-        public int NumeroPagos { get; set; }
-
-        public decimal SubTotalCuota { get; set; }
     }
 }

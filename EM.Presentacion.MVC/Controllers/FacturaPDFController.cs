@@ -16,6 +16,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EM.Presentacion.MVC.Models.Cliente;
+using EM.Presentacion.MVC.Models.FormaPagoTarjeta;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -65,7 +67,7 @@ namespace EM.Presentacion.MVC.Controllers
             {
                 var dto = (FacturaDto)await _facturaServicio.Obtener(id);
 
-                 var model = new FacturaViewModel()
+                var model = new FacturaViewModel()
                 {
                     Id = dto.Id,
                     ClienteId = dto.ClienteId,
@@ -78,7 +80,7 @@ namespace EM.Presentacion.MVC.Controllers
                     FacturaDetalles = dto.FacturaDetalles.Select(d => new FacturaDetalleViewModel()
                     {
                         FacturaId = d.FacturaId,
-                        EntradaId = d.EntradaId,                        
+                        EntradaId = d.EntradaId,
                         Cantidad = d.Cantidad,
                         SubTotal = d.SubTotal,
                         Entrada = _helperEntrada.ObtenerEntrada(d.EntradaId).Result
@@ -122,6 +124,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Empresa = _helperEmpresa.ObtenerEmpresa(dto.EmpresaId).Result,
                     FormaPago = _helperFormaPago.ObtenerFormaPago(dto.FormaPagoId).Result,
                 };
+
                 return new ViewAsPdf("PDF", model);
             }
             catch (Exception)
@@ -139,16 +142,19 @@ namespace EM.Presentacion.MVC.Controllers
         {
             var entrada = await _helperEntrada.ObtenerEntrada(entradaId);
             var evento = entrada.Evento;
+
             var factura = new FacturaDto()
             {
-                ClienteId = (long)entrada.ClienteId,
+                ClienteId = entrada.ClienteId.Value,
                 EmpresaId = evento.EmpresaId,
                 FormaPagoId = formaPagoId,
                 Fecha = DateTime.Today,
                 TipoFactura = Dominio.Enum.TipoFactura.B,
                 Total = entrada.Precio
             };
+
             long facturaId = await _facturaServicio.InsertarDevuelveId(factura);
+
             var facturaDetalle = new FacturaDetalleDto()
             {
                 Cantidad = 1,
@@ -156,8 +162,37 @@ namespace EM.Presentacion.MVC.Controllers
                 FacturaId = facturaId,
                 SubTotal = entrada.Precio
             };
+
             await _facturadetalleServicio.Insertar(facturaDetalle);
-            return RedirectToAction("Imprimir", "FacturaPDF", new { @id = facturaId }) ;
+
+            return RedirectToAction("Imprimir", "FacturaPDF", new { @id = facturaId });
+        }
+
+        public async Task<IActionResult> AltaFactura(long clienteId, long formaPagoId, long entradaId, int cantidad)
+        {
+            var entrada = await _helperEntrada.ObtenerEntrada(entradaId);
+
+            var factura = new FacturaDto()
+            {
+                ClienteId = clienteId,
+                EmpresaId = entrada.EventoId,
+                FormaPagoId = formaPagoId,
+                Fecha = DateTime.Now,
+                TipoFactura = Dominio.Enum.TipoFactura.B,
+                Total = cantidad * entrada.Precio
+            };
+            long facturaId = await _facturaServicio.InsertarDevuelveId(factura);
+
+            var facturaDetalle = new FacturaDetalleDto()
+            {
+                Cantidad = cantidad,
+                EntradaId = entrada.Id,
+                FacturaId = facturaId,
+                SubTotal = cantidad * entrada.Precio
+            };
+            await _facturadetalleServicio.Insertar(facturaDetalle);
+
+            return RedirectToAction("Imprimir", "FacturaPDF", new { id = facturaId });
         }
     }
 }

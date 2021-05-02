@@ -137,5 +137,14 @@ namespace EM.Servicio.Evento
 
             return eventos.Any();
         }
+
+        public async Task ActualizarCupoDisponible(long eventoId, int cantidad)
+        {
+            var evento = (EventoDto)await Obtener(eventoId);
+
+            evento.CupoDisponible -= cantidad;
+
+            await Modificar(evento);
+        }
     }
 }

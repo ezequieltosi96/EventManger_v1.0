@@ -10,8 +10,6 @@
         {
             builder.ToTable("FormaPagoTarjeta");
 
-            builder.Property(f => f.TipoTarjeta)
-                .IsRequired();
             builder.Property(f => f.NumeroTarjeta)
                 .HasMaxLength(16)
                 .IsRequired();
@@ -23,11 +21,7 @@
                 .IsRequired();
             builder.Property(f => f.DireccionFacturacion)
                 .IsRequired();
-            builder.Property(f => f.DireccionFacturacion2)
-               .IsRequired();
-            builder.Property(f => f.NumeroPagos)
-               .IsRequired();
-            builder.Property(f => f.SubTotalCuota)
+            builder.Property(f => f.CodigoPostal)
                .IsRequired();
         }
     }

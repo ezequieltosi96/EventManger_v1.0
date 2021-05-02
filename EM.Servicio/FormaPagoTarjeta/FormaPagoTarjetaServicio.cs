@@ -64,5 +64,16 @@
 
             return dtos;
         }
+
+        public async Task<long> InsertarDevuelveId(DtoBase dto)
+        {
+            var fptDto = (FormaPagoTarjetaDto)dto;
+
+            var formaPagoTarjeta = _mapper.Map<Dominio.Entidades.FormaPagoTarjeta>(fptDto);
+
+            await _formaPagoTarjetaRepositorio.Insertar(formaPagoTarjeta);
+
+            return formaPagoTarjeta.Id;
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace EM.IServicio.Evento
         Task<IEnumerable<DtoBase>> Obtener(string cadenaBuscar, bool mostrarTodos = true, bool mostrarPasados = true);
 
         Task<bool> Existe(EventoDto dto);
+
+        Task ActualizarCupoDisponible(long eventoId, int cantidad);
     }
 }

@@ -33,7 +33,7 @@ namespace EM.Presentacion.MVC.Controllers
             _helperPais = helperPais;
         }
 
-        public IActionResult Register()
+        public IActionResult Register(long? eventoId = null)
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -41,17 +41,19 @@ namespace EM.Presentacion.MVC.Controllers
             }
             ViewBag.ClienteDuplicado = false;
             ViewBag.EmailRequerido = false;
+            ViewBag.EventoId = eventoId;
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(UsuarioClienteViewModel vm)
+        public async Task<IActionResult> Register(UsuarioClienteViewModel vm, long? eventoId = null)
         {
             try
             {
                 ViewBag.ClienteDuplicado = false;
                 ViewBag.EmailRequerido = false;
+                ViewBag.EventoId = eventoId;
                 if (!ModelState.IsValid)
                 {
                     if (vm.Cliente.Email == null) ViewBag.EmailRequerido = true;
@@ -109,6 +111,11 @@ namespace EM.Presentacion.MVC.Controllers
                 if (!result.Succeeded)
                 {
                     throw new Exception("Error al inicir sesion.");
+                }
+
+                if (eventoId.HasValue)
+                {
+                    return RedirectToAction("SeleccionarEntradas", "Pago", new { eventoId = eventoId.Value });
                 }
 
                 return RedirectToAction("Index", "Home");

@@ -1,7 +1,132 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model EM.Presentacion.MVC.Models.Pago.PagoViewModel
 @{
+    ViewData["Title"] = "Pago";
+    Layout = "_Layout";
 }
 
-<h1>Seleccionar entradas</h1>
+<h1 class="text-center">Pago</h1>
+
+<div class="text-center">
+    @if (ViewBag.DatosInvalidos)
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Error al cargar los datos.
+        </div>
+    }
+    @if (ViewBag.EntradaInsuficiente)
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Cantidad de entradas disponibles insuficiente.
+        </div>
+    }
+    @if (ViewBag.ClienteExistente)
+    {
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            Los datos personales pertenecen a un usuario existente.
+            <a asp-controller="Account" asp-action="LogIn" asp-route-eventoId="@ViewBag.EventoId">Iniciar Sesion</a>
+        </div>
+    }
+</div>
+
+<div class="row">
+    <div class="col-md-4 col-md-offset-4">
+        <form asp-action="SeleccionarEntradas" asp-route-eventoId="@ViewBag.EventoId">
+            <div asp-validation-summary="ModelOnly" class="text-danger">@ViewData["Error"]</div>
+
+            <h3 class="text-center">Datos de entrada</h3>
+
+            <div class="form-group">
+                <label asp-for="EntradaId" class="control-label"></label>
+                <select asp-for="EntradaId" asp-items="Model.EntradasGenericas" class="form-control">
+                    <option value="">Seleccionar Entrada</option>
+                </select>
+                <span asp-validation-for="EntradaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <h3 class="text-center">Datos personales</h3>
+
+                <div class="form-group">
+                    <label asp-for="Cliente.Nombre" class="control-label"></label>
+                    <input asp-for="Cliente.Nombre" class="form-control" />
+                    <span asp-validation-for="Cliente.Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cliente.Apellido" class="control-label"></label>
+                    <input asp-for="Cliente.Apellido" class="form-control" />
+                    <span asp-validation-for="Cliente.Apellido" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cliente.Dni" class="control-label"></label>
+                    <input asp-for="Cliente.Dni" class="form-control" />
+                    <span asp-validation-for="Cliente.Dni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cliente.Email" class="control-label"></label>
+                    <input asp-for="Cliente.Email" class="form-control" />
+                    <span asp-validation-for="Cliente.Email" class="text-danger"></span>
+                </div>
+            }
+            else
+            {
+                <input type="hidden" asp-for="Cliente.Id" />
+                <input type="hidden" asp-for="Cliente.Nombre" />
+                <input type="hidden" asp-for="Cliente.Apellido" />
+                <input type="hidden" asp-for="Cliente.Dni" />
+                <input type="hidden" asp-for="Cliente.Email" />
+            }
+
+
+            <h3 class="text-center">Datos de tarjeta</h3>
+
+            <div class="form-group">
+                <label asp-for="FormaPago.NumeroTarjeta" class="control-label"></label>
+                <input asp-for="FormaPago.NumeroTarjeta" class="form-control" />
+                <span asp-validation-for="FormaPago.NumeroTarjeta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago.Nombre" class="control-label"></label>
+                <input asp-for="FormaPago.Nombre" class="form-control" />
+                <span asp-validation-for="FormaPago.Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago.MesExp" class="control-label"></label>
+                <input asp-for="FormaPago.MesExp" class="form-control" />
+                <span asp-validation-for="FormaPago.MesExp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago.AnioExp" class="control-label"></label>
+                <input asp-for="FormaPago.AnioExp" class="form-control" />
+                <span asp-validation-for="FormaPago.AnioExp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago.CodigoSeguridad" class="control-label"></label>
+                <input asp-for="FormaPago.CodigoSeguridad" class="form-control" />
+                <span asp-validation-for="FormaPago.CodigoSeguridad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago.DireccionFacturacion" class="control-label"></label>
+                <input asp-for="FormaPago.DireccionFacturacion" class="form-control" />
+                <span asp-validation-for="FormaPago.DireccionFacturacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormaPago.CodigoPostal" class="control-label"></label>
+                <input asp-for="FormaPago.CodigoPostal" class="form-control" />
+                <span asp-validation-for="FormaPago.CodigoPostal" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Realizar Pago" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
