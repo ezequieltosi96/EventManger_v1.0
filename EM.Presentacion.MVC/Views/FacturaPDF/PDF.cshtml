@@ -42,14 +42,14 @@
                                 <th>Entrada</th>
                                 <th>Precio Unitario</th>
                                 <th>Cantidad</th>
-                                <th>SubTotal</th>
+                                <th style="text-align:right!important;">SubTotal</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var facturaDetalle in Model.FacturaDetalles)
                             {
                                 <tr>
-                                    <td>@facturaDetalle.Entrada.TipoEntrada</td>
+                                    <td>@facturaDetalle.Entrada.Evento.Nombre - Entrada @facturaDetalle.Entrada.TipoEntrada.Nombre</td>
                                     <td>@facturaDetalle.Entrada.Precio</td>
                                     <td>@facturaDetalle.Cantidad</td>
                                     <td style="margin-right: 38px;text-align:right !important;">@facturaDetalle.SubTotal</td>
