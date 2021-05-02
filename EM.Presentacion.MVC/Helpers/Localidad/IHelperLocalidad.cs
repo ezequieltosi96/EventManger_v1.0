@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using EM.Presentacion.MVC.Models.Localidad;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Helpers.Localidad
 {

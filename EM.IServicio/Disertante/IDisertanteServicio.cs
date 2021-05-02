@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EM.ServicioBase.Dto;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using EM.ServicioBase.Dto;
 
 namespace EM.IServicio.Disertante
 {

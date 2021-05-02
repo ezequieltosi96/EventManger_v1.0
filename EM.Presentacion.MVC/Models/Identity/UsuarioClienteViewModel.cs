@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using EM.Presentacion.MVC.Models.Cliente;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using EM.Presentacion.MVC.Models.Cliente;
 
 namespace EM.Presentacion.MVC.Models.Identity
 {

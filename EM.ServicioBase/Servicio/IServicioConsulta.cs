@@ -1,8 +1,8 @@
 ﻿namespace EM.ServicioBase.Servicio
 {
+    using EM.ServicioBase.Dto;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using EM.ServicioBase.Dto;
 
     public interface IServicioConsulta
     {

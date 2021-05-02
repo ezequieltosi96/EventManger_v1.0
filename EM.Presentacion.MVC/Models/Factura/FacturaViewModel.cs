@@ -37,9 +37,9 @@ namespace EM.Presentacion.MVC.Models.Factura
         public EmpresaViewModel Empresa { get; set; }
 
         public FormaPagoViewModel FormaPago { get; set; }
-        
+
         public IEnumerable<FacturaDetalleViewModel> FacturaDetalles { get; set; }
 
-        
+
     }
 }

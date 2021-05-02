@@ -1,7 +1,7 @@
 ﻿namespace EM.ServicioBase.Servicio
 {
-    using System.Threading.Tasks;
     using EM.ServicioBase.Dto;
+    using System.Threading.Tasks;
 
     public interface IServicioAbm
     {

@@ -1,14 +1,14 @@
 ﻿namespace EM.Servicio.Persona
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
     using AutoMapper;
     using EM.Dominio.Repositorio.Persona;
     using EM.IServicio.Persona;
     using EM.IServicio.Persona.Dto;
     using EM.ServicioBase.Dto;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public class PersonaServicio : IPersonaServicio
     {

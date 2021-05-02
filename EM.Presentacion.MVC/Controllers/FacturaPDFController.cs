@@ -38,7 +38,7 @@ namespace EM.Presentacion.MVC.Controllers
 
             var models = dtos.Select(d => new FacturaViewModel()
             {
-                Id = d.Id,                
+                Id = d.Id,
                 EstaEliminado = d.EliminadoStr,
                 Fecha = d.Fecha,
                 TipoFactura = d.TipoFactura,
@@ -56,7 +56,7 @@ namespace EM.Presentacion.MVC.Controllers
             try
             {
                 var dto = (FacturaDto)await _facturaServicio.Obtener(id);
-                
+
                 var model = new FacturaViewModel()
                 {
                     Id = dto.Id,
@@ -117,7 +117,7 @@ namespace EM.Presentacion.MVC.Controllers
             catch (Exception)
             {
                 return RedirectToAction(nameof(Index));
-            }          
+            }
         }
 
         public IActionResult PDF(FacturaViewModel model)

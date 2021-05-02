@@ -1,15 +1,15 @@
 ﻿namespace EM.Servicio.Factura
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
     using AutoMapper;
     using EM.Dominio.Repositorio.Factura;
     using EM.IServicio.Factura;
     using EM.IServicio.Factura.Dto;
     using EM.ServicioBase.Dto;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public class FacturaServicio : IFacturaServicio
     {
@@ -62,7 +62,7 @@
             {
                 filtro = x => x.EstaEliminado || !x.EstaEliminado;
             }
-            var facturas = await _facturaRepositorio.ObtenerFiltrado(filtro,null, f => f.Include(e => e.FacturaDetalles));
+            var facturas = await _facturaRepositorio.ObtenerFiltrado(filtro, null, f => f.Include(e => e.FacturaDetalles));
 
             var dtos = _mapper.Map<IEnumerable<FacturaDto>>(facturas);
 

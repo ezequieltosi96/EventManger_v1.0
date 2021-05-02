@@ -1,8 +1,8 @@
 ﻿namespace EM.Dominio.Entidades
 {
+    using EM.DominioBase;
     using System;
     using System.Collections.Generic;
-    using EM.DominioBase;
 
     public class Evento : EntidadBase
     {

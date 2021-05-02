@@ -1,14 +1,14 @@
 ﻿namespace EM.Servicio.FormaPagoTarjetaTarjeta
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
     using AutoMapper;
     using EM.Dominio.Repositorio.FormaPagoTarjeta;
     using EM.IServicio.FormaPagoTarjeta;
     using EM.IServicio.FormaPagoTarjeta.Dto;
     using EM.ServicioBase.Dto;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public class FormaPagoTarjetaServicio : IFormaPagoTarjetaServicio
     {

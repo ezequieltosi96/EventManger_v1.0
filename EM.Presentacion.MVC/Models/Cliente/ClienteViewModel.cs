@@ -1,6 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
-using EM.Dominio.Identity;
-using EM.Presentacion.MVC.Models.Persona;
+﻿using EM.Presentacion.MVC.Models.Persona;
+using System.ComponentModel.DataAnnotations;
 
 namespace EM.Presentacion.MVC.Models.Cliente
 {

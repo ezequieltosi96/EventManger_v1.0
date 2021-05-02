@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using EM.Aplicacion.IoC;
+﻿using EM.Aplicacion.IoC;
 using EM.Dominio.Identity;
 using EM.Infrestructura;
 using EM.Presentacion.MVC.Helpers.RegistrarServicios;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Rotativa.AspNetCore;
 
 namespace EM.Presentacion.MVC

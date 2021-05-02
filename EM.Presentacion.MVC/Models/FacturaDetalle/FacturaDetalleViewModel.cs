@@ -1,8 +1,4 @@
 ﻿using EM.Presentacion.MVC.Models.Factura;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EM.Presentacion.MVC.Models.FacturaDetalle
 {

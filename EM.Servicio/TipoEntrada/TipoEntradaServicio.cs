@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace EM.Servicio.TipoEntrada
+﻿namespace EM.Servicio.TipoEntrada
 {
-    using System.Linq.Expressions;
     using AutoMapper;
     using EM.Dominio.Repositorio.TipoEntrada;
+    using EM.IServicio.TipoEntrada;
     using EM.IServicio.TipoEntrada.Dto;
+    using EM.ServicioBase.Dto;
     using System;
     using System.Collections.Generic;
+    using System.Linq.Expressions;
     using System.Threading.Tasks;
-    using EM.IServicio.TipoEntrada;
-    using EM.ServicioBase.Dto;
 
     public class TipoEntradaServicio : ITipoEntradaServicio
     {

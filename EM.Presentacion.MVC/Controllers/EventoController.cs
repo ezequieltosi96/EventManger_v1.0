@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using EM.IServicio.Evento;
+﻿using EM.IServicio.Evento;
 using EM.IServicio.Evento.Dto;
 using EM.Presentacion.MVC.Helpers.Actividad;
 using EM.Presentacion.MVC.Helpers.Disertante;
@@ -13,6 +8,11 @@ using EM.Presentacion.MVC.Helpers.Sala;
 using EM.Presentacion.MVC.Models.Actividad;
 using EM.Presentacion.MVC.Models.Evento;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EM.Presentacion.MVC.Controllers
 {

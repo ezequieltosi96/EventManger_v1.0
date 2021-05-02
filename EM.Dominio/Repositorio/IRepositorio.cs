@@ -1,12 +1,12 @@
 ﻿namespace EM.Dominio.Repositorio
 {
+    using EM.DominioBase;
+    using Microsoft.EntityFrameworkCore.Query;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
     using System.Threading.Tasks;
-    using EM.DominioBase;
-    using Microsoft.EntityFrameworkCore.Query;
 
     public interface IRepositorio<T> where T : EntidadBase
     {

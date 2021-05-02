@@ -2,16 +2,16 @@
 
 namespace EM.Servicio.Evento
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Threading.Tasks;
     using AutoMapper;
     using EM.Dominio.Repositorio.Evento;
     using EM.IServicio.Evento;
     using EM.IServicio.Evento.Dto;
     using EM.ServicioBase.Dto;
     using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq.Expressions;
+    using System.Threading.Tasks;
 
     public class EventoServicio : IEventoServicio
     {

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EM.IServicio.Establecimiento.Dto;
+﻿using System.Threading.Tasks;
 
 namespace EM.IServicio.Establecimiento
 {

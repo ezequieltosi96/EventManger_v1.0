@@ -1,7 +1,7 @@
 ﻿namespace EM.Dominio.Entidades
 {
-    using System;
     using EM.DominioBase;
+    using System;
 
     public class Actividad : EntidadBase
     {

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Models.Localidad
 {

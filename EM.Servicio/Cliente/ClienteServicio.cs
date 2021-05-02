@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using EM.Dominio.Repositorio.Cliente;
 using EM.IServicio.Cliente;
 using EM.IServicio.Cliente.Dto;
 using EM.ServicioBase.Dto;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 
 namespace EM.Servicio.Cliente
 {

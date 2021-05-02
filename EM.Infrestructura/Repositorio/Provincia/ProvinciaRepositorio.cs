@@ -1,7 +1,7 @@
 ﻿namespace EM.Infrestructura.Repositorio.Provincia
 {
-    using EM.Dominio.Repositorio.Provincia;
     using Dominio.Entidades;
+    using EM.Dominio.Repositorio.Provincia;
 
     public class ProvinciaRepositorio : Repositorio<Provincia>, IProvinciaRepositorio
     {

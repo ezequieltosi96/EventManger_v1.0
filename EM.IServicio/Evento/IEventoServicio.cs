@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using EM.IServicio.Evento.Dto;
+﻿using EM.IServicio.Evento.Dto;
 using EM.ServicioBase.Dto;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EM.IServicio.Evento
 {

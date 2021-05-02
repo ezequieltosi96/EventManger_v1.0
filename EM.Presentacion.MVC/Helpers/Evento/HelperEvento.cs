@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using EM.IServicio.Evento;
+﻿using EM.IServicio.Evento;
 using EM.IServicio.Evento.Dto;
-using EM.Presentacion.MVC.Models.Actividad;
 using EM.Presentacion.MVC.Models.Evento;
+using System.Threading.Tasks;
 
 namespace EM.Presentacion.MVC.Helpers.Evento
 {
