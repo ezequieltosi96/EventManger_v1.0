@@ -374,7 +374,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Descripcion = evento.Descripcion,
                     Fecha = evento.Fecha,
                     EmpresaId = evento.EmpresaId,
-                    EstablecimientoId = evento.EstalecimientoId,
+                    EstablecimientoId = evento.EstablecimientoId,
                     Actividades = evento.Actividades.Select(a => new ActividadViewModel()
                     {
                         Id = a.Id,
@@ -388,7 +388,7 @@ namespace EM.Presentacion.MVC.Controllers
                         Sala = _helperSala.ObtenerSala(a.SalaId).Result
                     }),
                     Empresa = _helperEmpresa.ObtenerEmpresa(evento.EmpresaId).Result,
-                    Establecimiento = _helperEstablecimiento.ObtenerEstablecimiento(evento.EstalecimientoId).Result,
+                    Establecimiento = _helperEstablecimiento.ObtenerEstablecimiento(evento.EstablecimientoId).Result,
                 };
 
                 return View(model);

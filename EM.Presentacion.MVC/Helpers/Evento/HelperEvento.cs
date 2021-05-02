@@ -31,7 +31,7 @@ namespace EM.Presentacion.MVC.Helpers.Evento
                 Descripcion = evento.Descripcion,
                 Fecha = evento.Fecha,
                 EmpresaId = evento.EmpresaId,
-                EstablecimientoId = evento.EstalecimientoId
+                EstablecimientoId = evento.EstablecimientoId
             };
 
             return model;

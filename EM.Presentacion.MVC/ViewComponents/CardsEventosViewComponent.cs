@@ -32,7 +32,7 @@ namespace EM.Presentacion.MVC.ViewComponents
                 Nombre = e.Nombre,
                 Descripcion = e.Descripcion,
                 Cupo = e.Cupo,
-                EstablecimientoId = e.EstalecimientoId,
+                EstablecimientoId = e.EstablecimientoId,
                 EmpresaId = e.EmpresaId,
                 Fecha = e.Fecha,
             }).ToList();
