@@ -171,11 +171,11 @@ namespace EM.Presentacion.MVC.Controllers
         public async Task<IActionResult> AltaFactura(long clienteId, long formaPagoId, long entradaId, int cantidad)
         {
             var entrada = await _helperEntrada.ObtenerEntrada(entradaId);
-
+            var evento = entrada.Evento;
             var factura = new FacturaDto()
             {
                 ClienteId = clienteId,
-                EmpresaId = entrada.EventoId,
+                EmpresaId = evento.EmpresaId,
                 FormaPagoId = formaPagoId,
                 Fecha = DateTime.Now,
                 TipoFactura = Dominio.Enum.TipoFactura.B,
