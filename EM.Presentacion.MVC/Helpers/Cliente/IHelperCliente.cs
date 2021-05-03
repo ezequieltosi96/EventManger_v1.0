@@ -14,6 +14,7 @@ namespace EM.Presentacion.MVC.Helpers.Cliente
         Task<ClienteViewModel> ObtenerClienteViewModelPorEmail(string email);
 
         Task<ClienteViewModel> Obtener(long clienteId);
+        Task<ClienteViewModel> Obtener(string dni);
 
         Task<ClienteViewModel> ObtenerNombreCliente(long id);
     }

@@ -7,6 +7,10 @@
 
         public long BeneficioEntradaId { get; set; }
 
+        public long EmpresaId { get; set; }
+
+        public virtual Empresa Empresa { get; set; }
+
         public virtual BeneficioEntrada BeneficiosEntradas { get; set; }
     }
 }

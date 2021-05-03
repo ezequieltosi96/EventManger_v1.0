@@ -64,8 +64,13 @@ namespace EM.Presentacion.MVC.Controllers
                 var existeCliente = await _helperCliente.ExisteCliente(vm.Cliente.Dni);
                 if (existeCliente)
                 {
-                    ViewBag.ClienteDuplicado = true;
-                    throw new Exception("Cliente existente.");
+                    var cliente = await _helperCliente.Obtener(vm.Cliente.Dni);
+                    var clienteUser = await _userManager.FindByEmailAsync(cliente.Email);
+                    if (clienteUser != null)
+                    {
+                        ViewBag.ClienteDuplicado = true;
+                        throw new Exception("Cliente existente.");
+                    }
                 }
 
                 // validar el usuario

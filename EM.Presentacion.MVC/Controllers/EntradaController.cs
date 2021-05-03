@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EM.Presentacion.MVC.Helpers.Empresa;
+using Rotativa.AspNetCore;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -33,6 +35,7 @@ namespace EM.Presentacion.MVC.Controllers
         public async Task<IActionResult> CreateGeneric(long eventoId)
         {
             ViewBag.EventoId = eventoId;
+
             var tipos = await _helperTipoEntrada.PoblarSelect();
             // poblar el combo de tipo entrada
             var model = new EntradaViewModel()
@@ -163,7 +166,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 return RedirectToAction("ListGeneric", new { eventoId = entradaDto.EventoId });
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return View(vm);
             }
@@ -194,6 +197,34 @@ namespace EM.Presentacion.MVC.Controllers
             ViewBag.EventoId = eventoId;
             ViewBag.MostrarTodos = mostrarTodos;
             return View(models);
+        }
+
+        [Authorize(Roles = "Admin, Empresa, Cliente")]
+        public async Task<IActionResult> Details(long id, long eventoId)
+        {
+            try
+            {
+                var entrada = (EntradaDto)await _entradaServicio.Obtener(id);
+
+                var model = new EntradaViewModel()
+                {
+                    Id = entrada.Id,
+                    EstaEliminado = entrada.EliminadoStr,
+                    EventoId = entrada.EventoId,
+                    ClienteId = entrada.ClienteId.Value,
+                    Precio = entrada.Precio,
+                    TipoEntradaId = entrada.TipoEntradaId,
+                    Evento = await _helperEvento.Obtener(entrada.EventoId),
+                    Cliente = await _helperCliente.Obtener(entrada.ClienteId.Value),
+                    TipoEntrada = await _helperTipoEntrada.Obtener(entrada.TipoEntradaId)
+                };
+
+                return new ViewAsPdf("PDF", model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("List", new { eventoId });
+            }
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model EM.Presentacion.MVC.Models.Entrada.EntradaViewModel
+@{
+    ViewData["Title"] = "Entrada";
+    Layout = "~/Views/Shared/_LayoutNoNavBar.cshtml";
+}
+<head>
+    <link rel="stylesheet" href="/css/StyleSheet.css" />
+</head>
+<div id="pdfContainer" style="text-align:center;">
+    <div style="margin: 10px;padding: 10px;background-color: #d7b9ff;">
+        <div style="margin: 0px;padding: 1px;background-color: #ffffff;">
+            <div class="d-flex" style="padding: 0px;background-color: #cba2ff;margin: 2px;">
+                <table style="width:100%">
+                    <td style="width: 200px;height: 100px;">
+                        <div style="width: 200px;height: 100px;">
+                            <img style="width: 100%;height: 100%;" src="~/images/logo_2.png" />
+                        </div>
+                    </td>
+                    <td>
+                        <h3 class="text-left d-lg-flex my-auto justify-content-lg-start" style="font-weight:bold;">@Model.TipoEntrada.Nombre</h3>
+                        <p class="text-left d-lg-flex my-auto justify-content-lg-start">@Model.TipoEntrada.BeneficioEntradaNombre</p>
+                    </td>
+                    <td>
+                        <div class="flex-shrink-0 flex-fill mb-auto">
+                            <p class="text-right" style="margin-top: 0px;margin-right: 0px;margin-bottom: 0px;padding-right: 19px; font-weight: bold;">Evento: @Model.Evento.Nombre</p>
+                            <p class="text-right" style="margin-top: 0px;margin-right: 0px;margin-bottom: 0px;padding-right: 19px; font-weight: bold;">Organiza: @Model.Evento.Empresa.RazonSocial</p>
+                            <p class="text-right" style="margin-top: 0px;margin-right: 0px;margin-bottom: 0px;padding-right: 19px; font-weight: bold;">Acceso para: @Model.Cliente.ApyNom</p>
+                            <p class="text-right" style="margin-top: 0px;margin-right: 0px;margin-bottom: 0px;padding-right: 19px; font-weight: bold;">Establecimiento: @Model.Evento.Establecimiento.Nombre - @Model.Evento.Establecimiento.Direccion.Descripcion</p>
+                            <p class="text-right" style="margin-top: 0px;margin-right: 0px;margin-bottom: 0px;padding-right: 19px; font-weight: bold;">Ubicacion: @Model.Evento.Establecimiento.Direccion.Ubicacion</p>
+                        </div>
+                    </td>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
