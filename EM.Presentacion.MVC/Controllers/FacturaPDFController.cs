@@ -60,6 +60,31 @@ namespace EM.Presentacion.MVC.Controllers
 
             return View(models);
         }
+
+        [Authorize(Roles = "Admin, Empresa")]
+        public async Task<IActionResult> IndexEmpresa(long? empresaId = null,string cadenaBuscar = "", bool mostrarTodos = false)
+        {
+            if (cadenaBuscar == null) cadenaBuscar = "";
+            IEnumerable<FacturaDto> dtos;
+            var empresa = await _helperEmpresa.ObtenerEmpresaActual(User.Identity.Name);
+            empresaId = empresa.Id;
+            dtos = (IEnumerable<FacturaDto>)await _facturaServicio.ObtenerPorEmpresa(empresaId.Value,cadenaBuscar, mostrarTodos);
+
+            var models = dtos.Select(d => new FacturaViewModel()
+            {
+                Id = d.Id,
+                EstaEliminado = d.EliminadoStr,
+                Fecha = d.Fecha,
+                TipoFactura = d.TipoFactura,
+                Total = d.Total
+            }).ToList();
+
+            ViewBag.MostrarTodos = mostrarTodos;
+            ViewBag.CadenaBuscar = cadenaBuscar;
+
+            return View(models);
+        }
+
         [Authorize(Roles = "Admin, Empresa")]
         public async Task<IActionResult> Details(long id)
         {
