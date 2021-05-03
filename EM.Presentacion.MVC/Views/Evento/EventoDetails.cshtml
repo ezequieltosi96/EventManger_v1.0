@@ -27,13 +27,16 @@
     </div>
 
     <div class="evento-sidebar">
-        @if (User.Identity.IsAuthenticated)
+        @if (User.Identity.IsAuthenticated && User.IsInRole("Cliente"))
         {
             <a class="btn-big" asp-controller="Pago" asp-action="SeleccionarEntradas" asp-route-eventoId="@Model.Id">Adquirir Entrada</a>
         }
         else
         {
-            <a class="btn-big" asp-controller="Pago" asp-action="LoginOrContinue" asp-route-eventoId="@Model.Id">Adquirir Entrada</a>
+            if (!(User.IsInRole("Admin") || User.IsInRole("Empresa")))
+            {
+                <a class="btn-big" asp-controller="Pago" asp-action="LoginOrContinue" asp-route-eventoId="@Model.Id">Adquirir Entrada</a>
+            }
         }
         <p style="margin-top: 20px;">Cupos disponibles: @Model.CupoDisponible</p>
     </div>

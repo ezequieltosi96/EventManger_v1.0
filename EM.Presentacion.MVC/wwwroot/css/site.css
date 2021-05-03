@@ -186,6 +186,32 @@ body {
     cursor: pointer;
 }
 
+
+.form-evento {
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.form-input-evento {
+    width: 70%;
+    border: none;
+    border-bottom: 2px solid #101010;
+    margin: 1rem;
+}
+    .form-input-evento:focus {
+        border: none;
+        outline: none;
+        border-bottom: 2px solid #101010;
+    }
+
+.form-button-evento {
+    margin: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    background-color: #101010;
+}
+
+
 @media screen and (max-width: 610px) {
     .contenedor {
         flex-direction: column-reverse;

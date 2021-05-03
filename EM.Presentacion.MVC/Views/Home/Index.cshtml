@@ -5,7 +5,12 @@
 
 <h1 class="text-center" style="color: #101010;">Descubre nuestros eventos</h1>
 
+<form asp-action="Index" class="form-evento">
+    <input class="form-input-evento" name="cadenaBuscar" type="text" value="@ViewBag.CadenaBuscar" placeholder="Buscar eventos..." autocomplete="off"/>
+    <button class="form-button-evento" type="submit">Buscar</button>
+</form>
+
 <section>
-    @await Component.InvokeAsync("CardsEventos")
+    @await Component.InvokeAsync("CardsEventos", new { cadenaBuscar = ViewBag.CadenaBuscar })
 </section>
 

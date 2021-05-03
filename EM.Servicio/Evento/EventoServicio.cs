@@ -146,5 +146,15 @@ namespace EM.Servicio.Evento
 
             await Modificar(evento);
         }
+
+        // obtiene solo los eventos que tienen entradas asignadas a la venta
+        public async Task<IEnumerable<DtoBase>> ObtenerHome(string cadenaBuscar = "")
+        {
+            var eventos = await _eventoRepositorio.ObtenerEventosConEntradas(cadenaBuscar);
+
+            var dtos = _mapper.Map<IEnumerable<EventoDto>>(eventos);
+
+            return dtos;
+        }
     }
 }

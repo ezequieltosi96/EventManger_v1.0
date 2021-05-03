@@ -21,9 +21,11 @@ namespace EM.Presentacion.MVC.ViewComponents
             _eventoServicio = eventoServicio;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(string cadenaBuscar = "")
         {
-            var dtos = (IEnumerable<EventoDto>)await _eventoServicio.Obtener("", false, false);
+            if (cadenaBuscar == null)
+                cadenaBuscar = "";
+            var dtos = (IEnumerable<EventoDto>)await _eventoServicio.ObtenerHome(cadenaBuscar);
 
             var models = dtos.Select(e => new EventoViewModel()
             {

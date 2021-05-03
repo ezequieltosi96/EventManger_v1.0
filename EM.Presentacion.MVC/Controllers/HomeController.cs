@@ -8,6 +8,15 @@ namespace EM.Presentacion.MVC.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.CadenaBuscar = "";
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Index(string cadenaBuscar)
+        {
+            ViewBag.CadenaBuscar = cadenaBuscar;
             return View();
         }
 
