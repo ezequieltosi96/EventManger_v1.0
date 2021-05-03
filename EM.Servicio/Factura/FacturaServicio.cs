@@ -79,5 +79,20 @@
 
             return factura.Id;
         }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostrarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.Factura, bool>> filtro = x => x.EmpresaId == empresaId && !x.EstaEliminado;
+
+            if (mostrarTodos)
+            {
+                filtro = x => x.EmpresaId == empresaId && (x.EstaEliminado || !x.EstaEliminado);
+            }
+            var facturas = await _facturaRepositorio.ObtenerFiltrado(filtro, null, f => f.Include(e => e.FacturaDetalles));
+
+            var dtos = _mapper.Map<IEnumerable<FacturaDto>>(facturas);
+
+            return dtos;
+        }
     }
 }
