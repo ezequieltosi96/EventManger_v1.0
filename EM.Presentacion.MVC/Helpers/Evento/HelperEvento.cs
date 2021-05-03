@@ -2,16 +2,22 @@
 using EM.IServicio.Evento.Dto;
 using EM.Presentacion.MVC.Models.Evento;
 using System.Threading.Tasks;
+using EM.Presentacion.MVC.Helpers.Empresa;
+using EM.Presentacion.MVC.Helpers.Establecimiento;
 
 namespace EM.Presentacion.MVC.Helpers.Evento
 {
     public class HelperEvento : IHelperEvento
     {
         private readonly IEventoServicio _eventoServicio;
+        private readonly IHelperEstablecimiento _helperEstablecimiento;
+        private readonly IHelperEmpresa _helperEmpresa;
 
-        public HelperEvento(IEventoServicio eventoServicio)
+        public HelperEvento(IEventoServicio eventoServicio, IHelperEstablecimiento helperEstablecimiento, IHelperEmpresa helperEmpresa)
         {
             _eventoServicio = eventoServicio;
+            _helperEstablecimiento = helperEstablecimiento;
+            _helperEmpresa = helperEmpresa;
         }
 
         public async Task<EventoViewModel> Obtener(long eventoId)
@@ -28,7 +34,9 @@ namespace EM.Presentacion.MVC.Helpers.Evento
                 Descripcion = evento.Descripcion,
                 Fecha = evento.Fecha,
                 EmpresaId = evento.EmpresaId,
-                EstablecimientoId = evento.EstablecimientoId
+                EstablecimientoId = evento.EstablecimientoId,
+                Establecimiento = await _helperEstablecimiento.ObtenerEstablecimiento(evento.EstablecimientoId),
+                Empresa = await _helperEmpresa.ObtenerEmpresa(evento.EmpresaId)
             };
 
             return model;

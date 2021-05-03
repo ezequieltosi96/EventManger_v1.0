@@ -17,7 +17,6 @@
     using EM.Dominio.Repositorio.FacturaDetalle;
     using EM.Dominio.Repositorio.FormaPago;
     using EM.Dominio.Repositorio.FormaPagoTarjeta;
-    using EM.Dominio.Repositorio.Inscripcion;
     using EM.Dominio.Repositorio.Localidad;
     using EM.Dominio.Repositorio.Pais;
     using EM.Dominio.Repositorio.Persona;
@@ -37,7 +36,6 @@
     using EM.Infrestructura.Repositorio.FacturaDetalle;
     using EM.Infrestructura.Repositorio.FormaPago;
     using EM.Infrestructura.Repositorio.FormaPagoTarjeta;
-    using EM.Infrestructura.Repositorio.Inscripcion;
     using EM.Infrestructura.Repositorio.Localidad;
     using EM.Infrestructura.Repositorio.Provincia;
     using EM.Infrestructura.Repositorio.Sala;
@@ -55,7 +53,6 @@
     using EM.IServicio.FacturaDetalle;
     using EM.IServicio.FormaPago;
     using EM.IServicio.FormaPagoTarjeta;
-    using EM.IServicio.Inscripcion;
     using EM.IServicio.Localidad;
     using EM.IServicio.Persona;
     using EM.IServicio.Provincia;
@@ -74,7 +71,6 @@
     using EM.Servicio.FacturaDetalleDetalle;
     using EM.Servicio.FormaPago;
     using EM.Servicio.FormaPagoTarjetaTarjeta;
-    using EM.Servicio.Inscripcion;
     using EM.Servicio.Localidad;
     using EM.Servicio.Persona;
     using EM.Servicio.Provincia;
@@ -172,10 +168,6 @@
             //Entrada
             services.AddScoped<IEntradaRepositorio, EntradaRepositorio>();
             services.AddScoped<IEntradaServicio, EntradaServicio>();
-
-            //Inscripcion
-            services.AddScoped<IInscripcionRepositorio, InscripcionRepositorio>();
-            services.AddScoped<IInscripcionServicio, InscripcionServicio>();
 
             //Factura
             services.AddScoped<IFacturaRepositorio, FacturaRepositorio>();

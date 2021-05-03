@@ -34,7 +34,6 @@
             modelBuilder.ApplyConfiguration(new ActividadConfiguracion());
             modelBuilder.ApplyConfiguration(new EventoConfiguracion());
             modelBuilder.ApplyConfiguration(new EntradaConfiguracion());
-            modelBuilder.ApplyConfiguration(new InscripcionConfiguracion());
             modelBuilder.ApplyConfiguration(new FacturaConfiguracion());
             modelBuilder.ApplyConfiguration(new FacturaDetalleConfiguracion());
             modelBuilder.ApplyConfiguration(new FormaPagoConfiguracion());
@@ -83,8 +82,6 @@
         public DbSet<Evento> Eventos { get; set; }
 
         public DbSet<Entrada> Entradas { get; set; }
-
-        public DbSet<Inscripcion> Inscripciones { get; set; }
 
         public DbSet<Factura> Factura { get; set; }
 

@@ -15,7 +15,6 @@
     using EM.IServicio.FacturaDetalle.Dto;
     using EM.IServicio.FormaPago.Dto;
     using EM.IServicio.FormaPagoTarjeta.Dto;
-    using EM.IServicio.Inscripcion.Dto;
     using EM.IServicio.Localidad.Dto;
     using EM.IServicio.Pais.Dto;
     using EM.IServicio.Persona.Dto;
@@ -86,10 +85,6 @@
             // Entrada
             CreateMap<Entrada, EntradaDto>();
             CreateMap<EntradaDto, Entrada>();
-
-            //Inscripcion
-            CreateMap<Inscripcion, InscripcionDto>();
-            CreateMap<InscripcionDto, Inscripcion>();
 
             //Factura
             CreateMap<Factura, FacturaDto>();

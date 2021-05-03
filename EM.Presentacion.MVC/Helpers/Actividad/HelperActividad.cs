@@ -39,7 +39,8 @@ namespace EM.Presentacion.MVC.Helpers.Actividad
 
             foreach (var sala in salas)
             {
-                if (ExistePorSalaYFecha(sala.Id, fecha.Value).Result)
+                var existe = await ExistePorSalaYFecha(sala.Id, fecha.Value);
+                if (existe)
                 {
                     salas = salas.Where(s => s.Id != sala.Id);
                 }
@@ -54,7 +55,8 @@ namespace EM.Presentacion.MVC.Helpers.Actividad
 
             foreach (var disertante in disertantes)
             {
-                if (ExistePorDisertanteYFecha(disertante.Id, fecha.Value).Result)
+                var existe = await ExistePorDisertanteYFecha(disertante.Id, fecha.Value);
+                if (existe)
                 {
                     disertantes = disertantes.Where(d => d.Id != disertante.Id);
                 }

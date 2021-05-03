@@ -1,4 +1,6 @@
-﻿using EM.IServicio.Cliente;
+﻿using System.Collections.Generic;
+using System.Linq;
+using EM.IServicio.Cliente;
 using EM.IServicio.Cliente.Dto;
 using EM.Presentacion.MVC.Models.Cliente;
 using System.Threading.Tasks;
@@ -78,6 +80,24 @@ namespace EM.Presentacion.MVC.Helpers.Cliente
 
             return model;
         }
+
+        public async Task<ClienteViewModel> Obtener(string dni)
+        {
+            var dto = (ClienteDto)((IEnumerable<ClienteDto>)await _clienteServicio.Obtener(dni, false)).FirstOrDefault(c => c.Dni.Equals(dni));
+
+            var model = new ClienteViewModel()
+            {
+                Id = dto.Id,
+                Nombre = dto.Nombre,
+                Apellido = dto.Apellido,
+                Dni = dto.Dni,
+                Email = dto.Email,
+                EstaEliminado = dto.EliminadoStr
+            };
+
+            return model;
+        }
+
         public async Task<ClienteViewModel> ObtenerNombreCliente(long id)
         {
             var dto = (ClienteDto)await _clienteServicio.Obtener(id);

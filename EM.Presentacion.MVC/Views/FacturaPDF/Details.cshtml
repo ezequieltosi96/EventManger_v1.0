@@ -66,8 +66,8 @@
     </div>
 </div>
 <div>
-    @Html.ActionLink("Imprimir", "Imprimir", "FacturaPDF", new { id = @Model.Id })
+    <a class="btn btn-primary pull-right m-5" asp-action="Imprimir" asp-route-id="@Model.Id" target="_blank"><span class="glyphicon glyphicon-print"></span> Imprimir</a>
 </div>
-<div>
+@*<div>
     @Html.ActionLink("CrearFactura", "Alta", "FacturaPDF", new { entradaId = 2 , formaPagoId =  2})
-</div>
+</div>*@
