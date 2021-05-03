@@ -65,5 +65,18 @@
 
             return dtos;
         }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = null, bool mostrarTodos = true)
+        {
+            Expression<Func<Dominio.Entidades.TipoEntrada, bool>> filtro = x => x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId && !x.EstaEliminado;
+
+            if (mostrarTodos) filtro = x => x.Nombre.Contains(cadenaBuscar) && x.EmpresaId == empresaId;
+
+            var tipoEntradas = await _tipoEntradaRepositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<TipoEntradaDto>>(tipoEntradas);
+
+            return dtos;
+        }
     }
 }

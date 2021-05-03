@@ -74,7 +74,7 @@
         }
         <a class="btn btn-primary" asp-controller="Actividad" asp-action="Create" asp-route-eventoId="@Model.Id" asp-route-empresaId="@Model.EmpresaId" asp-route-vbEmpresa="@ViewBag.EmpresaId" asp-route-establecimientoId="@Model.EstablecimientoId" asp-route-fecha="@Model.Fecha.Date.ToString()"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>
         @*<a class="btn btn-primary" onclick="handleCreateModalShow(@Model.Id)"><span class="glyphicon glyphicon-bullhorn"></span> Agregar Actividad</a>*@
-        <a class="btn btn-primary" asp-controller="Entrada" asp-action="ListGeneric" asp-route-eventoId="@Model.Id"><span class="glyphicon glyphicon-tag"></span> Tipos de entrada</a>
+        <a class="btn btn-primary" asp-controller="Entrada" asp-action="ListGeneric" asp-route-eventoId="@Model.Id" asp-route-empresaId="@Model.EmpresaId"><span class="glyphicon glyphicon-tag"></span> Tipos de entrada</a>
         <a class="btn btn-primary" asp-controller="Entrada" asp-action="List" asp-route-eventoId="@Model.Id"><span class="glyphicon glyphicon-tags"></span> Entradas venidas</a>
     }
 

@@ -12,7 +12,7 @@
 
 <div class="contenedor">
     <div class="p-5">
-        <a class="btn btn-default" asp-action="CreateGeneric" asp-route-eventoId="@ViewBag.EventoId"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
+        <a class="btn btn-default" asp-action="CreateGeneric" asp-route-eventoId="@ViewBag.EventoId" asp-route-empresaId="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-plus"></span> Nuevo</a>
         @if (ViewBag.MostrarTodos)
         {
             <a class="btn btn-default" asp-action="ListGeneric" asp-route-eventoId="@ViewBag.EventoId" asp-route-mostrarTodos="false">Ocultar eliminados</a>
@@ -56,12 +56,12 @@
                 <td>
                     @if (entrada.EstaEliminado.Equals("No"))
                     {
-                        <a class="btn-sm btn-success" asp-action="EditGeneric" asp-route-id="@entrada.Id"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a class="btn-sm btn-warning" asp-action="DeleteGeneric" asp-route-id="@entrada.Id" asp-route-eventoId="@ViewBag.EventoId"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a class="btn-sm btn-success" asp-action="EditGeneric" asp-route-id="@entrada.Id" asp-route-empresaId="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a class="btn-sm btn-warning" asp-action="DeleteGeneric" asp-route-id="@entrada.Id" asp-route-eventoId="@ViewBag.EventoId" asp-route-empresaId="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-trash"></span></a>
                     }
                     else
                     {
-                        <a class="btn-sm btn-warning" asp-action="DeleteGeneric" asp-route-id="@entrada.Id" asp-route-eventoId="@ViewBag.EventoId"><span class="glyphicon glyphicon-refresh"></span></a>
+                        <a class="btn-sm btn-warning" asp-action="DeleteGeneric" asp-route-id="@entrada.Id" asp-route-eventoId="@ViewBag.EventoId" asp-route-empresaId="@ViewBag.EmpresaId"><span class="glyphicon glyphicon-refresh"></span></a>
                     }
 
                 </td>

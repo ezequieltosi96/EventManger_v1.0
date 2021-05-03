@@ -32,11 +32,12 @@ namespace EM.Presentacion.MVC.Controllers
 
 
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> CreateGeneric(long eventoId)
+        public async Task<IActionResult> CreateGeneric(long eventoId, long empresaId)
         {
             ViewBag.EventoId = eventoId;
+            ViewBag.EmpresaId = empresaId;
 
-            var tipos = await _helperTipoEntrada.PoblarSelect();
+            var tipos = await _helperTipoEntrada.PoblarSelect(empresaId);
             // poblar el combo de tipo entrada
             var model = new EntradaViewModel()
             {
@@ -50,11 +51,12 @@ namespace EM.Presentacion.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> CreateGeneric(EntradaViewModel vm)
+        public async Task<IActionResult> CreateGeneric(EntradaViewModel vm, long empresaId)
         {
             try
             {
-
+                ViewBag.EmpresaId = empresaId;
+                ViewBag.EventoId = vm.EventoId;
                 if (!ModelState.IsValid)
                 {
                     throw new Exception("Error de validacion no controlado");
@@ -70,7 +72,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 await _entradaServicio.Insertar(entradaDto);
 
-                return RedirectToAction("ListGeneric", new { eventoId = entradaDto.EventoId });
+                return RedirectToAction("ListGeneric", new { eventoId = entradaDto.EventoId, empresaId });
             }
             catch (Exception)
             {
@@ -79,7 +81,7 @@ namespace EM.Presentacion.MVC.Controllers
         }
 
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> ListGeneric(long eventoId, bool mostrarTodos = false)
+        public async Task<IActionResult> ListGeneric(long eventoId, long empresaId, bool mostrarTodos = false)
         {
             var dtos = (IEnumerable<EntradaDto>)await _entradaServicio.ObtenerGenericByEvento(eventoId, mostrarTodos);
 
@@ -101,31 +103,32 @@ namespace EM.Presentacion.MVC.Controllers
 
             ViewBag.EventoId = eventoId;
             ViewBag.MostrarTodos = mostrarTodos;
+            ViewBag.EmpresaId = empresaId;
             return View(models);
         }
 
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> DeleteGeneric(long id, long eventoId)
+        public async Task<IActionResult> DeleteGeneric(long id, long eventoId, long empresaId)
         {
             try
             {
                 await _entradaServicio.Eliminar(id);
-                return RedirectToAction("ListGeneric", new { eventoId });
+                return RedirectToAction("ListGeneric", new { eventoId, empresaId });
             }
             catch (Exception)
             {
-                return RedirectToAction("ListGeneric", new { eventoId });
+                return RedirectToAction("ListGeneric", new { eventoId, empresaId });
             }
         }
 
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> EditGeneric(long id, long eventoId)
+        public async Task<IActionResult> EditGeneric(long id, long eventoId, long empresaId)
         {
             var dto = (EntradaDto)await _entradaServicio.Obtener(id);
 
-            if (dto == null) return RedirectToAction("ListGeneric", new { eventoId });
+            if (dto == null) return RedirectToAction("ListGeneric", new { eventoId, empresaId });
 
-            if (dto.ClienteId != null) return RedirectToAction("ListGeneric", new { eventoId });
+            if (dto.ClienteId != null) return RedirectToAction("ListGeneric", new { eventoId, empresaId });
 
             var model = new EntradaViewModel()
             {
@@ -135,19 +138,21 @@ namespace EM.Presentacion.MVC.Controllers
                 ClienteId = null,
                 Precio = dto.Precio,
                 TipoEntradaId = dto.TipoEntradaId,
-                TiposEntradas = await _helperTipoEntrada.PoblarSelect()
+                TiposEntradas = await _helperTipoEntrada.PoblarSelect(empresaId)
             };
 
+            ViewBag.EmpresaId = empresaId;
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> EditGeneric(EntradaViewModel vm)
+        public async Task<IActionResult> EditGeneric(EntradaViewModel vm, long empresaId)
         {
             try
             {
+                ViewBag.EmpresaId = empresaId;
                 if (!ModelState.IsValid)
                 {
                     throw new Exception("Error de validacion no controlado");
@@ -164,7 +169,7 @@ namespace EM.Presentacion.MVC.Controllers
 
                 await _entradaServicio.Modificar(entradaDto);
 
-                return RedirectToAction("ListGeneric", new { eventoId = entradaDto.EventoId });
+                return RedirectToAction("ListGeneric", new { eventoId = entradaDto.EventoId, empresaId });
             }
             catch (Exception)
             {

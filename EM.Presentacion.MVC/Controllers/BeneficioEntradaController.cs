@@ -19,7 +19,7 @@ namespace EM.Presentacion.MVC.Controllers
             _beneficioEntradaServicio = beneficioEntradaServicio;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         public async Task<IActionResult> Index(string cadenaBuscar = "", bool mostrarTodos = false)
         {
             if (cadenaBuscar == null) cadenaBuscar = "";
@@ -39,7 +39,7 @@ namespace EM.Presentacion.MVC.Controllers
             return View(models);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         public async Task<IActionResult> Details(long id)
         {
             try
@@ -61,13 +61,13 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         public IActionResult Create()
         {
             return View();
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BeneficioEntradaViewModel vm)

@@ -7,5 +7,7 @@
         public string Nombre { get; set; }
 
         public long BeneficioEntradaId { get; set; }
+
+        public long EmpresaId { get; set; }
     }
 }

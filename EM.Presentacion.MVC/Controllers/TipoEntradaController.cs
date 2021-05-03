@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EM.Presentacion.MVC.Helpers.Empresa;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -15,37 +17,54 @@ namespace EM.Presentacion.MVC.Controllers
     {
         private readonly ITipoEntradaServicio _tipoEntradaServicio;
         private readonly IHelperBeneficioEntrada _helperBeneficioEntrada;
-        public TipoEntradaController(ITipoEntradaServicio tipoEntradaServicio, IHelperBeneficioEntrada helperBeneficioEntrada)
+        private readonly IHelperEmpresa _helperEmpresa;
+
+        public TipoEntradaController(ITipoEntradaServicio tipoEntradaServicio, IHelperBeneficioEntrada helperBeneficioEntrada, IHelperEmpresa helperEmpresa)
         {
             _tipoEntradaServicio = tipoEntradaServicio;
             _helperBeneficioEntrada = helperBeneficioEntrada;
+            _helperEmpresa = helperEmpresa;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         public async Task<IActionResult> Index(string cadenaBuscar = "", bool mostrarTodos = false)
         {
             if (cadenaBuscar == null) cadenaBuscar = "";
 
-            var dtos = (IEnumerable<TipoEntradaDto>)await _tipoEntradaServicio.Obtener(cadenaBuscar, mostrarTodos);
+            IEnumerable<TipoEntradaDto> dtos;
+            if (User.IsInRole("Empresa"))
+            {
+                var empresa = await _helperEmpresa.ObtenerEmpresaActual(User.Identity.Name);
+                ViewBag.EmpresaId = empresa.Id;
+                dtos = (IEnumerable<TipoEntradaDto>)await _tipoEntradaServicio.ObtenerPorEmpresa(empresa.Id, cadenaBuscar, mostrarTodos);
+            }
+            else
+            {
+                ViewBag.EmpresaId = null;
+                dtos = (IEnumerable<TipoEntradaDto>)await _tipoEntradaServicio.Obtener(cadenaBuscar, mostrarTodos);
+            }
 
             var models = dtos.Select(b => new TipoEntradaViewModel()
             {
                 Id = b.Id,
                 EstaEliminado = b.EliminadoStr,
                 Nombre = b.Nombre,
+                EmpresaId = b.EmpresaId,
                 BeneficioEntradaId = b.BeneficioEntradaId
             }).ToList();
+
             foreach (var model in models)
             {
                 model.BeneficioEntradaNombre = await _helperBeneficioEntrada.ObtenerNombreBeneficioEntrada(model.BeneficioEntradaId);
             }
+
             ViewBag.MostrarTodos = mostrarTodos;
             ViewBag.CadenaBuscar = cadenaBuscar;
 
             return View(models);
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         public async Task<IActionResult> Details(long id)
         {
             try
@@ -57,6 +76,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Id = dto.Id,
                     EstaEliminado = dto.EliminadoStr,
                     Nombre = dto.Nombre,
+                    EmpresaId = dto.EmpresaId,
                     BeneficioEntradaId = dto.BeneficioEntradaId,
                     BeneficioEntradaNombre = await _helperBeneficioEntrada.ObtenerNombreBeneficioEntrada(dto.BeneficioEntradaId),
                 };
@@ -69,18 +89,32 @@ namespace EM.Presentacion.MVC.Controllers
             }
         }
 
-        [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create()
+        [Authorize(Roles = "Admin, Empresa")]
+        public async Task<IActionResult> Create(long? empresaId = null)
         {
+            ViewBag.EmpresaId = empresaId;
+
             var beneficiosEntrada = await _helperBeneficioEntrada.PoblarSelect();
+
+            if (empresaId.HasValue)
+            {
+                return View(new TipoEntradaViewModel()
+                {
+                    BeneficiosEntrada = beneficiosEntrada,
+                    EmpresaId = empresaId.Value
+                });
+            }
+
+            var empresas = await _helperEmpresa.PoblarCombo();
 
             return View(new TipoEntradaViewModel()
             {
-                BeneficiosEntrada = beneficiosEntrada
+                BeneficiosEntrada = beneficiosEntrada,
+                Empresas = empresas
             });
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, Empresa")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TipoEntradaViewModel vm)
@@ -95,7 +129,8 @@ namespace EM.Presentacion.MVC.Controllers
                 var tipoEntradaDto = new TipoEntradaDto()
                 {
                     Nombre = vm.Nombre,
-                    BeneficioEntradaId = vm.BeneficioEntradaId
+                    BeneficioEntradaId = vm.BeneficioEntradaId,
+                    EmpresaId = vm.EmpresaId
                 };
 
                 await _tipoEntradaServicio.Insertar(tipoEntradaDto);
@@ -122,6 +157,7 @@ namespace EM.Presentacion.MVC.Controllers
                     Id = dto.Id,
                     EstaEliminado = dto.EliminadoStr,
                     Nombre = dto.Nombre,
+                    EmpresaId = dto.EmpresaId,
                     BeneficioEntradaId = dto.BeneficioEntradaId,
                     BeneficioEntradaNombre = await _helperBeneficioEntrada.ObtenerNombreBeneficioEntrada(dto.BeneficioEntradaId),
                     BeneficiosEntrada = beneficiosEntrada
@@ -151,6 +187,7 @@ namespace EM.Presentacion.MVC.Controllers
                 {
                     Id = vm.Id,
                     Nombre = vm.Nombre,
+                    EmpresaId = vm.EmpresaId,
                     BeneficioEntradaId = vm.BeneficioEntradaId
                 };
 

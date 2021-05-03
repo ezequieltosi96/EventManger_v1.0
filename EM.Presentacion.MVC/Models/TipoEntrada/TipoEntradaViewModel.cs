@@ -19,6 +19,10 @@ namespace EM.Presentacion.MVC.Models.TipoEntrada
         [DisplayName("Beneficio Entrada")]
         public string BeneficioEntradaNombre { get; set; }
 
+        public long EmpresaId { get; set; }
+
         public IEnumerable<SelectListItem> BeneficiosEntrada { get; set; }
+
+        public IEnumerable<SelectListItem> Empresas { get; set; }
     }
 }

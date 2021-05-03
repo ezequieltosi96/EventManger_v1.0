@@ -7,7 +7,7 @@ namespace EM.Presentacion.MVC.Helpers.TipoEntrada
 {
     public interface IHelperTipoEntrada
     {
-        Task<IEnumerable<SelectListItem>> PoblarSelect();
+        Task<IEnumerable<SelectListItem>> PoblarSelect(long empresaId);
 
         Task<TipoEntradaViewModel> Obtener(long tipoEntradaId);
     }

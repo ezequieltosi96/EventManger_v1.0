@@ -20,9 +20,9 @@ namespace EM.Presentacion.MVC.Helpers.TipoEntrada
             _helperBeneficioEntrada = helperBeneficioEntrada;
         }
 
-        public async Task<IEnumerable<SelectListItem>> PoblarSelect()
+        public async Task<IEnumerable<SelectListItem>> PoblarSelect(long empresaId)
         {
-            var tipos = (IEnumerable<TipoEntradaDto>)await _tipoEntradaServicio.Obtener(String.Empty, false);
+            var tipos = (IEnumerable<TipoEntradaDto>)await _tipoEntradaServicio.ObtenerPorEmpresa(empresaId, String.Empty, false);
 
             return new SelectList(tipos, "Id", "Nombre");
         }
