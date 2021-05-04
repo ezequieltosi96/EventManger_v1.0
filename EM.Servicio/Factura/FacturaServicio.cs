@@ -80,6 +80,17 @@
             return factura.Id;
         }
 
+        public async Task<IEnumerable<DtoBase>> ObtenerPorCliente(long clienteId)
+        {
+            Expression<Func<Dominio.Entidades.Factura, bool>> filtro = x => x.ClienteId == clienteId && !x.EstaEliminado;
+
+            var facturas = await _facturaRepositorio.ObtenerFiltrado(filtro, null, f => f.Include(e => e.FacturaDetalles));
+
+            var dtos = _mapper.Map<IEnumerable<FacturaDto>>(facturas);
+
+            return dtos;
+        }
+
         public async Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostrarTodos = true)
         {
             Expression<Func<Dominio.Entidades.Factura, bool>> filtro = x => x.EmpresaId == empresaId && !x.EstaEliminado;

@@ -5,6 +5,7 @@ using EM.Presentacion.MVC.Models.FacturaDetalle;
 using EM.Presentacion.MVC.Models.FormaPago;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace EM.Presentacion.MVC.Models.Factura
@@ -40,6 +41,9 @@ namespace EM.Presentacion.MVC.Models.Factura
 
         public IEnumerable<FacturaDetalleViewModel> FacturaDetalles { get; set; }
 
+        [DisplayName("Evento")]
+        public string EventoNombre { get; set; }
 
+        public long EntradaId { get; set; }
     }
 }

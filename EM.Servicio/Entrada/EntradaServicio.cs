@@ -90,5 +90,16 @@
 
             return dtos;
         }
+
+        public async Task<IEnumerable<DtoBase>> ObtenerByCliente(long clienteId)
+        {
+            Expression<Func<Dominio.Entidades.Entrada, bool>> filtro = x => !x.EstaEliminado && x.ClienteId == clienteId;
+
+            var entradas = await _entradaRepositorio.ObtenerFiltrado(filtro);
+
+            var dtos = _mapper.Map<IEnumerable<EntradaDto>>(entradas);
+
+            return dtos;
+        }
     }
 }

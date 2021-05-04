@@ -62,13 +62,13 @@ namespace EM.Presentacion.MVC.Controllers
         }
 
         [Authorize(Roles = "Admin, Empresa")]
-        public async Task<IActionResult> IndexEmpresa(long? empresaId = null,string cadenaBuscar = "", bool mostrarTodos = false)
+        public async Task<IActionResult> IndexEmpresa(long? empresaId = null, string cadenaBuscar = "", bool mostrarTodos = false)
         {
             if (cadenaBuscar == null) cadenaBuscar = "";
             IEnumerable<FacturaDto> dtos;
             var empresa = await _helperEmpresa.ObtenerEmpresaActual(User.Identity.Name);
             empresaId = empresa.Id;
-            dtos = (IEnumerable<FacturaDto>)await _facturaServicio.ObtenerPorEmpresa(empresaId.Value,cadenaBuscar, mostrarTodos);
+            dtos = (IEnumerable<FacturaDto>)await _facturaServicio.ObtenerPorEmpresa(empresaId.Value, cadenaBuscar, mostrarTodos);
 
             var models = dtos.Select(d => new FacturaViewModel()
             {
@@ -218,6 +218,31 @@ namespace EM.Presentacion.MVC.Controllers
             await _facturadetalleServicio.Insertar(facturaDetalle);
 
             return RedirectToAction("Imprimir", "FacturaPDF", new { id = facturaId });
+        }
+
+        [Authorize(Roles = "Cliente")]
+        public async Task<IActionResult> ListClienteFacturas()
+        {
+            var cliente = await _helperCliente.ObtenerClienteViewModelPorEmail(User.Identity.Name);
+
+            var dtos = (IEnumerable<FacturaDto>)await _facturaServicio.ObtenerPorCliente(cliente.Id);
+
+            var models = dtos.Select(d => new FacturaViewModel()
+            {
+                Id = d.Id,
+                EstaEliminado = d.EliminadoStr,
+                Fecha = d.Fecha,
+                TipoFactura = d.TipoFactura,
+                Total = d.Total,
+                EntradaId = d.FacturaDetalles.First().EntradaId
+            }).ToList();
+
+            foreach (var model in models)
+            {
+                model.EventoNombre = (await _helperEntrada.ObtenerEntrada(model.EntradaId)).Evento.Nombre;
+            }
+
+            return View(models);
         }
     }
 }

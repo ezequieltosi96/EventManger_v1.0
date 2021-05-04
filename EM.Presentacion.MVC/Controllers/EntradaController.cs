@@ -10,7 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EM.Presentacion.MVC.Helpers.Empresa;
 using Rotativa.AspNetCore;
 
 namespace EM.Presentacion.MVC.Controllers
@@ -230,6 +229,31 @@ namespace EM.Presentacion.MVC.Controllers
             {
                 return RedirectToAction("List", new { eventoId });
             }
+        }
+
+        [Authorize(Roles = "Cliente")]
+        public async Task<IActionResult> ListClienteEntradas(long clienteId)
+        {
+            var entradas = (IEnumerable<EntradaDto>)await _entradaServicio.ObtenerByCliente(clienteId);
+
+            var models = entradas.Select(e => new EntradaViewModel()
+            {
+                Id = e.Id,
+                EstaEliminado = e.EliminadoStr,
+                EventoId = e.EventoId,
+                ClienteId = e.ClienteId.Value,
+                Precio = e.Precio,
+                TipoEntradaId = e.TipoEntradaId
+            }).ToList();
+
+            foreach (var vm in models)
+            {
+                vm.Evento = await _helperEvento.Obtener(vm.EventoId);
+                vm.TipoEntrada = await _helperTipoEntrada.Obtener(vm.TipoEntradaId);
+                vm.Cliente = await _helperCliente.Obtener(vm.ClienteId.Value);
+            }
+
+            return View(models);
         }
     }
 }

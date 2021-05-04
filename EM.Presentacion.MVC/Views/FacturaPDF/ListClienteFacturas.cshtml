@@ -1,0 +1,53 @@
+﻿@using Microsoft.EntityFrameworkCore.Internal
+@model IEnumerable<EM.Presentacion.MVC.Models.Factura.FacturaViewModel>
+@{
+    ViewData["Title"] = "Factura";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.EventoNombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.TipoFactura)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var factura in Model)
+        {
+            <tr>
+                <td>
+                    @factura.EventoNombre
+                </td>
+                <td>
+                    @factura.Fecha
+                </td>
+                <td>
+                    @factura.TipoFactura
+                </td>
+                <td>
+                    @factura.Total
+                </td>
+                <td>
+                    <a class="btn-sm btn-info" asp-action="Imprimir" asp-route-id="@factura.Id" target="_blank"><span class="glyphicon glyphicon-print"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

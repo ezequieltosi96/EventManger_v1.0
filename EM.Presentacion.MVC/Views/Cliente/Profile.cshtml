@@ -4,3 +4,6 @@
 }
 
 <h1 class="text-center">Perfil de @Model.Nombre @Model.Apellido</h1>
+
+<a class="btn btn-primary" asp-action="ListClienteEntradas" asp-controller="Entrada" asp-route-clienteId="@Model.Id"><span class="glyphicon glyphicon-tags"></span> Ver Entradas</a>
+<a class="btn btn-primary" asp-action="ListClienteFacturas" asp-controller="FacturaPDF" asp-route-clienteId="@Model.Id"><span class="glyphicon glyphicon-usd"></span> Ver Facturas</a>

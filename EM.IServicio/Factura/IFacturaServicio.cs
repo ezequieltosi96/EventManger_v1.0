@@ -1,4 +1,6 @@
-﻿namespace EM.IServicio.Factura
+﻿using EM.IServicio.Factura.Dto;
+
+namespace EM.IServicio.Factura
 {
     using EM.ServicioBase.Dto;
     using ServicioBase.Servicio;
@@ -10,5 +12,7 @@
         Task<IEnumerable<DtoBase>> ObtenerPorEmpresa(long empresaId, string cadenaBuscar = "", bool mostrarTodos = true);
 
         Task<long> InsertarDevuelveId(DtoBase dtoBase);
+
+        Task<IEnumerable<DtoBase>> ObtenerPorCliente(long clienteId);
     }
 }
