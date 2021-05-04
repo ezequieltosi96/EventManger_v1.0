@@ -1,4 +1,9 @@
-﻿namespace EM.Infrestructura.Repositorio.Factura
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+
+namespace EM.Infrestructura.Repositorio.Factura
 {
     using Dominio.Entidades;
     using EM.Dominio.Repositorio.Factura;

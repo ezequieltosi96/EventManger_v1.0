@@ -10,5 +10,7 @@ namespace EM.Presentacion.MVC.Helpers.Entrada
         Task<IEnumerable<SelectListItem>> PoblarComboGeneric(long eventoId);
 
         Task<EntradaViewModel> ObtenerEntrada(long id);
+
+        Task<EntradaViewModel> ObtenerEntradaConCliente(long id);
     }
 }

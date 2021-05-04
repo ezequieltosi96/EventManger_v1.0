@@ -18,6 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using EM.Presentacion.MVC.Models.Cliente;
 using EM.Presentacion.MVC.Models.FormaPagoTarjeta;
+using Microsoft.AspNetCore.Routing;
 
 namespace EM.Presentacion.MVC.Controllers
 {
@@ -220,6 +221,34 @@ namespace EM.Presentacion.MVC.Controllers
             return RedirectToAction("Imprimir", "FacturaPDF", new { id = facturaId });
         }
 
+        public async Task<IActionResult> AltaFacturaRedirect(long clienteId, long formaPagoId, long entradaId, int cantidad, long[] entradas)
+        {
+            var entrada = await _helperEntrada.ObtenerEntrada(entradaId);
+            var evento = entrada.Evento;
+            var factura = new FacturaDto()
+            {
+                ClienteId = clienteId,
+                EmpresaId = evento.EmpresaId,
+                FormaPagoId = formaPagoId,
+                Fecha = DateTime.Now,
+                TipoFactura = Dominio.Enum.TipoFactura.B,
+                Total = cantidad * entrada.Precio
+            };
+            long facturaId = await _facturaServicio.InsertarDevuelveId(factura);
+
+            var facturaDetalle = new FacturaDetalleDto()
+            {
+                Cantidad = cantidad,
+                EntradaId = entrada.Id,
+                FacturaId = facturaId,
+                SubTotal = cantidad * entrada.Precio
+            };
+            await _facturadetalleServicio.Insertar(facturaDetalle);
+
+
+            return RedirectToAction("CompraExitosa", new { facturaId = facturaId, entradas });
+        }
+
         [Authorize(Roles = "Cliente")]
         public async Task<IActionResult> ListClienteFacturas()
         {
@@ -243,6 +272,22 @@ namespace EM.Presentacion.MVC.Controllers
             }
 
             return View(models);
+        }
+
+        public async Task<IActionResult> CompraExitosa(long facturaId, long[] entradas)
+        {
+            var facturaConEntradas = new FacturaConEntradasViewModel()
+            {
+                FacturaId = facturaId,
+                Entradas = new List<EntradaViewModel>()
+            };
+
+            foreach (var id in entradas)
+            {
+                facturaConEntradas.Entradas.Add(await _helperEntrada.ObtenerEntradaConCliente(id));
+            }
+
+            return View(facturaConEntradas);
         }
     }
 }

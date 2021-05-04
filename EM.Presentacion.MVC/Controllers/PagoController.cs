@@ -142,6 +142,8 @@ namespace EM.Presentacion.MVC.Controllers
 
                 // guardo las entradas para el cliente (for int i=0; 1 < cantidad; i++)
                 var entradaVm = await _helperEntrada.ObtenerEntrada(vm.EntradaId);
+
+                long[] entradas = new long[vm.Cantidad];
                 for (int i = 0; i < vm.Cantidad; i++)
                 {
                     var entrada = new EntradaDto()
@@ -151,13 +153,16 @@ namespace EM.Presentacion.MVC.Controllers
                         Precio = entradaVm.Precio,
                         TipoEntradaId = entradaVm.TipoEntradaId
                     };
-                    await _entradaServicio.Insertar(entrada);
+                    var entradaId = await _entradaServicio.InsertarDevuelveId(entrada);
+
+                    entradas[i] = entradaId;
                 }
 
-                return RedirectToAction("AltaFactura", "FacturaPDF", new { clienteId = clienteVm.Id, formaPagoId = formaPagoVm.Id, entradaId = entradaVm.Id, cantidad = vm.Cantidad });
+                return RedirectToAction("AltaFacturaRedirect", "FacturaPDF", new { clienteId = clienteVm.Id, formaPagoId = formaPagoVm.Id, entradaId = entradaVm.Id, cantidad = vm.Cantidad, entradas });
             }
             catch (Exception)
             {
+                vm.EntradasGenericas = await _helperEntrada.PoblarComboGeneric(eventoId);
                 return View(vm);
             }
         }

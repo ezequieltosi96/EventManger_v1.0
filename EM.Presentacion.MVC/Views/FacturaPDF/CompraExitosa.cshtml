@@ -1,0 +1,65 @@
+﻿@model EM.Presentacion.MVC.Models.Factura.FacturaConEntradasViewModel
+@{
+    ViewData["Title"] = "Compra exitosa";
+    Layout = "_Layout";
+}
+
+<h1 class="text-center m-5">@ViewData["Title"]</h1>
+
+<table class="table table-responsive table-striped text-center">
+    <thead>
+        <tr>
+            <th class="text-center">
+                Evento
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Entradas.First().TipoEntrada.Nombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Entradas.First().TipoEntrada.BeneficioEntradaNombre)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Entradas.First().Cliente.ApyNom)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Entradas.First().Cliente.Dni)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.Entradas.First().Precio)
+            </th>
+
+            <th>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entrada in Model.Entradas)
+        {
+            <tr>
+                <td>
+                    @entrada.Evento.Nombre
+                </td>
+                <td>
+                    @entrada.TipoEntrada.Nombre
+                </td>
+                <td>
+                    @entrada.TipoEntrada.BeneficioEntradaNombre
+                </td>
+                <td>
+                    @entrada.Cliente.ApyNom
+                </td>
+                <td>
+                    @entrada.Cliente.Dni
+                </td>
+                <td>
+                    $@entrada.Precio
+                </td>
+                <td>
+                    <a class="btn-sm btn-success" asp-controller="Entrada" asp-action="Details" asp-route-id="@entrada.Id" asp-route-eventoId="@entrada.EventoId" target="_blank"><span class="glyphicon glyphicon-qrcode"></span></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" style="margin: 0 auto;" asp-action="Imprimir" asp-route-id="@Model.FacturaId" target="_blank"><span class="glyphicon glyphicon-print"></span> Imprimir Factura</a>

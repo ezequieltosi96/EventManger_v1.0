@@ -101,5 +101,16 @@
 
             return dtos;
         }
+
+        public async Task<long> InsertarDevuelveId(DtoBase dtoBase)
+        {
+            var dto = (EntradaDto)dtoBase;
+
+            var entrada = _mapper.Map<Dominio.Entidades.Entrada>(dto);
+
+            await _entradaRepositorio.Insertar(entrada);
+
+            return entrada.Id;
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace EM.Servicio.Factura
+﻿using System.Linq;
+
+namespace EM.Servicio.Factura
 {
     using AutoMapper;
     using EM.Dominio.Repositorio.Factura;

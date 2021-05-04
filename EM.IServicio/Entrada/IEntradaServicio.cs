@@ -12,5 +12,7 @@ namespace EM.IServicio.Entrada
         Task<IEnumerable<DtoBase>> ObtenerByEvento(long eventoId, bool mostrarTodos = true);
 
         Task<IEnumerable<DtoBase>> ObtenerByCliente(long clienteId);
+
+        Task<long> InsertarDevuelveId(DtoBase dtoBase);
     }
 }

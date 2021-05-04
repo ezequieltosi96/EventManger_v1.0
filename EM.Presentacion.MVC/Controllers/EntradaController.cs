@@ -203,7 +203,7 @@ namespace EM.Presentacion.MVC.Controllers
             return View(models);
         }
 
-        [Authorize(Roles = "Admin, Empresa, Cliente")]
+
         public async Task<IActionResult> Details(long id, long eventoId)
         {
             try
