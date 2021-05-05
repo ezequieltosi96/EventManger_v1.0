@@ -8,12 +8,12 @@ namespace EM.Presentacion.MVC.Models.Empresa
 {
     public class EmpresaViewModel : ViewModelBase
     {
-        [DisplayName("Razon Social")]
+        [DisplayName("Razón Social")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [MaxLength(200, ErrorMessage = "El campo {0} no debe superar los {1} caracteres.")]
         public string RazonSocial { get; set; }
 
-        [DisplayName("Nombre de Fantasia")]
+        [DisplayName("Nombre de Fantasía")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         [MaxLength(200, ErrorMessage = "El campo {0} no debe superar los {1} caracteres.")]
         public string NombreFantasia { get; set; }
@@ -35,9 +35,9 @@ namespace EM.Presentacion.MVC.Models.Empresa
         [DisplayName("Dirección")]
         public DireccionViewModel Direccion { get; set; }
 
-        [DisplayName("Pais")]
+        [DisplayName("País")]
         public long PaisId { get; set; }
-
+        [DisplayName("Provincia")]
         public long ProvinciaId { get; set; }
 
         public IEnumerable<SelectListItem> Paises { get; set; }

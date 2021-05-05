@@ -13,16 +13,16 @@ namespace EM.Presentacion.MVC.Models.Establecimiento
         [MaxLength(200, ErrorMessage = "El campo {0} no debe permite mas de {1} caracteres.")]
         public string Nombre { get; set; }
 
-        [DisplayName("Direccion")]
+        [DisplayName("Dirección")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public long DireccionId { get; set; }
 
-        [DisplayName("Direccion")]
+        [DisplayName("Dirección")]
         public DireccionViewModel Direccion { get; set; }
 
-        [DisplayName("Pais")]
+        [DisplayName("País")]
         public long PaisId { get; set; }
-
+        [DisplayName("Provincia")]
         public long ProvinciaId { get; set; }
 
         public IEnumerable<SelectListItem> Paises { get; set; }

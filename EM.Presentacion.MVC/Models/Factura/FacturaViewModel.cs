@@ -16,21 +16,21 @@ namespace EM.Presentacion.MVC.Models.Factura
         [DisplayFormat(DataFormatString = "{dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
-
+        [Display(Name = "Empresa")]
         public long EmpresaId { get; set; }
-
+        [Display(Name = "Empresa")]
         public string EmpresaNombre { get; set; }
-
+        [Display(Name = "Cliente")]
         public long ClienteId { get; set; }
-
+        [Display(Name = "Cliente")]
         public string ClienteNombre { get; set; }
-
+        [Display(Name = "Forma de pago")]
         public long FormaPagoId { get; set; }
-
+        [Display(Name = "Forma de pago")]
         public string FormaPagoNombre { get; set; }
-
+        [Display(Name = "Tipo Factura")]
         public TipoFactura TipoFactura { get; set; }
-
+        [Display(Name = "Total")]
         public decimal Total { get; set; }
 
         public ClienteViewModel Cliente { get; set; }
@@ -43,7 +43,7 @@ namespace EM.Presentacion.MVC.Models.Factura
 
         [DisplayName("Evento")]
         public string EventoNombre { get; set; }
-
+        [DisplayName("Entrada")]
         public long EntradaId { get; set; }
     }
 }

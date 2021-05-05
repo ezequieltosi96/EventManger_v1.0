@@ -20,7 +20,7 @@ namespace EM.Presentacion.MVC.Models.Identity
         [Compare("Password", ErrorMessage = "Las contraseñas no coinciden.")]
         public string ConfirmPassword { get; set; }
 
-        [DisplayName("Pais")]
+        [DisplayName("País")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public long PaisId { get; set; }
 

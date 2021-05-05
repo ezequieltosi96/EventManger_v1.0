@@ -17,7 +17,7 @@ namespace EM.Presentacion.MVC.Models.Localidad
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public long ProvinciaId { get; set; }
 
-        [DisplayName("Pais")]
+        [DisplayName("País")]
         public long PaisId { get; set; }
 
         [DisplayName("Provincia")]

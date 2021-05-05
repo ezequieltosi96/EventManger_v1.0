@@ -13,11 +13,11 @@ namespace EM.Presentacion.MVC.Models.Provincia
         [RegularExpression(@"^[a-zA-Z\s]*$", ErrorMessage = "El campo {0} solo puede contener letras (a-z,A-Z).")]
         public string Nombre { get; set; }
 
-        [DisplayName("Pais")]
+        [DisplayName("País")]
         [Required(ErrorMessage = "El campo {0} es requerido.")]
         public long PaisId { get; set; }
 
-        [DisplayName("Pais")]
+        [DisplayName("Paí   s")]
         public string PaisNombre { get; set; }
 
         public IEnumerable<SelectListItem> Paises { get; set; }
