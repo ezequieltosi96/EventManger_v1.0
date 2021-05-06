@@ -54,6 +54,7 @@ namespace EM.Presentacion.MVC.Controllers
                 ViewBag.ClienteDuplicado = false;
                 ViewBag.EmailRequerido = false;
                 ViewBag.EventoId = eventoId;
+                ViewBag.Error = null;
                 if (!ModelState.IsValid)
                 {
                     if (vm.Cliente.Email == null) ViewBag.EmailRequerido = true;
@@ -85,7 +86,8 @@ namespace EM.Presentacion.MVC.Controllers
                 if (!usuarioCreado.Succeeded)
                 {
                     ViewBag.UsuarioDuplicado = usuarioCreado;
-                    ViewBag.ClienteDuplicado = true;
+                    ViewBag.ClienteDuplicado = false;
+                    ViewBag.Error = "Contraseña demaciado corta.";
                     throw new Exception("Error al crear usuario");
                 }
 

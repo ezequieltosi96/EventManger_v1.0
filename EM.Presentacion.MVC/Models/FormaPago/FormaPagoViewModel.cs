@@ -4,7 +4,7 @@ namespace EM.Presentacion.MVC.Models.FormaPago
 {
     public class FormaPagoViewModel : ViewModelBase
     {
-        [DisplayName("Forma de pago")]
+        [DisplayName("Nombre")]
         public string Nombre { get; set; }
     }
 }

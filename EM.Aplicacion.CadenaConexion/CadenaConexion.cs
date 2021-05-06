@@ -10,7 +10,7 @@
 
         // Cadena de conexion Ezequiel
         private const string Servidor = "DESKTOP-TTT7KKD";
-        private const string BaseDeDatos = "EventManager_v1.2";
+        private const string BaseDeDatos = "EventManager_v1.2.1";
         private const string Usuario = "sa";
         private const string Contrasena = "pa$$word";
 
